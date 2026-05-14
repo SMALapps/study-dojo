@@ -1,18 +1,18 @@
 // Hero scene — layered PNG asset renderer.
 //
-// Drop real artwork into src/assets/ to replace the placeholders:
-//   hero_bg.png        186×128  background (sky, cliffs, trees)
-//   hero_waterfall.png 186×128  animated waterfall + pool (spritesheet later)
-//   hero_fg.png        186×128  foreground (ninja, rock, lanterns, plants)
-//
-// All layers are positioned absolute inside the hero container so z-order
-// is preserved and each file can be swapped independently.
+// Layer stack (z-order):
+//   z=1  background.png        — sky, cliffs, trees, waterfall, pool, rock
+//   z=2  waterfall-overlay.png — animated water (spritesheet, placeholder for now)
+//   z=3  foreground.png        — lanterns, plants overlay (placeholder for now)
+//   z=4  ninja meditating.png  — seated ninja, centered on rock
+//   z=10 CalmFlowChip          — HTML status overlay
 
 import heroBg        from './assets/themes/daytime-waterfall/background.png';
 import heroWaterfall from './assets/themes/daytime-waterfall/waterfall-overlay.png';
 import heroFg        from './assets/themes/daytime-waterfall/foreground.png';
+import ninjaImg      from './assets/ninja/white-belt/meditating.png';
 
-// Shared style for every image layer
+// Full-bleed layer (background, waterfall overlay, foreground overlay)
 const layerStyle = {
   position: 'absolute',
   top: 0, left: 0,
@@ -50,13 +50,28 @@ export default function HeroScene({ animFrame: _animFrame }) {
       position: 'relative', width: '100%', height: '100%',
       overflow: 'hidden', background: '#0a2460',
     }}>
-      {/* z=1 background: sky, cliffs, distant trees */}
+      {/* z=1 background scene */}
       <img src={heroBg}        alt="" style={{ ...layerStyle, zIndex: 1 }} />
-      {/* z=2 waterfall: falling water, pool, mist */}
+      {/* z=2 waterfall animation overlay (transparent placeholder) */}
       <img src={heroWaterfall} alt="" style={{ ...layerStyle, zIndex: 2 }} />
-      {/* z=3 foreground: ninja, rock, lanterns, plants */}
+      {/* z=3 foreground overlay (transparent placeholder) */}
       <img src={heroFg}        alt="" style={{ ...layerStyle, zIndex: 3 }} />
-      {/* z=10 status chip: always HTML */}
+      {/* z=4 ninja — centered on meditation rock */}
+      <img
+        src={ninjaImg}
+        alt="Meditating ninja"
+        style={{
+          position: 'absolute',
+          bottom: '22%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          height: '42%',
+          width: 'auto',
+          imageRendering: 'pixelated',
+          zIndex: 4,
+        }}
+      />
+      {/* z=10 status chip */}
       <CalmFlowChip />
     </div>
   );
