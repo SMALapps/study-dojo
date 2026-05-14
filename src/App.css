@@ -294,7 +294,7 @@
 
 .bonsai-icon { font-size: 38px; flex-shrink: 0; }
 
-.scroll-bottom-pad { height: 12px; }
+.scroll-bottom-pad { height: 24px; }
 
 .tab-bar {
   height: 80px;
