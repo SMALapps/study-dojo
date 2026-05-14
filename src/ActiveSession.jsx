@@ -55,7 +55,10 @@ export default function ActiveSession({
       {/* Dark gradient overlay — transparent top, solid dark at bottom */}
       <div className="as-overlay" />
 
-      {/* Ninja — positioned in the waterfall above the dark zone */}
+      {/* DEBUG: rock anchor at top:482px (63.2% of 1844px image → 492px screen, -10px bg shift) — REMOVE BEFORE SHIP */}
+      <div className="as-debug-anchor" />
+
+      {/* Ninja — bottom-center aligned to debug anchor at 482px */}
       <img src={ninjaImg} alt="Meditating ninja" className="as-ninja" />
 
       {/* Floating header over the waterfall */}

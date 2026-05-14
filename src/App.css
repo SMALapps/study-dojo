@@ -734,16 +734,31 @@
   z-index: 1;
 }
 
-/* Ninja: top:48.5% → top at 377px, height:16% → 124px, feet at 501px (10px deeper into rock) */
+/* Ninja: top:46% → 358px, height:16% → 124px, bottom=482px = debug anchor (rock surface) */
 .as-ninja {
   position: absolute;
-  top: 48.5%;
+  top: 46%;
   left: 50%;
   transform: translateX(-50%);
   height: 16%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
+}
+
+/* DEBUG — remove before ship */
+.as-debug-anchor {
+  position: absolute;
+  top: 482px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 20;
+  pointer-events: none;
 }
 
 /* Header pills float over the waterfall */
