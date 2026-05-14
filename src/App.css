@@ -351,3 +351,104 @@
   border-radius: 3px;
   opacity: 0.18;
 }
+
+/* XP badge (blue pill in top nav) */
+.xp-badge {
+  background: #3d7abd;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.xp-badge .flame { font-size: 15px; }
+
+.xp-badge .xp-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+}
+
+/* Rank card */
+.rank-card {
+  margin: 10px 14px 0;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.rank-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.rank-super-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  color: var(--tab-active);
+  letter-spacing: 0.5px;
+}
+
+.rank-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-dark);
+  line-height: 1.1;
+}
+
+.rank-tier {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--tab-active);
+  font-weight: 500;
+}
+
+.rank-bar-wrap {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.rank-bar-fill {
+  height: 100%;
+  background: var(--green-cta);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.rank-xp {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  color: var(--text-mid);
+  margin-top: 2px;
+}
+
+.rank-motto {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--text-light);
+  font-style: italic;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+/* Quote card arrow */
+.quote-arrow {
+  font-size: 22px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  line-height: 1;
+}
