@@ -714,28 +714,29 @@
   z-index: 0;
 }
 
-/* Gradient: transparent top → solid dark bottom (starts at ~52% from top) */
+/* Gradient: transparent top → fully solid at ~67% from top (~520px on a 778px screen).
+   Timer sits right at that boundary so it appears to rise from the waterfall. */
 .as-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
     transparent  0%,
-    transparent 48%,
-    rgba(10,26,46,0.55) 58%,
-    var(--as-dark) 68%,
+    transparent 45%,
+    rgba(10,26,46,0.45) 57%,
+    var(--as-dark) 67%,
     var(--as-dark) 100%
   );
   z-index: 1;
 }
 
-/* Ninja sits in the waterfall, base just above the content block */
+/* Ninja sits in the waterfall — bottom edge ~30px above content block top */
 .as-ninja {
   position: absolute;
-  bottom: 310px;
+  bottom: 285px;
   left: 50%;
   transform: translateX(-50%);
-  height: 22%;
+  height: 20%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
@@ -793,25 +794,33 @@
   backdrop-filter: blur(4px);
 }
 
-/* Content block anchored to the bottom; height set so elements fill without gaps */
+/*
+ * Content block: fixed to the bottom.
+ * Sized so all 5 flex items + 4 gaps + top/bottom padding fill it exactly.
+ *   timer 46 + tagline 18 + chips 26 + progress 30 + button 42 = 162
+ *   4 gaps × 14px = 56
+ *   padding 10 + 12 = 22
+ *   total = 240px  (+18px buffer = 258px)
+ * Bottom of content = screen bottom → button is ~30px from very bottom.
+ * Top of content = 778-258 = 520px from top = 66.8% → matches gradient solid zone.
+ */
 .as-content {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 272px;
+  height: 258px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 18px 14px;
-  gap: 16px;
+  padding: 10px 18px 12px;
+  gap: 14px;
   z-index: 5;
-  overflow: hidden;
 }
 
 .as-timer {
   font-family: 'Press Start 2P', monospace;
-  font-size: 46px;
+  font-size: 50px;
   color: #fff;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   line-height: 1;
 }
 
