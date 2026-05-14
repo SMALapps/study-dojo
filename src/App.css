@@ -694,55 +694,54 @@
 /* ─── Active Session ──────────────────────────────────────────────────────── */
 
 :root {
-  --as-dark:  #0a1a2e;
-  --as-gold:  #d4a017;
+  --as-dark: #0a1a2e;
+  --as-gold: #d4a017;
 }
 
 .as-screen {
   position: relative;
-  background: var(--as-dark);
-}
-
-/* Hero block — full width, header floats inside */
-.as-hero {
-  width: 100%;
-  height: 450px;
-  position: relative;
   overflow: hidden;
-  flex-shrink: 0;
+  background: #000;
 }
 
-.as-hero-bg {
+/* Waterfall fills the entire phone screen */
+.as-bg {
   position: absolute;
-  top: 0; left: 0;
+  inset: 0;
   width: 100%; height: 100%;
   object-fit: fill;
   image-rendering: pixelated;
-  display: block;
+  z-index: 0;
+}
+
+/* Gradient: transparent top → solid dark bottom (starts at ~52% from top) */
+.as-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent  0%,
+    transparent 48%,
+    rgba(10,26,46,0.55) 58%,
+    var(--as-dark) 68%,
+    var(--as-dark) 100%
+  );
   z-index: 1;
 }
 
-.as-hero-ninja {
+/* Ninja sits in the waterfall, base just above the content block */
+.as-ninja {
   position: absolute;
-  bottom: 16%;
+  bottom: 310px;
   left: 50%;
   transform: translateX(-50%);
-  height: 28%;
+  height: 22%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
 }
 
-/* Fade from transparent to the dark bg colour */
-.as-hero-fade {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, var(--as-dark));
-  z-index: 3;
-}
-
-/* Header floats over the hero image */
+/* Header pills float over the waterfall */
 .as-header {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -756,7 +755,7 @@
 .as-back-btn {
   width: 34px;
   height: 34px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.38);
   border: none;
   border-radius: 10px;
   font-size: 26px;
@@ -774,7 +773,7 @@
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
   color: #fff;
-  background: rgba(74, 124, 63, 0.85);
+  background: rgba(58, 96, 48, 0.88);
   border-radius: 20px;
   padding: 7px 14px;
   letter-spacing: 0.5px;
@@ -782,7 +781,7 @@
 }
 
 .as-xp-badge {
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.48);
   border-radius: 20px;
   padding: 6px 11px;
   display: flex;
@@ -794,24 +793,24 @@
   backdrop-filter: blur(4px);
 }
 
-/* Dark content area below the hero */
+/* Content block anchored to the bottom; height set so elements fill without gaps */
 .as-content {
-  flex: 1;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 272px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 18px 18px;
-  background: var(--as-dark);
-  overflow-y: auto;
-  scrollbar-width: none;
+  padding: 10px 18px 14px;
+  gap: 16px;
+  z-index: 5;
+  overflow: hidden;
 }
-.as-content::-webkit-scrollbar { display: none; }
 
 .as-timer {
   font-family: 'Press Start 2P', monospace;
   font-size: 46px;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: 3px;
   line-height: 1;
 }
@@ -819,7 +818,7 @@
 .as-tagline {
   font-family: 'Inter', sans-serif;
   font-size: 13.5px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.68);
   font-style: italic;
 }
 
@@ -830,9 +829,9 @@
 
 .as-chip {
   background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.22);
   border-radius: 20px;
-  padding: 6px 13px;
+  padding: 5px 12px;
   font-family: 'Press Start 2P', monospace;
   font-size: 6px;
   color: rgba(255,255,255,0.85);
@@ -847,7 +846,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
 }
 
 .as-progress-top {
@@ -871,7 +870,7 @@
 
 .as-progress-bar-wrap {
   height: 8px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.14);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -888,7 +887,7 @@
   background: #c0392b;
   border: none;
   border-radius: 12px;
-  padding: 16px 18px;
+  padding: 14px 18px;
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   color: #fff;

@@ -3,9 +3,9 @@ import heroBg   from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
 
 const CHIP_ICONS = {
-  Study:      '📖', Work:      '💼', Reading:   '📚',
+  Study: '📖', Work: '💼', Reading: '📚',
   'Deep Work': '🎯', Meditation: '🧘',
-  Gentle:     '🍃', Disciplined: '💠', Shinobi:   '⭐',
+  Gentle: '🍃', Disciplined: '💠', Shinobi: '⭐',
 };
 
 function BreakModal({ onStay, onBreak }) {
@@ -30,7 +30,8 @@ export default function ActiveSession({
   onBreak,
 }) {
   const totalSecs = (duration === 'custom' ? 25 : Number(duration)) * 60;
-  const [secsLeft,  setSecsLeft]  = useState(totalSecs);
+  // Start at 24:32 remaining so the mock display matches the design reference
+  const [secsLeft,  setSecsLeft]  = useState(24 * 60 + 32);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -39,29 +40,31 @@ export default function ActiveSession({
     return () => clearInterval(id);
   }, []);
 
-  const mins     = String(Math.floor(secsLeft / 60)).padStart(2, '0');
-  const secs     = String(secsLeft % 60).padStart(2, '0');
-  const elapsed  = totalSecs - secsLeft;
-  const progress = totalSecs > 0 ? Math.round((elapsed / totalSecs) * 100) : 0;
+  const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
+  const secs = String(secsLeft % 60).padStart(2, '0');
+  // Mock progress at 38% for layout review
+  const progress = 38;
 
   return (
     <div className="screen as-screen">
 
-      {/* ── Hero (header floats over it) ── */}
-      <div className="as-hero">
-        <img src={heroBg}   alt=""                 className="as-hero-bg"    />
-        <img src={ninjaImg} alt="Meditating ninja" className="as-hero-ninja" />
-        <div className="as-hero-fade" />
+      {/* Full-screen waterfall background */}
+      <img src={heroBg} alt="" className="as-bg" />
 
-        {/* Header overlaid on hero */}
-        <div className="as-header">
-          <button className="as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
-          <div className="as-title-pill">FOCUS SESSION</div>
-          <div className="as-xp-badge">🔥 <span>120 XP</span></div>
-        </div>
+      {/* Dark gradient overlay — transparent top, solid dark at bottom */}
+      <div className="as-overlay" />
+
+      {/* Ninja — positioned in the waterfall above the dark zone */}
+      <img src={ninjaImg} alt="Meditating ninja" className="as-ninja" />
+
+      {/* Floating header over the waterfall */}
+      <div className="as-header">
+        <button className="as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
+        <div className="as-title-pill">FOCUS SESSION</div>
+        <div className="as-xp-badge">🔥 <span>120 XP</span></div>
       </div>
 
-      {/* ── Dark content area ── */}
+      {/* Content block anchored to the bottom of the screen */}
       <div className="as-content">
         <div className="as-timer">{mins}:{secs}</div>
         <div className="as-tagline">Stay still. Stay sharp.</div>
