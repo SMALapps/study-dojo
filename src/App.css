@@ -134,12 +134,13 @@
   position: relative;
 }
 
-.hero-section canvas {
+.hero-section img {
   display: block;
   width: 100%;
   height: 100%;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  object-fit: fill;
 }
 
 .stats-card {
