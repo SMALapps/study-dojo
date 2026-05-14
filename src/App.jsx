@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import HeroScene from './HeroScene';
 import RankCard from './RankCard';
 import SessionSetup from './SessionSetup';
+import ActiveSession from './ActiveSession';
 import './App.css';
 
 function StatusBar() {
@@ -49,24 +50,11 @@ const TABS = [
   { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
 ];
 
-function ActiveSessionPlaceholder({ onBack }) {
-  return (
-    <div className="screen" style={{ alignItems: 'center', justifyContent: 'center', gap: 20, padding: '0 24px' }}>
-      <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: 'var(--text-dark)', textAlign: 'center', lineHeight: 2 }}>
-        ACTIVE SESSION{'\n'}COMING SOON
-      </span>
-      <button className="cta-button" style={{ width: '100%' }} onClick={onBack}>
-        <span className="cta-text">RETURN TO DOJO</span>
-        <div className="cta-arrow">›</div>
-      </button>
-    </div>
-  );
-}
-
 export default function App() {
-  const [activeTab, setActiveTab] = useState('dojo');
-  const [animFrame, setAnimFrame] = useState(0);
-  const [screen,    setScreen]    = useState('home');
+  const [activeTab,     setActiveTab]     = useState('dojo');
+  const [animFrame,     setAnimFrame]     = useState(0);
+  const [screen,        setScreen]        = useState('home');
+  const [sessionConfig, setSessionConfig] = useState(null);
 
   useEffect(() => {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
@@ -81,19 +69,22 @@ export default function App() {
         <StatusBar />
         <SessionSetup
           onBack={() => setScreen('home')}
-          onStart={() => setScreen('activeSession')}
+          onStart={(cfg) => { setSessionConfig(cfg); setScreen('activeSession'); }}
         />
       </div>
     );
   }
 
-  // ── Active Session placeholder ────────────────────────────────────────────
+  // ── Active Session ────────────────────────────────────────────────────────
   if (screen === 'activeSession') {
     return (
       <div className="phone-shell">
         <div className="dynamic-island" />
         <StatusBar />
-        <ActiveSessionPlaceholder onBack={() => setScreen('home')} />
+        <ActiveSession
+          {...(sessionConfig || {})}
+          onBreak={() => setScreen('home')}
+        />
       </div>
     );
   }

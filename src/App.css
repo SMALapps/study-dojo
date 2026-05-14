@@ -690,3 +690,251 @@
   width: 100%;
   margin: 0;
 }
+
+/* ─── Active Session ──────────────────────────────────────────────────────── */
+
+.as-screen {
+  position: relative;
+  background: var(--cream);
+}
+
+.as-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: rgba(10, 36, 96, 0.92);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.as-back-btn {
+  color: #fff !important;
+}
+
+.as-title-pill {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #fff;
+  background: var(--green-cta);
+  border-radius: 20px;
+  padding: 6px 12px;
+  letter-spacing: 0.5px;
+}
+
+.as-xp-badge {
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #fff;
+}
+
+.as-hero {
+  width: 100%;
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.as-hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  image-rendering: pixelated;
+  display: block;
+  z-index: 1;
+}
+
+.as-hero-ninja {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 58%;
+  width: auto;
+  image-rendering: pixelated;
+  z-index: 2;
+}
+
+.as-hero-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  z-index: 3;
+}
+
+.as-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 18px 14px;
+  gap: 10px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.as-content::-webkit-scrollbar { display: none; }
+
+.as-timer {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 42px;
+  color: var(--text-dark);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.as-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-mid);
+  font-style: italic;
+}
+
+.as-chips {
+  display: flex;
+  gap: 8px;
+}
+
+.as-chip {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-mid);
+}
+
+.as-progress-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.as-progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.as-progress-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5.5px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+.as-progress-pct {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-mid);
+}
+
+.as-progress-bar-wrap {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.as-progress-bar-fill {
+  height: 100%;
+  background: var(--green-cta);
+  border-radius: 4px;
+  transition: width 1s linear;
+}
+
+.as-break-btn {
+  width: 100%;
+  background: #c0392b;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 18px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: auto;
+}
+
+.as-break-btn:hover  { background: #e74c3c; }
+.as-break-btn:active { transform: scale(0.98); }
+
+/* Break Focus confirmation modal */
+.as-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 0 24px;
+}
+
+.as-modal-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.as-modal-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.as-modal-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-mid);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.as-modal-btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.as-modal-btn:active { transform: scale(0.98); }
+
+.as-modal-stay {
+  background: var(--green-cta);
+  color: #fff;
+}
+
+.as-modal-stay:hover { background: #558945; }
+
+.as-modal-break {
+  background: #faf7f0;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+}
+
+.as-modal-break:hover { background: #fde8e6; }

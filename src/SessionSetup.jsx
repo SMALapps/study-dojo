@@ -128,7 +128,7 @@ export default function SessionSetup({ onBack, onStart }) {
 
       {/* ── Fixed CTA ── */}
       <div className="ss-cta-wrap">
-        <button className="cta-button ss-cta-btn" onClick={onStart}>
+        <button className="cta-button ss-cta-btn" onClick={() => onStart({ duration, category, difficulty })}>
           <span className="cta-text">ENTER THE WATERFALL</span>
           <div className="cta-arrow">›</div>
         </button>
