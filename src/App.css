@@ -714,29 +714,29 @@
   z-index: 0;
 }
 
-/* Gradient: transparent top → fully solid at ~67% from top (~520px on a 778px screen).
-   Timer sits right at that boundary so it appears to rise from the waterfall. */
+/* Gradient: transparent top → fully solid at 60% from top (467px on 778px screen).
+   Timer sits right at that boundary so it rises from the waterfall fade. */
 .as-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
     transparent  0%,
-    transparent 45%,
-    rgba(10,26,46,0.45) 57%,
-    var(--as-dark) 67%,
+    transparent 44%,
+    rgba(10,26,46,0.5) 54%,
+    var(--as-dark) 60%,
     var(--as-dark) 100%
   );
   z-index: 1;
 }
 
-/* Ninja sits in the waterfall — bottom edge ~30px above content block top */
+/* Ninja: bottom edge sits just above the content block start (~460px from screen top) */
 .as-ninja {
   position: absolute;
-  bottom: 285px;
+  bottom: 322px;
   left: 50%;
   transform: translateX(-50%);
-  height: 20%;
+  height: 19%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
@@ -795,32 +795,30 @@
 }
 
 /*
- * Content block: fixed to the bottom.
- * Sized so all 5 flex items + 4 gaps + top/bottom padding fill it exactly.
- *   timer 46 + tagline 18 + chips 26 + progress 30 + button 42 = 162
- *   4 gaps × 14px = 56
- *   padding 10 + 12 = 22
- *   total = 240px  (+18px buffer = 258px)
- * Bottom of content = screen bottom → button is ~30px from very bottom.
- * Top of content = 778-258 = 520px from top = 66.8% → matches gradient solid zone.
+ * Content block: anchored top at 460px from screen top (59% of 778px).
+ * Extends to screen bottom (bottom: 0) so dark bg covers remainder.
+ * Elements pack at the top with 12px gaps; ~100px of dark navy shows below the button.
+ *
+ * Element heights:  timer 44 + tagline 18 + chips 26 + progress 30 + button 42 = 160
+ * Gaps (4 × 12px) = 48. Padding-top 10. Total used = 218px from content top.
+ * Button bottom: 460 + 218 = 678px from screen top. Dark below: 100px. ✓
  */
 .as-content {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 258px;
+  top: 460px; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 18px 12px;
-  gap: 14px;
+  padding: 10px 18px 0;
+  gap: 12px;
   z-index: 5;
 }
 
 .as-timer {
   font-family: 'Press Start 2P', monospace;
-  font-size: 50px;
+  font-size: 44px;
   color: #fff;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   line-height: 1;
 }
 
