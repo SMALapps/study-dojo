@@ -1,0 +1,164 @@
+import { useState, useEffect } from 'react';
+import PixelWaterfall from './PixelWaterfall';
+import './App.css';
+
+function StatusBar() {
+  const [time, setTime] = useState('9:41');
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      setTime(`${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`);
+    };
+    tick();
+    const id = setInterval(tick, 10000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="status-bar">
+      <span className="status-time">{time}</span>
+      <div className="status-icons">
+        {/* Signal */}
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="white">
+          <rect x="0" y="7" width="3" height="5" rx="0.5"/>
+          <rect x="4.5" y="4.5" width="3" height="7.5" rx="0.5"/>
+          <rect x="9" y="2" width="3" height="10" rx="0.5"/>
+          <rect x="13.5" y="0" width="3" height="12" rx="0.5"/>
+        </svg>
+        {/* WiFi */}
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white">
+          <path d="M8 9.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+          <path d="M3.5 6.5C4.9 5.1 6.35 4.4 8 4.4s3.1.7 4.5 2.1l1.4-1.4C12.1 3.3 10.15 2.4 8 2.4s-4.1.9-5.9 2.7l1.4 1.4z"/>
+          <path d="M.7 3.7C2.6 1.8 5.15.9 8 .9s5.4.9 7.3 2.8l1.4-1.4C14.6 .5 11.5-.1 8-.1S1.4.5-.7 2.3L.7 3.7z"/>
+        </svg>
+        {/* Battery */}
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="white">
+          <rect x="0" y="1" width="21" height="10" rx="2" stroke="white" strokeWidth="1.2" fill="none"/>
+          <rect x="1.5" y="2.5" width="17" height="7" rx="1" fill="white"/>
+          <rect x="21.5" y="3.5" width="3" height="5" rx="1" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+const TABS = [
+  { id: 'dojo',     label: 'DOJO',     icon: '🥷' },
+  { id: 'train',    label: 'TRAIN',    icon: '⚔️' },
+  { id: 'progress', label: 'PROGRESS', icon: '📊' },
+  { id: 'settings', label: 'SETTINGS', icon: '⚙️' },
+];
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('dojo');
+  const [animFrame, setAnimFrame] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setAnimFrame(f => f + 1), 180);
+    return () => clearInterval(id);
+  }, []);
+
+  const activeIdx = TABS.findIndex(t => t.id === activeTab);
+  const tabUnderlineLeft = `calc(${activeIdx} * 25% + 12.5% - 14px)`;
+
+  return (
+    <div className="phone-shell">
+      <div className="dynamic-island" />
+      <StatusBar />
+
+      <div className="screen">
+        {/* Top nav */}
+        <div className="top-nav">
+          <button className="hamburger-btn" aria-label="Menu">
+            <span /><span /><span />
+          </button>
+
+          <span className="app-title">FOCUS DOJO</span>
+
+          <div className="streak-badge">
+            <span className="flame">🔥</span>
+            <span className="streak-num">120</span>
+          </div>
+        </div>
+
+        {/* Scrollable body */}
+        <div className="scroll-content">
+          {/* Pixel art hero */}
+          <div className="hero-section">
+            <PixelWaterfall animFrame={animFrame} />
+          </div>
+
+          {/* Stats card */}
+          <div className="stats-card">
+            <div className="stats-row">
+              <div className="stat-item">
+                <span className="stat-label">FOCUS TODAY</span>
+                <span className="stat-value">42</span>
+                <span className="stat-unit">min</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">STREAK</span>
+                <span className="stat-value streak-val">5</span>
+                <span className="stat-unit">days</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">SESSIONS</span>
+                <span className="stat-value">3</span>
+                <span className="stat-unit">completed</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button className="cta-button">
+            <span className="cta-text">START FOCUS SESSION</span>
+            <div className="cta-arrow">›</div>
+          </button>
+
+          {/* Quick actions */}
+          <div className="quick-actions">
+            <div className="action-card">
+              <span className="action-icon">⛩️</span>
+              <span className="action-label">TRAINING{'\n'}MODES</span>
+            </div>
+            <div className="action-card">
+              <span className="action-icon">📊</span>
+              <span className="action-label">PROGRESS</span>
+            </div>
+            <div className="action-card">
+              <span className="action-icon">🔒</span>
+              <span className="action-label">BLOCKED{'\n'}APPS</span>
+            </div>
+          </div>
+
+          {/* Quote */}
+          <div className="quote-card">
+            <div className="quote-text-block">
+              <p className="quote-body">Discipline today, freedom tomorrow.</p>
+              <p className="quote-attribution">– The Dojo</p>
+            </div>
+            <span className="bonsai-icon">🌳</span>
+          </div>
+
+          <div className="scroll-bottom-pad" />
+        </div>
+
+        {/* Tab bar */}
+        <div className="tab-bar">
+          {TABS.map((tab) => (
+            <div
+              key={tab.id}
+              className={`tab-item${activeTab === tab.id ? ' active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <span className="tab-icon">{tab.icon}</span>
+              <span className="tab-label">{tab.label}</span>
+            </div>
+          ))}
+          <div className="tab-underline" style={{ left: tabUnderlineLeft }} />
+          <div className="home-indicator" />
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream: #f5f0e8;
+  --card-bg: #faf7f0;
+  --green-cta: #4a7c3f;
+  --green-light: #5a8f4e;
+  --text-dark: #2c2c1e;
+  --text-mid: #5a5a3a;
+  --text-light: #8a8a6a;
+  --tab-active: #3a6030;
+  --border: #e0d8c8;
+  --orange: #c8611a;
+}
+
+body {
+  background: #2a2a3e;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
