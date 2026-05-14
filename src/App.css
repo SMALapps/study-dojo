@@ -622,7 +622,7 @@
 /* Preview strip */
 .ss-preview {
   margin: 14px 14px 0;
-  height: 76px;
+  height: 96px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -642,6 +642,40 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, transparent 20%, rgba(245,240,232,0.55) 100%);
+}
+
+/* Today's Ritual summary card */
+.ss-ritual-card {
+  margin: 10px 14px 0;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ss-ritual-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5.5px;
+  color: var(--tab-active);
+  letter-spacing: 0.5px;
+}
+
+.ss-ritual-summary {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.ss-ritual-quote {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-light);
+  font-style: italic;
+  line-height: 1.4;
 }
 
 /* CTA wrapper */

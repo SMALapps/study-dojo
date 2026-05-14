@@ -14,7 +14,7 @@ const CATEGORIES = [
   { id: 'Work',       icon: '💼', label: 'Work'     },
   { id: 'Reading',    icon: '📚', label: 'Reading'  },
   { id: 'Deep Work',  icon: '🎯', label: 'Deep\nWork'  },
-  { id: 'Meditation', icon: '🧘', label: 'Medit.'   },
+  { id: 'Meditation', icon: '🧘', label: 'Meditate' },
 ];
 
 const DIFFICULTIES = [
@@ -104,10 +104,23 @@ export default function SessionSetup({ onBack, onStart }) {
           </div>
         </div>
 
-        {/* Dojo preview strip */}
+        {/* Dojo preview strip — taller to fill space */}
         <div className="ss-preview">
           <img src={heroBg} alt="" className="ss-preview-img" />
           <div className="ss-preview-fade" />
+        </div>
+
+        {/* Today's Ritual summary card */}
+        <div className="ss-ritual-card">
+          <span className="ss-ritual-label">TODAY'S RITUAL</span>
+          <span className="ss-ritual-summary">
+            {duration === 'custom' ? 'Custom' : `${duration} min`}
+            {' · '}
+            {category}
+            {' · '}
+            {difficulty}
+          </span>
+          <span className="ss-ritual-quote">"Enter the waterfall when you're ready."</span>
         </div>
 
         <div className="scroll-bottom-pad" />
