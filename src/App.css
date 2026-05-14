@@ -730,10 +730,10 @@
   z-index: 1;
 }
 
-/* Ninja: seated on the meditation rock (~78% from screen top = 607px, ninja bottom ~560px) */
+/* Ninja: anchored to waterfall scene — top% tracks the rock position in the bg image */
 .as-ninja {
   position: absolute;
-  bottom: 210px;
+  top: 35%;
   left: 50%;
   transform: translateX(-50%);
   height: 17%;
