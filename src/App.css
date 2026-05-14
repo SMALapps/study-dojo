@@ -719,24 +719,27 @@
 .as-overlay {
   position: absolute;
   inset: 0;
+  /* Rock surface at 63% (492px); keep transparent through the rock,
+     transition to solid just below it so the UI text has a clean backdrop */
   background: linear-gradient(
     to bottom,
-    transparent  0%,
-    transparent 44%,
-    rgba(10,26,46,0.5) 54%,
-    var(--as-dark) 63%,
-    var(--as-dark) 100%
+    transparent          0%,
+    transparent         50%,
+    rgba(10,26,46,0.25) 62%,
+    rgba(10,26,46,0.85) 70%,
+    var(--as-dark)      73%,
+    var(--as-dark)     100%
   );
   z-index: 1;
 }
 
-/* Ninja: anchored to waterfall scene — top% tracks the rock position in the bg image */
+/* Ninja: top:47% → top at 366px, height:16% → 124px, feet at 490px ≈ rock surface (492px) */
 .as-ninja {
   position: absolute;
-  top: 35%;
+  top: 47%;
   left: 50%;
   transform: translateX(-50%);
-  height: 17%;
+  height: 16%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
@@ -809,11 +812,11 @@
  */
 .as-content {
   position: absolute;
-  top: 490px; left: 0; right: 0; bottom: 0;
+  top: 545px; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 18px 45px;
+  padding: 10px 18px 40px;
   gap: 10px;
   z-index: 5;
 }
