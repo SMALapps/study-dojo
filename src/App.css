@@ -733,10 +733,10 @@
   z-index: 1;
 }
 
-/* Ninja: top:47% → top at 366px, height:16% → 124px, feet at 490px ≈ rock surface (492px) */
+/* Ninja: top:48.5% → top at 377px, height:16% → 124px, feet at 501px (10px deeper into rock) */
 .as-ninja {
   position: absolute;
-  top: 47%;
+  top: 48.5%;
   left: 50%;
   transform: translateX(-50%);
   height: 16%;
