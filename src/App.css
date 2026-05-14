@@ -730,10 +730,10 @@
   z-index: 1;
 }
 
-/* Ninja: bottom edge sits just above the content block start (~460px from screen top) */
+/* Ninja: base sits ~15px above content start (435px from screen top = 343px from bottom) */
 .as-ninja {
   position: absolute;
-  bottom: 322px;
+  bottom: 358px;
   left: 50%;
   transform: translateX(-50%);
   height: 19%;
@@ -795,23 +795,37 @@
 }
 
 /*
- * Content block: anchored top at 460px from screen top (59% of 778px).
- * Extends to screen bottom (bottom: 0) so dark bg covers remainder.
- * Elements pack at the top with 12px gaps; ~100px of dark navy shows below the button.
+ * Content block starts at 435px from screen top (55.9%).
+ * Extends to screen bottom. Padding-bottom: 58px creates intentional
+ * dark navy breathing room below the button (matches reference).
  *
- * Element heights:  timer 44 + tagline 18 + chips 26 + progress 30 + button 42 = 160
- * Gaps (4 × 12px) = 48. Padding-top 10. Total used = 218px from content top.
- * Button bottom: 460 + 218 = 678px from screen top. Dark below: 100px. ✓
+ * Internal layout:
+ *   .as-info  (flex:1, space-evenly) → timer / tagline / chips / progress
+ *   gap 10px
+ *   .as-break-btn → 50px tall
+ *
+ * Info height = (778-435) - 10(pad-top) - 58(pad-bot) - 10(gap) - 50(btn) = 215px
+ * space-evenly distributes 4 items across 215px: ~19px per gap (incl. edges).
  */
 .as-content {
   position: absolute;
-  top: 460px; left: 0; right: 0; bottom: 0;
+  top: 435px; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 18px 0;
-  gap: 12px;
+  padding: 10px 18px 58px;
+  gap: 10px;
   z-index: 5;
+}
+
+/* Upper info group: evenly spaces the 4 label elements */
+.as-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .as-timer {
@@ -894,7 +908,7 @@
   background: #c0392b;
   border: none;
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 16px 18px;
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   color: #fff;

@@ -64,35 +64,41 @@ export default function ActiveSession({
         <div className="as-xp-badge">🔥 <span>120 XP</span></div>
       </div>
 
-      {/* Content block anchored to the bottom of the screen */}
+      {/* Content block: info group + button, sits in lower portion of screen */}
       <div className="as-content">
-        <div className="as-timer">{mins}:{secs}</div>
-        <div className="as-tagline">Stay still. Stay sharp.</div>
 
-        <div className="as-chips">
-          <span className="as-chip">
-            {CHIP_ICONS[category] && <span className="as-chip-icon">{CHIP_ICONS[category]}</span>}
-            {category}
-          </span>
-          <span className="as-chip">
-            {CHIP_ICONS[difficulty] && <span className="as-chip-icon">{CHIP_ICONS[difficulty]}</span>}
-            {difficulty}
-          </span>
+        {/* Upper group: timer / tagline / chips / progress — evenly distributed */}
+        <div className="as-info">
+          <div className="as-timer">{mins}:{secs}</div>
+          <div className="as-tagline">Stay still. Stay sharp.</div>
+
+          <div className="as-chips">
+            <span className="as-chip">
+              {CHIP_ICONS[category] && <span className="as-chip-icon">{CHIP_ICONS[category]}</span>}
+              {category}
+            </span>
+            <span className="as-chip">
+              {CHIP_ICONS[difficulty] && <span className="as-chip-icon">{CHIP_ICONS[difficulty]}</span>}
+              {difficulty}
+            </span>
+          </div>
+
+          <div className="as-progress-section">
+            <div className="as-progress-top">
+              <span className="as-progress-label">PROGRESS</span>
+              <span className="as-progress-pct">{progress}%</span>
+            </div>
+            <div className="as-progress-bar-wrap">
+              <div className="as-progress-bar-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
         </div>
 
-        <div className="as-progress-section">
-          <div className="as-progress-top">
-            <span className="as-progress-label">PROGRESS</span>
-            <span className="as-progress-pct">{progress}%</span>
-          </div>
-          <div className="as-progress-bar-wrap">
-            <div className="as-progress-bar-fill" style={{ width: `${progress}%` }} />
-          </div>
-        </div>
-
+        {/* Button sits just below info group with a tight gap */}
         <button className="as-break-btn" onClick={() => setShowModal(true)}>
           BREAK FOCUS
         </button>
+
       </div>
 
       {showModal && (
