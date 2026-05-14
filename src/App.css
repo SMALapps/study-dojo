@@ -724,19 +724,19 @@
     transparent  0%,
     transparent 44%,
     rgba(10,26,46,0.5) 54%,
-    var(--as-dark) 60%,
+    var(--as-dark) 63%,
     var(--as-dark) 100%
   );
   z-index: 1;
 }
 
-/* Ninja: base sits ~15px above content start (435px from screen top = 343px from bottom) */
+/* Ninja: seated on the meditation rock (~78% from screen top = 607px, ninja bottom ~560px) */
 .as-ninja {
   position: absolute;
-  bottom: 358px;
+  bottom: 210px;
   left: 50%;
   transform: translateX(-50%);
-  height: 19%;
+  height: 17%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
@@ -809,11 +809,11 @@
  */
 .as-content {
   position: absolute;
-  top: 435px; left: 0; right: 0; bottom: 0;
+  top: 490px; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 18px 58px;
+  padding: 10px 18px 45px;
   gap: 10px;
   z-index: 5;
 }
