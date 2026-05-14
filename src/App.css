@@ -693,50 +693,20 @@
 
 /* ─── Active Session ──────────────────────────────────────────────────────── */
 
+:root {
+  --as-dark:  #0a1a2e;
+  --as-gold:  #d4a017;
+}
+
 .as-screen {
   position: relative;
-  background: var(--cream);
+  background: var(--as-dark);
 }
 
-.as-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 14px;
-  background: rgba(10, 36, 96, 0.92);
-  flex-shrink: 0;
-  z-index: 10;
-}
-
-.as-back-btn {
-  color: #fff !important;
-}
-
-.as-title-pill {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: #fff;
-  background: var(--green-cta);
-  border-radius: 20px;
-  padding: 6px 12px;
-  letter-spacing: 0.5px;
-}
-
-.as-xp-badge {
-  background: rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 5px 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: #fff;
-}
-
+/* Hero block — full width, header floats inside */
 .as-hero {
   width: 100%;
-  height: 330px;
+  height: 420px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -754,30 +724,85 @@
 
 .as-hero-ninja {
   position: absolute;
-  bottom: 8%;
+  bottom: 14%;
   left: 50%;
   transform: translateX(-50%);
-  height: 58%;
+  height: 36%;
   width: auto;
   image-rendering: pixelated;
   z-index: 2;
 }
 
+/* Fade from transparent to the dark bg colour */
 .as-hero-fade {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 90px;
-  background: linear-gradient(to bottom, transparent, var(--cream));
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--as-dark));
   z-index: 3;
 }
 
+/* Header floats over the hero image */
+.as-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px 6px;
+  z-index: 10;
+}
+
+.as-back-btn {
+  width: 34px;
+  height: 34px;
+  background: rgba(0,0,0,0.35);
+  border: none;
+  border-radius: 10px;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  backdrop-filter: blur(4px);
+}
+
+.as-title-pill {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #fff;
+  background: rgba(74, 124, 63, 0.85);
+  border-radius: 20px;
+  padding: 7px 14px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.as-xp-badge {
+  background: rgba(0,0,0,0.45);
+  border-radius: 20px;
+  padding: 6px 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+/* Dark content area below the hero */
 .as-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2px 18px 14px;
-  gap: 10px;
+  padding: 6px 18px 16px;
+  gap: 11px;
+  background: var(--as-dark);
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -785,39 +810,44 @@
 
 .as-timer {
   font-family: 'Press Start 2P', monospace;
-  font-size: 42px;
-  color: var(--text-dark);
-  letter-spacing: 2px;
+  font-size: 46px;
+  color: #ffffff;
+  letter-spacing: 3px;
   line-height: 1;
 }
 
 .as-tagline {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  color: var(--text-mid);
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.65);
   font-style: italic;
 }
 
 .as-chips {
   display: flex;
-  gap: 8px;
+  gap: 9px;
 }
 
 .as-chip {
-  background: var(--card-bg);
-  border: 1.5px solid var(--border);
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.2);
   border-radius: 20px;
-  padding: 5px 13px;
+  padding: 6px 13px;
   font-family: 'Press Start 2P', monospace;
   font-size: 6px;
-  color: var(--text-mid);
+  color: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.as-chip-icon { font-size: 11px; line-height: 1; }
 
 .as-progress-section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .as-progress-top {
@@ -828,27 +858,27 @@
 
 .as-progress-label {
   font-family: 'Press Start 2P', monospace;
-  font-size: 5.5px;
-  color: var(--text-light);
+  font-size: 6px;
+  color: var(--as-gold);
   letter-spacing: 0.5px;
 }
 
 .as-progress-pct {
   font-family: 'Press Start 2P', monospace;
   font-size: 6px;
-  color: var(--text-mid);
+  color: var(--as-gold);
 }
 
 .as-progress-bar-wrap {
   height: 8px;
-  background: var(--border);
+  background: rgba(255,255,255,0.12);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .as-progress-bar-fill {
   height: 100%;
-  background: var(--green-cta);
+  background: var(--as-gold);
   border-radius: 4px;
   transition: width 1s linear;
 }
@@ -858,7 +888,7 @@
   background: #c0392b;
   border: none;
   border-radius: 12px;
-  padding: 15px 18px;
+  padding: 16px 18px;
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   color: #fff;
@@ -875,7 +905,7 @@
 .as-modal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.62);
+  background: rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -891,7 +921,7 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
 .as-modal-title {

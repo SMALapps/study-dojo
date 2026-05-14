@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import heroBg   from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
 
+const CHIP_ICONS = {
+  Study:      '📖', Work:      '💼', Reading:   '📚',
+  'Deep Work': '🎯', Meditation: '🧘',
+  Gentle:     '🍃', Disciplined: '💠', Shinobi:   '⭐',
+};
+
 function BreakModal({ onStay, onBreak }) {
   return (
     <div className="as-modal-overlay">
@@ -10,12 +16,8 @@ function BreakModal({ onStay, onBreak }) {
         <span className="as-modal-body">
           Leaving now will end this training session.
         </span>
-        <button className="as-modal-btn as-modal-stay" onClick={onStay}>
-          Stay Focused
-        </button>
-        <button className="as-modal-btn as-modal-break" onClick={onBreak}>
-          Break Session
-        </button>
+        <button className="as-modal-btn as-modal-stay"  onClick={onStay}>Stay Focused</button>
+        <button className="as-modal-btn as-modal-break" onClick={onBreak}>Break Session</button>
       </div>
     </div>
   );
@@ -28,8 +30,8 @@ export default function ActiveSession({
   onBreak,
 }) {
   const totalSecs = (duration === 'custom' ? 25 : Number(duration)) * 60;
-  const [secsLeft,   setSecsLeft]   = useState(totalSecs);
-  const [showModal,  setShowModal]  = useState(false);
+  const [secsLeft,  setSecsLeft]  = useState(totalSecs);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (secsLeft <= 0) return;
@@ -45,28 +47,34 @@ export default function ActiveSession({
   return (
     <div className="screen as-screen">
 
-      {/* ── Header ── */}
-      <div className="as-header">
-        <button className="ss-back-btn as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
-        <div className="as-title-pill">FOCUS SESSION</div>
-        <div className="as-xp-badge">🔥 <span>120 XP</span></div>
-      </div>
-
-      {/* ── Hero ── */}
+      {/* ── Hero (header floats over it) ── */}
       <div className="as-hero">
-        <img src={heroBg}   alt=""                  className="as-hero-bg"    />
-        <img src={ninjaImg} alt="Meditating ninja"  className="as-hero-ninja" />
+        <img src={heroBg}   alt=""                 className="as-hero-bg"    />
+        <img src={ninjaImg} alt="Meditating ninja" className="as-hero-ninja" />
         <div className="as-hero-fade" />
+
+        {/* Header overlaid on hero */}
+        <div className="as-header">
+          <button className="as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
+          <div className="as-title-pill">FOCUS SESSION</div>
+          <div className="as-xp-badge">🔥 <span>120 XP</span></div>
+        </div>
       </div>
 
-      {/* ── Content ── */}
+      {/* ── Dark content area ── */}
       <div className="as-content">
         <div className="as-timer">{mins}:{secs}</div>
         <div className="as-tagline">Stay still. Stay sharp.</div>
 
         <div className="as-chips">
-          <span className="as-chip">{category}</span>
-          <span className="as-chip">{difficulty}</span>
+          <span className="as-chip">
+            {CHIP_ICONS[category] && <span className="as-chip-icon">{CHIP_ICONS[category]}</span>}
+            {category}
+          </span>
+          <span className="as-chip">
+            {CHIP_ICONS[difficulty] && <span className="as-chip-icon">{CHIP_ICONS[difficulty]}</span>}
+            {difficulty}
+          </span>
         </div>
 
         <div className="as-progress-section">
@@ -84,7 +92,6 @@ export default function ActiveSession({
         </button>
       </div>
 
-      {/* ── Modal ── */}
       {showModal && (
         <BreakModal
           onStay={() => setShowModal(false)}
