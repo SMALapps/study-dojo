@@ -8,9 +8,9 @@
 // All layers are positioned absolute inside the hero container so z-order
 // is preserved and each file can be swapped independently.
 
-import heroBg        from './assets/hero_bg.png';
-import heroWaterfall from './assets/hero_waterfall.png';
-import heroFg        from './assets/hero_fg.png';
+import heroBg        from './assets/themes/daytime-waterfall/background.png';
+import heroWaterfall from './assets/themes/daytime-waterfall/waterfall-overlay.png';
+import heroFg        from './assets/themes/daytime-waterfall/foreground.png';
 
 // Shared style for every image layer
 const layerStyle = {
