@@ -453,3 +453,206 @@
   flex-shrink: 0;
   line-height: 1;
 }
+
+/* ─── Session Setup ──────────────────────────────────────────────────────── */
+
+.ss-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--cream);
+  border-bottom: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.ss-back-btn {
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.ss-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+}
+
+.ss-header-spacer { width: 36px; }
+
+.ss-section {
+  margin: 14px 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.ss-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5.5px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+/* Duration pills */
+.ss-duration-row {
+  display: flex;
+  gap: 5px;
+}
+
+.ss-dur-btn {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 2px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-dark);
+  cursor: pointer;
+  text-align: center;
+  white-space: pre-line;
+  line-height: 1.6;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ss-dur-btn.active {
+  background: var(--green-cta);
+  border-color: var(--green-cta);
+  color: #fff;
+}
+
+.ss-dur-btn:hover:not(.active) { background: #ede8da; }
+
+/* Category cards */
+.ss-cat-row {
+  display: flex;
+  gap: 5px;
+}
+
+.ss-cat-btn {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ss-cat-btn.active {
+  background: var(--green-cta);
+  border-color: var(--green-cta);
+}
+
+.ss-cat-btn.active .ss-cat-label { color: #fff; }
+
+.ss-cat-btn:hover:not(.active) { background: #ede8da; }
+
+.ss-cat-icon { font-size: 19px; line-height: 1; }
+
+.ss-cat-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 4.5px;
+  color: var(--text-mid);
+  text-align: center;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* Difficulty cards */
+.ss-diff-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 7px;
+}
+
+.ss-diff-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ss-diff-card.active {
+  background: #eaf4ea;
+  border: 2px solid var(--green-cta);
+}
+
+.ss-diff-card:hover:not(.active) { background: #ede8da; }
+
+.ss-diff-icon { font-size: 20px; line-height: 1; }
+
+.ss-diff-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5.5px;
+  color: var(--text-dark);
+}
+
+.ss-diff-card.active .ss-diff-name { color: var(--tab-active); }
+
+.ss-diff-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Preview strip */
+.ss-preview {
+  margin: 14px 14px 0;
+  height: 76px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid var(--border);
+}
+
+.ss-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.ss-preview-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 20%, rgba(245,240,232,0.55) 100%);
+}
+
+/* CTA wrapper */
+.ss-cta-wrap {
+  padding: 10px 14px 12px;
+  background: var(--cream);
+  border-top: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.ss-cta-btn {
+  width: 100%;
+  margin: 0;
+}

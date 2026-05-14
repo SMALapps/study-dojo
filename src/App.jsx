@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import HeroScene from './HeroScene';
 import RankCard from './RankCard';
+import SessionSetup from './SessionSetup';
 import './App.css';
 
 function StatusBar() {
@@ -48,15 +49,56 @@ const TABS = [
   { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
 ];
 
+function ActiveSessionPlaceholder({ onBack }) {
+  return (
+    <div className="screen" style={{ alignItems: 'center', justifyContent: 'center', gap: 20, padding: '0 24px' }}>
+      <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: 'var(--text-dark)', textAlign: 'center', lineHeight: 2 }}>
+        ACTIVE SESSION{'\n'}COMING SOON
+      </span>
+      <button className="cta-button" style={{ width: '100%' }} onClick={onBack}>
+        <span className="cta-text">RETURN TO DOJO</span>
+        <div className="cta-arrow">›</div>
+      </button>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dojo');
   const [animFrame, setAnimFrame] = useState(0);
+  const [screen,    setScreen]    = useState('home');
 
   useEffect(() => {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
     return () => clearInterval(id);
   }, []);
 
+  // ── Session Setup screen ──────────────────────────────────────────────────
+  if (screen === 'sessionSetup') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <SessionSetup
+          onBack={() => setScreen('home')}
+          onStart={() => setScreen('activeSession')}
+        />
+      </div>
+    );
+  }
+
+  // ── Active Session placeholder ────────────────────────────────────────────
+  if (screen === 'activeSession') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <ActiveSessionPlaceholder onBack={() => setScreen('home')} />
+      </div>
+    );
+  }
+
+  // ── Home / Dojo screen ────────────────────────────────────────────────────
   const activeIdx = TABS.findIndex(t => t.id === activeTab);
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
@@ -102,7 +144,7 @@ export default function App() {
             </div>
           </div>
 
-          <button className="cta-button">
+          <button className="cta-button" onClick={() => setScreen('sessionSetup')}>
             <span className="cta-text">START FOCUS SESSION</span>
             <div className="cta-arrow">›</div>
           </button>
