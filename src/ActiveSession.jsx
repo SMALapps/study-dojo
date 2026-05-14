@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import heroBg   from './assets/themes/daytime-waterfall/background.png';
+import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
+import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
 
 const CHIP_ICONS = {
@@ -49,7 +50,7 @@ export default function ActiveSession({
     <div className="screen as-screen">
 
       {/* Full-screen waterfall background */}
-      <img src={heroBg} alt="" className="as-bg" />
+      <img src={activeBg} alt="" className="as-bg" onError={e => { e.currentTarget.src = fallbackBg; }} />
 
       {/* Dark gradient overlay — transparent top, solid dark at bottom */}
       <div className="as-overlay" />
