@@ -34,3 +34,16 @@ body {
   justify-content: center;
   min-height: 100vh;
 }
+
+/* ── Mobile: strip the fake frame, fill the real viewport ── */
+@media (max-width: 600px) {
+  body {
+    background: var(--cream);
+    display: block;
+    min-height: 100dvh;
+  }
+  #root {
+    display: block;
+    min-height: 100dvh;
+  }
+}
