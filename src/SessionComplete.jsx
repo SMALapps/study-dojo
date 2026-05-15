@@ -2,6 +2,10 @@ import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg   from './assets/ninja/white-belt/meditating.png';
 
+const CATEGORY_ICONS = {
+  Study: '📖', Work: '💼', Reading: '📚', 'Deep Work': '🎯', Meditation: '🧘',
+};
+
 export default function SessionComplete({
   duration   = 25,
   category   = 'Study',
@@ -38,7 +42,7 @@ export default function SessionComplete({
               <span className="sc-stat-val">{duration} min</span>
             </div>
             <div className="sc-stat-row">
-              <span className="sc-stat-label"><span className="sc-stat-icon">📖</span>Category</span>
+              <span className="sc-stat-label"><span className="sc-stat-icon">{CATEGORY_ICONS[category] || '📖'}</span>Category</span>
               <span className="sc-stat-val">{category}</span>
             </div>
             <div className="sc-stat-row">
