@@ -24,10 +24,8 @@ export default function Onboarding({ onBegin }) {
         </p>
       </div>
 
-      {/* Ninja */}
-      <div className="ob-ninja-wrap">
-        <img src={ninjaImg} alt="Meditating ninja" className="ob-ninja" />
-      </div>
+      {/* Ninja — absolutely anchored just above the card */}
+      <img src={ninjaImg} alt="Meditating ninja" className="ob-ninja" />
 
       {/* Bottom card */}
       <div className="ob-card">

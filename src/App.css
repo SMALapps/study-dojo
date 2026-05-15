@@ -2325,26 +2325,20 @@
   text-shadow: 0 1px 6px rgba(255,255,255,0.50);
 }
 
-/* Ninja — sits in the mid section, grows naturally with remaining space */
-.ob-ninja-wrap {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 0;
-  pointer-events: none;
-}
-
+/* Ninja — absolutely anchored so its base sits on the rock, just above the card */
 .ob-ninja {
-  width: 190px;
+  position: absolute;
+  /* card is ~222px tall; place ninja bottom at card top + small rock overlap */
+  bottom: 204px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 158px;
   height: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   display: block;
-  /* nudge down so feet disappear behind card edge */
-  margin-bottom: -12px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Bottom card */
