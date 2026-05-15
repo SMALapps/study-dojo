@@ -746,21 +746,6 @@
   z-index: 2;
 }
 
-/* DEBUG — remove before ship */
-.as-debug-anchor {
-  position: absolute;
-  top: 482px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 14px;
-  height: 14px;
-  background: red;
-  border-radius: 50%;
-  border: 2px solid white;
-  z-index: 20;
-  pointer-events: none;
-}
-
 /* Header pills float over the waterfall */
 .as-header {
   position: absolute;
@@ -943,31 +928,50 @@
 .as-modal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  /* Dark enough to signal interruption; light enough to keep waterfall + ninja visible */
+  background: rgba(4, 12, 24, 0.72);
+  backdrop-filter: blur(3px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   z-index: 200;
-  padding: 0 24px;
+  padding: 0 20px 52px;
 }
 
 .as-modal-card {
   background: var(--cream);
-  border-radius: 20px;
-  padding: 26px 20px;
+  border-radius: 24px;
+  padding: 28px 22px 22px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 0;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.06);
+}
+
+/* Decorative icon above title */
+.as-modal-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  line-height: 1;
 }
 
 .as-modal-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-dark);
   text-align: center;
-  line-height: 1.7;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.as-modal-divider {
+  width: 40px;
+  height: 2px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 2px;
+  margin-bottom: 12px;
 }
 
 .as-modal-body {
@@ -975,14 +979,15 @@
   font-size: 13px;
   color: var(--text-mid);
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.55;
+  margin-bottom: 22px;
 }
 
 .as-modal-btn {
   width: 100%;
   border: none;
-  border-radius: 12px;
-  padding: 15px;
+  border-radius: 14px;
+  padding: 16px;
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
   cursor: pointer;
@@ -990,7 +995,9 @@
   transition: background 0.15s, transform 0.1s;
 }
 
-.as-modal-btn:active { transform: scale(0.98); }
+.as-modal-btn + .as-modal-btn { margin-top: 10px; }
+
+.as-modal-btn:active { transform: scale(0.97); }
 
 .as-modal-stay {
   background: var(--green-cta);
@@ -1000,9 +1007,37 @@
 .as-modal-stay:hover { background: #558945; }
 
 .as-modal-break {
-  background: #faf7f0;
+  background: transparent;
   color: #c0392b;
-  border: 2px solid #c0392b;
+  border: 1.5px solid rgba(192,57,43,0.4);
 }
 
 .as-modal-break:hover { background: #fde8e6; }
+
+/* Broken Focus placeholder screen */
+.bf-screen {
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--cream);
+  padding: 40px 28px;
+}
+
+.bf-icon  { font-size: 48px; }
+
+.bf-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.bf-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-mid);
+  text-align: center;
+}
+
+.bf-cta { margin-top: 12px; width: 100%; }
