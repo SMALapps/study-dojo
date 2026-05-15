@@ -43,6 +43,24 @@ const THEMES = [
   },
 ];
 
+function LockIcon() {
+  return (
+    <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
+      <rect x="1.5" y="9" width="15" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8"/>
+      <path d="M5 9V6.5a4 4 0 018 0V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+      <circle cx="9" cy="15.5" r="1.5" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="16" height="13" viewBox="0 0 16 13" fill="none">
+      <path d="M1.5 6.5L6 11L14.5 1.5" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 export default function Themes({ onTabChange, onPremiumUpsell }) {
   const activeIdx = 3;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
@@ -86,32 +104,20 @@ export default function Themes({ onTabChange, onPremiumUpsell }) {
               />
             </div>
 
-            {/* Text */}
+            {/* Title → badge → description stacked */}
             <div className="th-card-body">
-              <div className="th-card-top">
-                <span className="th-card-title">{theme.title}</span>
-                <span className={`th-badge th-badge-${theme.badge}`}>{theme.badgeLabel}</span>
-              </div>
+              <span className="th-card-title">{theme.title}</span>
+              <span className={`th-badge th-badge-${theme.badge}`}>{theme.badgeLabel}</span>
               <p className="th-card-desc">{theme.description}</p>
             </div>
 
             {/* Status icon */}
             <div className="th-card-status">
               {theme.id === 'daytime' && (
-                <div className="th-check">
-                  <svg width="14" height="11" viewBox="0 0 14 11" fill="none">
-                    <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
+                <div className="th-check"><CheckIcon /></div>
               )}
               {theme.locked && (
-                <div className="th-lock">
-                  <svg width="12" height="15" viewBox="0 0 12 15" fill="none">
-                    <rect x="1" y="6" width="10" height="8" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-                    <path d="M3.5 6V4a2.5 2.5 0 015 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                    <circle cx="6" cy="10.5" r="1" fill="currentColor"/>
-                  </svg>
-                </div>
+                <div className="th-lock"><LockIcon /></div>
               )}
             </div>
           </div>
