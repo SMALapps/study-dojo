@@ -32,10 +32,8 @@ export default function PremiumUpsell({ onClose, onStartPremium }) {
         {/* Crown + Title */}
         <div className="pu-title-block">
           <span className="pu-crown">👑</span>
-          <div className="pu-title-text">
-            <span className="pu-title-top">FOCUS DOJO</span>
-            <span className="pu-title-main">PREMIUM</span>
-          </div>
+          <span className="pu-title-top">FOCUS DOJO</span>
+          <span className="pu-title-main">PREMIUM</span>
         </div>
 
         <p className="pu-subtitle">

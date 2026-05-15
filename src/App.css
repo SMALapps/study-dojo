@@ -1899,7 +1899,7 @@
 /* Hero image block */
 .pu-hero {
   position: relative;
-  height: 210px;
+  height: 185px;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -1917,8 +1917,8 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(15,29,20,0.15) 0%,
-    rgba(15,29,20,0.70) 100%
+    rgba(15,29,20,0.10) 0%,
+    rgba(15,29,20,0.62) 100%
   );
 }
 
@@ -1945,52 +1945,49 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
-  padding: 18px 20px 20px;
+  padding: 16px 20px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .pu-scroll::-webkit-scrollbar { display: none; }
 
-/* Crown + title */
+/* Crown + title — centered column */
 .pu-title-block {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   margin-bottom: 10px;
 }
 
-.pu-crown { font-size: 26px; line-height: 1; }
-
-.pu-title-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
+.pu-crown { font-size: 28px; line-height: 1; margin-bottom: 2px; }
 
 .pu-title-top {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
   color: #d4aa30;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-align: center;
 }
 
 .pu-title-main {
   font-family: 'Press Start 2P', monospace;
-  font-size: 16px;
+  font-size: 18px;
   color: #e8c832;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   line-height: 1.2;
+  text-align: center;
 }
 
 /* Subtitle */
 .pu-subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  color: rgba(255,255,255,0.70);
+  color: rgba(255,255,255,0.75);
   text-align: center;
   line-height: 1.55;
-  margin: 0 0 14px;
+  margin: 0 0 12px;
 }
 
 /* Feature list */
@@ -1998,12 +1995,12 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  margin-bottom: 16px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.10);
+  gap: 8px;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 14px;
-  padding: 12px 14px;
+  padding: 14px 16px;
 }
 
 .pu-feature-row {
@@ -2012,12 +2009,12 @@
   gap: 10px;
 }
 
-.pu-feature-icon { font-size: 14px; flex-shrink: 0; }
+.pu-feature-icon { font-size: 14px; flex-shrink: 0; line-height: 1; }
 
 .pu-feature-label {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.88);
 }
 
 /* Pricing cards */
@@ -2025,18 +2022,18 @@
   width: 100%;
   display: flex;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .pu-price-card {
   flex: 1;
   background: var(--cream);
   border-radius: 14px;
-  padding: 12px 10px;
+  padding: 12px 10px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   border: 1.5px solid var(--border);
   position: relative;
 }
@@ -2044,18 +2041,19 @@
 .pu-price-featured {
   border-color: #e8c832;
   box-shadow: 0 0 0 1px #e8c832;
+  padding-top: 18px;
 }
 
 .pu-price-save {
   position: absolute;
-  top: -10px;
+  top: -11px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--tab-active);
   color: #fff;
   font-family: 'Press Start 2P', monospace;
   font-size: 5px;
-  padding: 3px 7px;
+  padding: 4px 8px;
   border-radius: 6px;
   white-space: nowrap;
   letter-spacing: 0.3px;
@@ -2070,7 +2068,7 @@
 
 .pu-price-amount {
   font-family: 'Press Start 2P', monospace;
-  font-size: 16px;
+  font-size: 17px;
   color: var(--text-dark);
   line-height: 1;
 }
@@ -2087,8 +2085,8 @@
   font-size: 10px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 16px rgba(74,140,74,0.35);
+  margin-bottom: 8px;
+  box-shadow: 0 4px 16px rgba(74,140,74,0.40);
   transition: opacity 0.15s;
 }
 .pu-btn-primary:hover { opacity: 0.88; }
@@ -2096,12 +2094,13 @@
 .pu-btn-secondary {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.50);
+  border-bottom: 1px solid rgba(255,255,255,0.30);
+  color: rgba(255,255,255,0.68);
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
   letter-spacing: 0.4px;
   cursor: pointer;
-  padding: 6px 0;
-  transition: color 0.15s;
+  padding: 4px 2px;
+  transition: color 0.15s, border-color 0.15s;
 }
-.pu-btn-secondary:hover { color: rgba(255,255,255,0.80); }
+.pu-btn-secondary:hover { color: rgba(255,255,255,0.90); border-color: rgba(255,255,255,0.60); }
