@@ -1,4 +1,6 @@
-import waterfallImg from './assets/themes/daytime-waterfall/active-background.png';
+import daytimeImg  from './assets/themes/daytime-waterfall/background.png';
+import forestImg   from './assets/themes/forest-sunbeams/background.png';
+import nightImg    from './assets/themes/night-waterfall/background.png';
 
 const TABS = [
   { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
@@ -15,7 +17,7 @@ const THEMES = [
     description: 'A bright, peaceful waterfall for everyday focus.',
     badge:       'active',
     badgeLabel:  'Active',
-    imgFilter:   'none',
+    img:         daytimeImg,
     locked:      false,
   },
   {
@@ -24,7 +26,7 @@ const THEMES = [
     description: 'A quiet forest waterfall with golden sunbeams for deep focus.',
     badge:       'premium',
     badgeLabel:  'Premium',
-    imgFilter:   'sepia(0.55) saturate(1.5) hue-rotate(-15deg) brightness(0.82)',
+    img:         forestImg,
     locked:      true,
   },
   {
@@ -33,19 +35,19 @@ const THEMES = [
     description: 'A moonlit waterfall for late-night study sessions.',
     badge:       'soon',
     badgeLabel:  'Coming Soon',
-    imgFilter:   'brightness(0.35) saturate(0.4) hue-rotate(190deg)',
+    img:         nightImg,
     locked:      true,
   },
 ];
 
 export default function Themes({ onTabChange, onPremiumUpsell }) {
-  const activeIdx = 3; // themes tab
+  const activeIdx = 3;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
   const handleCardTap = (theme) => {
-    if (theme.id === 'daytime') return; // already active
+    if (theme.id === 'daytime') return;
     if (theme.id === 'forest')  onPremiumUpsell?.();
-    // night: locked / coming soon — no action
+    // night: coming soon — no action
   };
 
   return (
@@ -74,10 +76,9 @@ export default function Themes({ onTabChange, onPremiumUpsell }) {
             {/* Thumbnail */}
             <div className="th-thumb-wrap">
               <img
-                src={waterfallImg}
+                src={theme.img}
                 alt={theme.title}
                 className="th-thumb-img"
-                style={{ filter: theme.imgFilter }}
               />
             </div>
 
