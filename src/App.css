@@ -491,10 +491,10 @@
 .ss-header-spacer { width: 36px; }
 
 .ss-section {
-  margin: 11px 14px 0;
+  margin: 16px 14px 0;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 10px;
 }
 
 .ss-label {
@@ -515,7 +515,7 @@
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 10px;
-  padding: 12px 4px;
+  padding: 14px 4px;
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
   color: var(--text-dark);
@@ -545,11 +545,11 @@
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 10px;
-  padding: 10px 2px;
+  padding: 13px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
@@ -585,7 +585,7 @@
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 12px;
-  padding: 16px 6px 14px;
+  padding: 19px 6px 17px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -623,8 +623,8 @@
 
 /* Preview strip */
 .ss-preview {
-  margin: 11px 0 0;
-  height: 360px;
+  margin: 14px 0 0;
+  height: 328px;
   border-radius: 0;
   overflow: hidden;
   position: relative;
