@@ -1043,3 +1043,235 @@
 }
 
 .bf-cta { margin-top: 12px; width: 100%; }
+
+/* ── Session Complete ─────────────────────────────────────────────────── */
+.sc-screen {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Ninja sits in front of the card so upper body is visible above it */
+.sc-ninja {
+  z-index: 4;
+}
+
+/* Pill tweaks for "SESSION COMPLETE" */
+.sc-pill {
+  background: rgba(40, 80, 35, 0.90);
+  font-size: 6.5px;
+  letter-spacing: 0.3px;
+}
+
+/* XP badge — green tint to match celebration state */
+.sc-xp-badge span { color: #f0c060; }
+
+/* Cream card rises from below the ninja */
+.sc-card {
+  position: absolute;
+  top: 318px;
+  left: 0; right: 0; bottom: 0;
+  background: var(--cream);
+  border-radius: 24px 24px 0 0;
+  border-top: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 22px 20px 28px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--green-cta);
+  text-align: center;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+.sc-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+  flex-shrink: 0;
+}
+
+/* ── Stat rows ── */
+.sc-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 4px 0;
+}
+
+.sc-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(224,216,200,0.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+.sc-stat-row:last-child { border-bottom: none; }
+
+.sc-stat-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-mid);
+  font-weight: 400;
+}
+.sc-stat-icon { font-size: 14px; }
+
+.sc-stat-val {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+.sc-stat-xp { color: var(--green-cta); }
+
+/* ── Rank section ── */
+.sc-rank {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 0 4px;
+}
+
+.sc-rank-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-rank-left  { flex: 1; align-items: flex-start; }
+.sc-rank-right { flex: 1; align-items: flex-end; }
+.sc-rank-center {
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.sc-rank-eyebrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--green-cta);
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+.sc-rank-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+.sc-rank-xp {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.sc-rank-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sc-rank-bar-fill {
+  height: 100%;
+  background: var(--green-cta);
+  border-radius: 3px;
+}
+.sc-rank-star   { font-size: 12px; line-height: 1; }
+.sc-rank-avatar { font-size: 28px; line-height: 1; }
+.sc-rank-avatar-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--text-mid);
+  margin-top: 2px;
+}
+
+/* ── Theme teaser ── */
+.sc-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0 4px;
+}
+.sc-theme-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+.sc-theme-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-light);
+}
+.sc-theme-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.sc-theme-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.sc-theme-lock {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #2d5a27 0%, #4a8a3a 50%, #1e3d18 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.sc-theme-lock-icon { font-size: 22px; }
+
+/* ── Buttons ── */
+.sc-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-shrink: 0;
+}
+.sc-btn {
+  flex: 1;
+  border-radius: 13px;
+  padding: 15px 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  line-height: 1.7;
+}
+.sc-btn:active { transform: scale(0.97); }
+
+.sc-btn-primary {
+  background: var(--green-cta);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(74,124,63,0.30);
+}
+.sc-btn-primary:hover { background: #3d6b34; }
+
+.sc-btn-secondary {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1.5px solid var(--border);
+}
+.sc-btn-secondary:hover { background: var(--card-bg); }

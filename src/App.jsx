@@ -3,6 +3,7 @@ import HeroScene from './HeroScene';
 import RankCard from './RankCard';
 import SessionSetup from './SessionSetup';
 import ActiveSession from './ActiveSession';
+import SessionComplete from './SessionComplete';
 import './App.css';
 
 function StatusBar() {
@@ -84,6 +85,22 @@ export default function App() {
         <ActiveSession
           {...(sessionConfig || {})}
           onBreak={() => setScreen('brokenFocus')}
+          onComplete={() => setScreen('sessionComplete')}
+        />
+      </div>
+    );
+  }
+
+  // ── Session Complete ──────────────────────────────────────────────────────
+  if (screen === 'sessionComplete') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <SessionComplete
+          {...(sessionConfig || {})}
+          onReturnHome={() => setScreen('home')}
+          onStartAgain={() => setScreen('sessionSetup')}
         />
       </div>
     );

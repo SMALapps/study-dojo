@@ -30,6 +30,7 @@ export default function ActiveSession({
   category   = 'Study',
   difficulty = 'Disciplined',
   onBreak,
+  onComplete,
 }) {
   const totalSecs = (duration === 'custom' ? 25 : Number(duration)) * 60;
   // Start at 24:32 remaining so the mock display matches the design reference
@@ -37,10 +38,10 @@ export default function ActiveSession({
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (secsLeft <= 0) return;
+    if (secsLeft <= 0) { onComplete?.(); return; }
     const id = setInterval(() => setSecsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [secsLeft]);
 
   const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
   const secs = String(secsLeft % 60).padStart(2, '0');
@@ -63,7 +64,8 @@ export default function ActiveSession({
       <div className="as-header">
         <button className="as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
         <div className="as-title-pill">FOCUS SESSION</div>
-        <div className="as-xp-badge">🔥 <span>120 XP</span></div>
+        {/* temp: tap XP badge to skip to Session Complete for testing */}
+        <div className="as-xp-badge" onClick={onComplete} style={{ cursor: 'pointer' }}>🔥 <span>120 XP</span></div>
       </div>
 
       {/* Content block: info group + button, sits in lower portion of screen */}
