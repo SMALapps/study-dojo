@@ -2120,3 +2120,113 @@
   transition: color 0.15s;
 }
 .pu-btn-secondary:hover { color: rgba(255,255,255,0.60); }
+
+
+/* ── Settings Screen ─────────────────────────────────────────────────────── */
+.sg-screen {
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+}
+
+.sg-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Section label above each card */
+.sg-section-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-dark);
+  margin: 14px 0 6px 2px;
+}
+.sg-section-label:first-of-type { margin-top: 2px; }
+
+/* Card container */
+.sg-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Row */
+.sg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  min-height: 46px;
+}
+
+.sg-row-tappable { cursor: pointer; }
+.sg-row-tappable:active { background: rgba(0,0,0,0.04); }
+
+.sg-row-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  color: var(--text-dark);
+}
+
+.sg-row-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sg-row-chevron {
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+}
+
+.sg-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 16px;
+}
+
+/* Toggle */
+.sg-toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  background: #ccc8c2;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.sg-toggle-on {
+  background: var(--tab-active);
+}
+
+.sg-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  transition: left 0.2s;
+  display: block;
+}
+
+.sg-toggle-on .sg-toggle-thumb {
+  left: 21px;
+}
+
+.sg-bottom-pad { height: 16px; }

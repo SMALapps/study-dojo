@@ -8,6 +8,7 @@ import BrokenFocus from './BrokenFocus';
 import Progress from './Progress';
 import Themes from './Themes';
 import PremiumUpsell from './PremiumUpsell';
+import Settings from './Settings';
 import './App.css';
 
 function StatusBar() {
@@ -207,13 +208,13 @@ export default function App() {
     );
   }
 
-  // ── Settings placeholder ──────────────────────────────────────────────────
+  // ── Settings screen ───────────────────────────────────────────────────────
   if (screen === 'settings') {
     return (
       <div className="phone-shell">
         <div className="dynamic-island" />
         <StatusBar />
-        <PlaceholderScreen title="SETTINGS" onTabChange={handleTabChange} />
+        <Settings onTabChange={handleTabChange} />
       </div>
     );
   }
