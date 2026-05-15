@@ -2325,19 +2325,18 @@
   text-shadow: 0 1px 6px rgba(255,255,255,0.50);
 }
 
-/* Ninja — absolutely anchored so its base sits on the rock, just above the card */
+/* Ninja — absolutely anchored so its base sits on the rock */
 .ob-ninja {
   position: absolute;
-  /* card is ~222px tall; place ninja bottom at card top + small rock overlap */
-  bottom: 204px;
+  bottom: 158px;
   left: 50%;
   transform: translateX(-50%);
-  width: 158px;
+  width: 162px;
   height: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   display: block;
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 
@@ -2345,6 +2344,7 @@
 .ob-card {
   position: relative;
   z-index: 3;
+  /* ninja z-index: 4 intentionally sits in front of card top edge */
   background: var(--cream);
   border-radius: 28px 28px 0 0;
   padding: 22px 24px 20px;
