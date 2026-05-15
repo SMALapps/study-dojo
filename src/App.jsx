@@ -283,7 +283,7 @@ export default function App() {
           </button>
 
           <div className="quick-actions">
-            <div className="action-card">
+            <div className="action-card" onClick={() => setScreen('sessionSetup')}>
               <span className="action-icon">⛩️</span>
               <span className="action-label">TRAINING{'\n'}MODES</span>
             </div>

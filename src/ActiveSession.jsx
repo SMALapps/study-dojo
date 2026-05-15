@@ -34,8 +34,7 @@ export default function ActiveSession({
   onHome,
 }) {
   const totalSecs = (duration === 'custom' ? 25 : Number(duration)) * 60;
-  // Start at 24:32 remaining so the mock display matches the design reference
-  const [secsLeft,  setSecsLeft]  = useState(24 * 60 + 32);
+  const [secsLeft,  setSecsLeft]  = useState(totalSecs);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -46,8 +45,7 @@ export default function ActiveSession({
 
   const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
   const secs = String(secsLeft % 60).padStart(2, '0');
-  // Mock progress at 38% for layout review
-  const progress = 38;
+  const progress = Math.round(((totalSecs - secsLeft) / totalSecs) * 100);
 
   return (
     <div className="screen as-screen">
@@ -112,16 +110,6 @@ export default function ActiveSession({
         />
       )}
 
-      {/* ── DEV SHORTCUTS — remove before production ────────────────────────
-          Temporary navigation shortcuts for prototype testing only.
-          These are not part of the final design and must be deleted
-          before any public/production release.
-      ─────────────────────────────────────────────────────────────────── */}
-      <div className="dev-shortcuts">
-        <button className="dev-btn" onClick={onComplete}>Dev: Complete Session</button>
-        <button className="dev-btn" onClick={onBreak}>Dev: Break Session</button>
-        <button className="dev-btn" onClick={onHome}>Dev: Return Home</button>
-      </div>
     </div>
   );
 }
