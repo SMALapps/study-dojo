@@ -734,10 +734,11 @@
   z-index: 1;
 }
 
-/* Ninja: top:401px (+25px from prior 376px), visible feet at 401+106=507px */
+/* Ninja: top:415px — visible feet (92.4px into 124px box) land at 507px on rock.
+   New sprite (1060x1060) has 31.5px rendered bottom padding vs old 17.7px. */
 .as-ninja {
   position: absolute;
-  top: 401px;
+  top: 415px;
   left: 50%;
   /* translateZ(0) forces a stable GPU compositing layer so the timer's
      per-second re-renders don't cause the image to briefly lose its
