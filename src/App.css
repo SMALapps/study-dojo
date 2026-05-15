@@ -295,7 +295,7 @@
 
 .bonsai-icon { font-size: 38px; flex-shrink: 0; }
 
-.scroll-bottom-pad { height: 24px; }
+.scroll-bottom-pad { height: 4px; }
 
 .tab-bar {
   height: 80px;
@@ -491,7 +491,7 @@
 .ss-header-spacer { width: 36px; }
 
 .ss-section {
-  margin: 14px 14px 0;
+  margin: 11px 14px 0;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -585,7 +585,7 @@
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 12px;
-  padding: 12px 6px 10px;
+  padding: 16px 6px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -621,8 +621,8 @@
 
 /* Preview strip */
 .ss-preview {
-  margin: 14px 14px 0;
-  height: 96px;
+  margin: 11px 14px 0;
+  height: 280px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -646,7 +646,7 @@
 
 /* Today's Ritual summary card */
 .ss-ritual-card {
-  margin: 10px 14px 0;
+  margin: 8px 14px 0;
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 12px;
