@@ -1,6 +1,6 @@
 import daytimeImg  from './assets/themes/daytime-waterfall/background.png';
-import forestImg   from './assets/themes/forest-sunbeams/background.png';
-import nightImg    from './assets/themes/night-waterfall/background.png';
+import forestImg   from './assets/themes/daytime-waterfall/forest-sunbeams.png';
+import nightImg    from './assets/themes/daytime-waterfall/night-waterfall.png';
 
 const TABS = [
   { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
