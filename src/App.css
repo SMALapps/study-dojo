@@ -1027,17 +1027,13 @@
 .bf-scroll {
   position: absolute;
   inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow: hidden; /* no scrolling — all content must fit in viewport */
 }
-.bf-scroll::-webkit-scrollbar { display: none; }
 
 /* Hero block — waterfall + dark overlay + ninja */
 .bf-hero {
   position: relative;
-  height: 510px;
+  height: 515px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -1074,15 +1070,13 @@
 
 .bf-pill { background: rgba(140, 30, 25, 0.90); }
 
-.bf-xp-badge { /* inherits as-xp-badge styles */ }
-
-/* Cream card — normal document flow below hero */
+/* Cream card — starts just below ninja body (hero 515 - 10px overlap = 505px) */
 .bf-card {
   position: relative;
   background: var(--cream);
   border-radius: 26px 26px 0 0;
-  margin-top: -42px;
-  padding: 14px 20px 24px;
+  margin-top: -10px;
+  padding: 10px 18px 10px;
   z-index: 3;
 }
 
@@ -1092,31 +1086,31 @@
   color: #b03020;
   text-align: center;
   letter-spacing: 0.04em;
-  margin: 0 0 10px;
+  margin: 0 0 7px;
 }
 
 .bf-card-divider {
   height: 1px;
   background: rgba(0,0,0,0.10);
-  margin: 0 0 10px;
+  margin: 0 0 7px;
 }
 
 .bf-card-body {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-mid);
   text-align: center;
-  line-height: 1.55;
+  line-height: 1.45;
   white-space: pre-line;
-  margin: 0 0 10px;
+  margin: 0 0 7px;
 }
 
 /* Stats rows */
 .bf-stats {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  margin-bottom: 9px;
 }
 
 .bf-stat-row {
@@ -1127,18 +1121,18 @@
 
 .bf-stat-label {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-mid);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.bf-stat-icon { font-size: 14px; }
+.bf-stat-icon { font-size: 13px; }
 
 .bf-stat-val {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-dark);
 }
@@ -1149,13 +1143,13 @@
 .bf-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 2px;
+  gap: 8px;
+  margin-top: 0;
 }
 
 .bf-btn {
   width: 100%;
-  padding: 12px 0;
+  padding: 11px 0;
   border-radius: 10px;
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
