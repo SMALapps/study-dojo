@@ -941,7 +941,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 18px 36px;
+  padding: 0 18px 10px;
   z-index: 200;
 }
 
@@ -949,7 +949,7 @@
   background: var(--cream);
   border-radius: 22px;
   border: 1px solid var(--border);
-  padding: 30px 24px 24px;
+  padding: 32px 26px 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -965,7 +965,7 @@
   color: var(--text-dark);
   text-align: center;
   line-height: 1.9;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .as-modal-divider {
@@ -973,7 +973,7 @@
   height: 1.5px;
   background: var(--border);
   border-radius: 2px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .as-modal-body {
@@ -983,7 +983,7 @@
   color: var(--text-mid);
   text-align: center;
   line-height: 1.65;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 }
 
 .as-modal-btn {
@@ -998,7 +998,7 @@
   transition: background 0.15s, transform 0.1s;
 }
 
-.as-modal-btn + .as-modal-btn { margin-top: 10px; }
+.as-modal-btn + .as-modal-btn { margin-top: 12px; }
 .as-modal-btn:active { transform: scale(0.97); }
 
 .as-modal-stay {
