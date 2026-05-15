@@ -116,6 +116,7 @@
   flex-direction: column;
   overflow: hidden;
   background: var(--cream);
+  position: relative;
 }
 
 .scroll-content {
@@ -693,6 +694,89 @@
 .ss-cta-btn {
   width: 100%;
   margin: 0;
+}
+
+/* Custom duration modal */
+.ss-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.ss-modal-card {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 22px 20px 18px;
+  width: 264px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ss-modal-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.ss-modal-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text-dark);
+}
+
+.ss-modal-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: -4px;
+}
+
+.ss-modal-error { color: #c0392b; }
+
+.ss-modal-btns {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.ss-modal-cancel {
+  flex: 1;
+  padding: 11px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.ss-modal-set {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green-cta);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
 }
 
 /* ─── Active Session ──────────────────────────────────────────────────────── */

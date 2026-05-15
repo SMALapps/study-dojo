@@ -3,8 +3,8 @@ import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg   from './assets/ninja/white-belt/meditating.png';
 
 export default function BrokenFocus({
+  duration    = 25,
   timeFocused = 11,
-  goal        = 25,
   onTryAgain,
   onReturnHome,
 }) {
@@ -43,7 +43,7 @@ export default function BrokenFocus({
             </div>
             <div className="bf-stat-row">
               <span className="bf-stat-label"><span className="bf-stat-icon">🎯</span>Goal</span>
-              <span className="bf-stat-val">{goal} min</span>
+              <span className="bf-stat-val">{duration} min</span>
             </div>
             <div className="bf-stat-row">
               <span className="bf-stat-label"><span className="bf-stat-icon">🔥</span>XP Earned</span>

@@ -33,7 +33,7 @@ export default function ActiveSession({
   onComplete,
   onHome,
 }) {
-  const totalSecs = (duration === 'custom' ? 25 : Number(duration)) * 60;
+  const totalSecs = Number(duration) * 60;
   const [secsLeft,  setSecsLeft]  = useState(totalSecs);
   const [showModal, setShowModal] = useState(false);
 

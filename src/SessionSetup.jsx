@@ -1,44 +1,73 @@
 import { useState } from 'react';
 import previewImg from './assets/themes/daytime-waterfall/active-background.png';
 
-const DURATIONS = [
-  { value: 15,       label: '15\nmin'  },
-  { value: 25,       label: '25\nmin'  },
-  { value: 45,       label: '45\nmin'  },
-  { value: 60,       label: '60\nmin'  },
-  { value: 'custom', label: 'Custom'   },
+const PRESET_DURATIONS = [
+  { value: 15, label: '15\nmin' },
+  { value: 25, label: '25\nmin' },
+  { value: 45, label: '45\nmin' },
+  { value: 60, label: '60\nmin' },
 ];
 
 const CATEGORIES = [
-  { id: 'Study',      icon: '📖', label: 'Study'    },
-  { id: 'Work',       icon: '💼', label: 'Work'     },
-  { id: 'Reading',    icon: '📚', label: 'Reading'  },
+  { id: 'Study',      icon: '📖', label: 'Study'       },
+  { id: 'Work',       icon: '💼', label: 'Work'        },
+  { id: 'Reading',    icon: '📚', label: 'Reading'     },
   { id: 'Deep Work',  icon: '🎯', label: 'Deep\nWork'  },
-  { id: 'Meditation', icon: '🧘', label: 'Meditate' },
+  { id: 'Meditation', icon: '🧘', label: 'Meditate'    },
 ];
 
 const DIFFICULTIES = [
-  {
-    id:   'Gentle',
-    icon: '🍃',
-    desc: 'Allows one pause.',
-  },
-  {
-    id:   'Disciplined',
-    icon: '💠',
-    desc: 'No pauses. Stay committed.',
-  },
-  {
-    id:   'Shinobi',
-    icon: '⭐',
-    desc: 'Breaking focus ends the session.',
-  },
+  { id: 'Gentle',      icon: '🍃', desc: 'Allows one pause.'              },
+  { id: 'Disciplined', icon: '💠', desc: 'No pauses. Stay committed.'     },
+  { id: 'Shinobi',     icon: '⭐', desc: 'Breaking focus ends the session.' },
 ];
+
+function CustomModal({ initial, onSet, onCancel }) {
+  const [raw,   setRaw]   = useState(initial);
+  const [error, setError] = useState('');
+
+  const handleSet = () => {
+    const n = parseInt(raw, 10);
+    if (!raw || isNaN(n))  { setError('Enter a number.');        return; }
+    if (n <= 0)             { setError('Must be greater than 0.'); return; }
+    if (n > 180)            { setError('Max is 180 minutes.');    return; }
+    onSet(n);
+  };
+
+  return (
+    <div className="ss-modal-overlay">
+      <div className="ss-modal-card">
+        <span className="ss-modal-title">CUSTOM DURATION</span>
+        <input
+          className="ss-modal-input"
+          type="number"
+          min="1"
+          max="180"
+          placeholder="25"
+          value={raw}
+          onChange={e => { setRaw(e.target.value); setError(''); }}
+          autoFocus
+        />
+        <span className={`ss-modal-hint${error ? ' ss-modal-error' : ''}`}>
+          {error || '1 – 180 minutes'}
+        </span>
+        <div className="ss-modal-btns">
+          <button className="ss-modal-cancel" onClick={onCancel}>Cancel</button>
+          <button className="ss-modal-set"    onClick={handleSet}>Set</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function SessionSetup({ onBack, onStart }) {
   const [duration,   setDuration]   = useState(25);
+  const [showCustom, setShowCustom] = useState(false);
   const [category,   setCategory]   = useState('Study');
   const [difficulty, setDifficulty] = useState('Disciplined');
+
+  const isCustom      = !PRESET_DURATIONS.map(d => d.value).includes(duration);
+  const customLabel   = isCustom ? `Custom\n${duration} min` : 'Custom';
 
   return (
     <div className="screen">
@@ -57,7 +86,7 @@ export default function SessionSetup({ onBack, onStart }) {
         <div className="ss-section">
           <span className="ss-label">CHOOSE DURATION</span>
           <div className="ss-duration-row">
-            {DURATIONS.map(d => (
+            {PRESET_DURATIONS.map(d => (
               <button
                 key={d.value}
                 className={`ss-dur-btn${duration === d.value ? ' active' : ''}`}
@@ -66,6 +95,12 @@ export default function SessionSetup({ onBack, onStart }) {
                 {d.label}
               </button>
             ))}
+            <button
+              className={`ss-dur-btn${isCustom ? ' active' : ''}`}
+              onClick={() => setShowCustom(true)}
+            >
+              {customLabel}
+            </button>
           </div>
         </div>
 
@@ -106,7 +141,7 @@ export default function SessionSetup({ onBack, onStart }) {
 
       </div>
 
-      {/* ── Scenic preview — flex:1 fills all remaining height, button overlaid ── */}
+      {/* ── Scenic preview — flex:1, button overlaid ── */}
       <div className="ss-preview">
         <img src={previewImg} alt="" className="ss-preview-img" />
         <div className="ss-cta-overlay">
@@ -116,6 +151,15 @@ export default function SessionSetup({ onBack, onStart }) {
           </button>
         </div>
       </div>
+
+      {/* ── Custom duration modal ── */}
+      {showCustom && (
+        <CustomModal
+          initial={isCustom ? String(duration) : ''}
+          onSet={n => { setDuration(n); setShowCustom(false); }}
+          onCancel={() => setShowCustom(false)}
+        />
+      )}
 
     </div>
   );
