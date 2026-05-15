@@ -126,7 +126,10 @@ export default function Progress({ onTabChange }) {
           <div className="pr-belts">
             {BELTS.map((belt) => (
               <div key={belt.name} className={`pr-belt-item${belt.active ? ' pr-belt-active' : ''}`}>
-                {belt.active && <div className="pr-belt-marker">▼</div>}
+                {belt.active
+                  ? <div className="pr-belt-marker" />
+                  : <div className="pr-belt-spacer" />
+                }
                 <div
                   className="pr-belt-strip"
                   style={{ background: belt.bg, borderColor: belt.border }}
