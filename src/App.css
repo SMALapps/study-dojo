@@ -2328,7 +2328,7 @@
 /* Ninja — absolutely anchored so its base sits on the rock */
 .ob-ninja {
   position: absolute;
-  bottom: 127px;
+  bottom: 125px;
   left: 50%;
   transform: translateX(-50%);
   width: 210px;
