@@ -18,6 +18,7 @@ const THEMES = [
     badge:       'active',
     badgeLabel:  'Active',
     img:         daytimeImg,
+    imgPos:      'center center',
     locked:      false,
   },
   {
@@ -27,6 +28,7 @@ const THEMES = [
     badge:       'premium',
     badgeLabel:  'Premium',
     img:         forestImg,
+    imgPos:      'center 58%',
     locked:      true,
   },
   {
@@ -36,6 +38,7 @@ const THEMES = [
     badge:       'soon',
     badgeLabel:  'Coming Soon',
     img:         nightImg,
+    imgPos:      'center 58%',
     locked:      true,
   },
 ];
@@ -79,6 +82,7 @@ export default function Themes({ onTabChange, onPremiumUpsell }) {
                 src={theme.img}
                 alt={theme.title}
                 className="th-thumb-img"
+                style={{ objectPosition: theme.imgPos }}
               />
             </div>
 
