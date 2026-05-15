@@ -1,3 +1,5 @@
+import { getRankInfo, RANKS } from './gameLogic';
+
 const TABS = [
   { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
   { id: 'train',    label: 'TRAIN',    icon: '⚔️'  },
@@ -6,44 +8,54 @@ const TABS = [
   { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
 ];
 
-const WEEK_DATA = [
-  { day: 'M', mins: 45 },
-  { day: 'T', mins: 30 },
-  { day: 'W', mins: 60 },
-  { day: 'T', mins: 25 },
-  { day: 'F', mins: 90 },
-  { day: 'S', mins: 70 },
-  { day: 'S', mins: 55 },
-];
+const DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
-const MAX_MINS = 90;
+const BELT_STYLES = {
+  'White Belt':  { bg: '#f0ede6', border: '#aea89e', knot: '#ccc8c0' },
+  'Yellow Belt': { bg: '#e8c832', border: '#b09010', knot: '#c4a010' },
+  'Orange Belt': { bg: '#e07820', border: '#b05010', knot: '#c06010' },
+  'Green Belt':  { bg: '#3a7a42', border: '#235a2a', knot: '#2a5a30' },
+  'Blue Belt':   { bg: '#2850a8', border: '#1a3480', knot: '#1c3880' },
+  'Brown Belt':  { bg: '#804020', border: '#5a2c10', knot: '#5a2c10' },
+  'Black Belt':  { bg: '#1c1c1c', border: '#000',    knot: '#383838' },
+};
 
-const BELTS = [
-  { name: 'White',  bg: '#f0ede6', border: '#aea89e', knot: '#ccc8c0', active: true  },
-  { name: 'Yellow', bg: '#e8c832', border: '#b09010', knot: '#c4a010', active: false },
-  { name: 'Orange', bg: '#e07820', border: '#b05010', knot: '#c06010', active: false },
-  { name: 'Green',  bg: '#3a7a42', border: '#235a2a', knot: '#2a5a30', active: false },
-  { name: 'Blue',   bg: '#2850a8', border: '#1a3480', knot: '#1c3880', active: false },
-  { name: 'Brown',  bg: '#804020', border: '#5a2c10', knot: '#5a2c10', active: false },
-  { name: 'Black',  bg: '#1c1c1c', border: '#000',    knot: '#383838', active: false },
-];
-
-export default function Progress({ onTabChange }) {
-  const activeIdx = 2;
+export default function Progress({ stats = {}, onTabChange, onHamburger }) {
+  const activeIdx        = 2;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
+
+  const {
+    totalFocusMinutes = 0,
+    currentStreak     = 0,
+    longestStreak     = 0,
+    sessionsCompleted = 0,
+    xp                = 0,
+    weeklyFocusData   = [0, 0, 0, 0, 0, 0, 0],
+  } = stats;
+
+  const totalHrs  = Math.floor(totalFocusMinutes / 60);
+  const totalMins = totalFocusMinutes % 60;
+  const totalDisplay = totalHrs > 0
+    ? `${totalHrs}.${String(Math.round((totalMins / 60) * 10)).padStart(1, '0')}`
+    : String(totalMins);
+  const totalUnit = totalHrs > 0 ? 'hrs' : 'min';
+
+  const weekMax  = Math.max(...weeklyFocusData, 30); // floor at 30 so empty chart still renders
+  const yLabels  = [weekMax, Math.round(weekMax * 0.66), Math.round(weekMax * 0.33)];
+
+  const { current, next, rankXp, rankMax, progress } = getRankInfo(xp);
 
   return (
     <div className="screen pr-screen">
 
-      {/* Header */}
       <div className="top-nav">
-        <button className="hamburger-btn" aria-label="Menu">
+        <button className="hamburger-btn" aria-label="Menu" onClick={onHamburger}>
           <span /><span /><span />
         </button>
         <span className="app-title">PROGRESS</span>
         <div className="xp-badge">
           <span className="flame">🔥</span>
-          <span className="xp-num">120 XP</span>
+          <span className="xp-num">{xp} XP</span>
         </div>
       </div>
 
@@ -53,22 +65,22 @@ export default function Progress({ onTabChange }) {
         <div className="pr-stat-grid">
           <div className="pr-stat-card">
             <span className="pr-stat-label">TOTAL FOCUS</span>
-            <span className="pr-stat-value">18.5</span>
-            <span className="pr-stat-unit">hrs</span>
+            <span className="pr-stat-value">{totalDisplay}</span>
+            <span className="pr-stat-unit">{totalUnit}</span>
           </div>
           <div className="pr-stat-card">
             <span className="pr-stat-label">CURRENT STREAK</span>
-            <span className="pr-stat-value pr-streak">6</span>
+            <span className="pr-stat-value pr-streak">{currentStreak}</span>
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
             <span className="pr-stat-label">LONGEST STREAK</span>
-            <span className="pr-stat-value">14</span>
+            <span className="pr-stat-value">{longestStreak}</span>
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
             <span className="pr-stat-label">SESSIONS{'\n'}COMPLETED</span>
-            <span className="pr-stat-value">42</span>
+            <span className="pr-stat-value">{sessionsCompleted}</span>
             <span className="pr-stat-unit">sessions</span>
           </div>
         </div>
@@ -78,20 +90,18 @@ export default function Progress({ onTabChange }) {
           <span className="pr-section-title">FOCUS THIS WEEK</span>
           <div className="pr-chart">
             <div className="pr-chart-yaxis">
-              <span>90</span>
-              <span>60</span>
-              <span>30</span>
+              {yLabels.map((v, i) => <span key={i}>{v}</span>)}
             </div>
             <div className="pr-chart-bars">
-              {WEEK_DATA.map(({ day, mins }, i) => (
+              {weeklyFocusData.map((mins, i) => (
                 <div key={i} className="pr-bar-col">
                   <div className="pr-bar-track">
                     <div
                       className="pr-bar-fill"
-                      style={{ height: `${(mins / MAX_MINS) * 100}%` }}
+                      style={{ height: `${(mins / weekMax) * 100}%` }}
                     />
                   </div>
-                  <span className="pr-bar-label">{day}</span>
+                  <span className="pr-bar-label">{DAY_LABELS[i]}</span>
                 </div>
               ))}
             </div>
@@ -104,10 +114,10 @@ export default function Progress({ onTabChange }) {
           <div className="pr-rank-row">
             <div className="pr-rank-side">
               <span className="pr-rank-eyebrow">CURRENT RANK</span>
-              <span className="pr-rank-name">Disciple</span>
-              <span className="pr-rank-xp">340 / 600 XP</span>
+              <span className="pr-rank-name">{current.name}</span>
+              <span className="pr-rank-xp">{rankXp} / {rankMax ?? rankXp} XP</span>
               <div className="pr-rank-bar-track">
-                <div className="pr-rank-bar-fill" style={{ width: '56.7%' }} />
+                <div className="pr-rank-bar-fill" style={{ width: `${progress}%` }} />
               </div>
             </div>
             <div className="pr-rank-center">
@@ -115,7 +125,7 @@ export default function Progress({ onTabChange }) {
             </div>
             <div className="pr-rank-side pr-rank-next">
               <span className="pr-rank-eyebrow">NEXT RANK</span>
-              <span className="pr-rank-name">Shinobi</span>
+              <span className="pr-rank-name">{next ? next.name : 'MAX RANK'}</span>
             </div>
           </div>
         </div>
@@ -124,27 +134,30 @@ export default function Progress({ onTabChange }) {
         <div className="pr-section-card pr-belts-card">
           <span className="pr-section-title">BELT JOURNEY</span>
           <div className="pr-belts">
-            {BELTS.map((belt) => (
-              <div key={belt.name} className={`pr-belt-item${belt.active ? ' pr-belt-active' : ''}`}>
-                {belt.active
-                  ? <div className="pr-belt-marker" />
-                  : <div className="pr-belt-spacer" />
-                }
-                <div
-                  className="pr-belt-strip"
-                  style={{ background: belt.bg, borderColor: belt.border }}
-                >
-                  <div className="pr-belt-knot" style={{ background: belt.knot }} />
+            {RANKS.map((rank) => {
+              const style  = BELT_STYLES[rank.name] || BELT_STYLES['White Belt'];
+              const active = rank.name === current.name;
+              return (
+                <div key={rank.name} className={`pr-belt-item${active ? ' pr-belt-active' : ''}`}>
+                  {active
+                    ? <div className="pr-belt-marker" />
+                    : <div className="pr-belt-spacer" />
+                  }
+                  <div
+                    className="pr-belt-strip"
+                    style={{ background: style.bg, borderColor: style.border }}
+                  >
+                    <div className="pr-belt-knot" style={{ background: style.knot }} />
+                  </div>
+                  <span className="pr-belt-label">{rank.name.replace(' Belt', '')}</span>
                 </div>
-                <span className="pr-belt-label">{belt.name}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
       </div>
 
-      {/* Bottom tab bar */}
       <div className="tab-bar">
         {TABS.map((tab) => (
           <div

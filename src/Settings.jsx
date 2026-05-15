@@ -28,7 +28,7 @@ function ChevronRight() {
   );
 }
 
-export default function Settings({ onTabChange }) {
+export default function Settings({ xp = 0, onTabChange, onHamburger }) {
   const activeIdx = 4;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
@@ -46,13 +46,13 @@ export default function Settings({ onTabChange }) {
 
       {/* Header */}
       <div className="top-nav">
-        <button className="hamburger-btn" aria-label="Menu">
+        <button className="hamburger-btn" aria-label="Menu" onClick={onHamburger}>
           <span /><span /><span />
         </button>
         <span className="app-title">SETTINGS</span>
         <div className="xp-badge">
           <span className="flame">🔥</span>
-          <span className="xp-num">120 XP</span>
+          <span className="xp-num">{xp} XP</span>
         </div>
       </div>
 

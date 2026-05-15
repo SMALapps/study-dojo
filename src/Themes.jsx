@@ -61,7 +61,7 @@ function CheckIcon() {
   );
 }
 
-export default function Themes({ onTabChange, onPremiumUpsell }) {
+export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburger }) {
   const activeIdx = 3;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
@@ -76,13 +76,13 @@ export default function Themes({ onTabChange, onPremiumUpsell }) {
 
       {/* Header */}
       <div className="top-nav">
-        <button className="hamburger-btn" aria-label="Menu">
+        <button className="hamburger-btn" aria-label="Menu" onClick={onHamburger}>
           <span /><span /><span />
         </button>
         <span className="app-title">THEMES</span>
         <div className="xp-badge">
           <span className="flame">🔥</span>
-          <span className="xp-num">120 XP</span>
+          <span className="xp-num">{xp} XP</span>
         </div>
       </div>
 

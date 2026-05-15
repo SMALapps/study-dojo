@@ -1,26 +1,28 @@
 import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg   from './assets/ninja/white-belt/meditating.png';
+import { getRankInfo } from './gameLogic';
 
 const CATEGORY_ICONS = {
   Study: '📖', Work: '💼', Reading: '📚', 'Deep Work': '🎯', Meditation: '🧘',
 };
 
 export default function SessionComplete({
-  duration   = 25,
-  category   = 'Study',
+  duration      = 25,
+  category      = 'Study',
+  earnedXp      = 0,
+  currentStreak = 0,
+  totalXp       = 0,
   onReturnHome,
   onStartAgain,
 }) {
+  const { current, next, rankXp, rankMax, progress } = getRankInfo(totalXp);
+
   return (
     <div className="screen sc-screen">
 
-      {/* ── Single scrollable column: hero → card ──────────────────────────
-          Both sections scroll together so the ninja never floats over
-          the card content. The header is the only fixed layer. */}
       <div className="sc-scroll">
 
-        {/* Hero block — waterfall + ninja */}
         <div className="sc-hero">
           <img
             src={activeBg} alt=""
@@ -30,7 +32,6 @@ export default function SessionComplete({
           <img src={ninjaImg} alt="Meditating ninja" className="sc-hero-ninja" />
         </div>
 
-        {/* Cream card — normal document flow below hero */}
         <div className="sc-card">
 
           <h2 className="sc-title">TRAINING COMPLETE!</h2>
@@ -46,12 +47,12 @@ export default function SessionComplete({
               <span className="sc-stat-val">{category}</span>
             </div>
             <div className="sc-stat-row">
-              <span className="sc-stat-label"><span className="sc-stat-icon">🔥</span>XP Earned</span>
-              <span className="sc-stat-val sc-stat-xp">+120 XP</span>
+              <span className="sc-stat-label"><span className="sc-stat-icon">⚡</span>XP Earned</span>
+              <span className="sc-stat-val sc-stat-xp">+{earnedXp} XP</span>
             </div>
             <div className="sc-stat-row">
               <span className="sc-stat-label"><span className="sc-stat-icon">🔥</span>Streak</span>
-              <span className="sc-stat-val">6 days</span>
+              <span className="sc-stat-val">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</span>
             </div>
           </div>
 
@@ -60,21 +61,21 @@ export default function SessionComplete({
           <div className="sc-rank">
             <div className="sc-rank-col sc-rank-left">
               <span className="sc-rank-eyebrow">CURRENT RANK</span>
-              <span className="sc-rank-name">Disciple</span>
-              <span className="sc-rank-xp">340 / 600 XP</span>
+              <span className="sc-rank-name">{current.name}</span>
+              <span className="sc-rank-xp">{rankXp} / {rankMax ?? rankXp} XP</span>
               <div className="sc-rank-bar-track">
-                <div className="sc-rank-bar-fill" style={{ width: '56.7%' }} />
+                <div className="sc-rank-bar-fill" style={{ width: `${progress}%` }} />
               </div>
             </div>
             <div className="sc-rank-col sc-rank-center">
               <span className="sc-rank-star">⭐</span>
               <span className="sc-rank-avatar">🥷</span>
-              <span className="sc-rank-avatar-label">Shinobi</span>
+              <span className="sc-rank-avatar-label">{next ? next.name : current.name}</span>
             </div>
             <div className="sc-rank-col sc-rank-right">
               <span className="sc-rank-eyebrow">NEXT RANK</span>
-              <span className="sc-rank-name">Shinobi</span>
-              <span className="sc-rank-xp">600 / 800 XP</span>
+              <span className="sc-rank-name">{next ? next.name : 'MAX RANK'}</span>
+              {next && <span className="sc-rank-xp">{next.minXp} XP</span>}
             </div>
           </div>
 
@@ -99,11 +100,10 @@ export default function SessionComplete({
         </div>
       </div>
 
-      {/* Header sits above the scroll as a fixed overlay */}
       <div className="as-header sc-header">
         <button className="as-back-btn" onClick={onReturnHome} aria-label="Back">‹</button>
         <div className="as-title-pill sc-pill">SESSION COMPLETE</div>
-        <div className="as-xp-badge sc-xp-badge">🔥 <span>+120 XP</span></div>
+        <div className="as-xp-badge sc-xp-badge">⚡ <span>+{earnedXp} XP</span></div>
       </div>
 
     </div>
