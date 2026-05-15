@@ -1077,150 +1077,137 @@
   background: #000;
 }
 
-/* Ninja sits in front of the card so upper body is visible above it */
-.sc-ninja {
-  z-index: 4;
-}
+/* Ninja renders in front of the card top edge */
+.sc-ninja { z-index: 4; }
 
-/* Pill tweaks for "SESSION COMPLETE" */
 .sc-pill {
   background: rgba(40, 80, 35, 0.90);
   font-size: 6.5px;
   letter-spacing: 0.3px;
 }
 
-/* XP badge — green tint to match celebration state */
 .sc-xp-badge span { color: #f0c060; }
 
-/* Cream card rises from below the ninja */
+/* Card starts below the rock so ninja is fully clear above it */
 .sc-card {
   position: absolute;
-  top: 318px;
+  top: 438px;
   left: 0; right: 0; bottom: 0;
   background: var(--cream);
-  border-radius: 24px 24px 0 0;
-  border-top: 1px solid var(--border);
+  border-radius: 26px 26px 0 0;
+  border-top: 1.5px solid var(--border);
   overflow-y: auto;
-  padding: 22px 20px 28px;
+  padding: 20px 20px 36px;
   z-index: 3;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .sc-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--green-cta);
   text-align: center;
-  line-height: 1.9;
-  margin-bottom: 14px;
+  line-height: 1.85;
+  margin-bottom: 4px;
 }
 
 .sc-divider {
   width: 100%;
   height: 1px;
   background: var(--border);
-  margin: 10px 0;
+  margin: 12px 0;
   flex-shrink: 0;
 }
 
 /* ── Stat rows ── */
-.sc-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin: 4px 0;
-}
+.sc-stats { display: flex; flex-direction: column; }
 
 .sc-stat-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(224,216,200,0.6);
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(224,216,200,0.55);
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
 }
 .sc-stat-row:last-child { border-bottom: none; }
 
 .sc-stat-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--text-mid);
   font-weight: 400;
 }
-.sc-stat-icon { font-size: 14px; }
+.sc-stat-icon { font-size: 15px; }
 
-.sc-stat-val {
-  color: var(--text-dark);
-  font-weight: 600;
-}
-.sc-stat-xp { color: var(--green-cta); }
+.sc-stat-val  { color: var(--text-dark); font-weight: 600; }
+.sc-stat-xp   { color: var(--green-cta); }
 
 /* ── Rank section ── */
 .sc-rank {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 6px;
-  padding: 6px 0 4px;
+  gap: 8px;
+  padding: 4px 0 2px;
 }
 
-.sc-rank-col {
-  display: flex;
-  flex-direction: column;
-}
-
+.sc-rank-col   { display: flex; flex-direction: column; }
 .sc-rank-left  { flex: 1; align-items: flex-start; }
-.sc-rank-right { flex: 1; align-items: flex-end; }
+.sc-rank-right { flex: 1; align-items: flex-end; text-align: right; }
 .sc-rank-center {
   align-items: center;
   justify-content: center;
   gap: 2px;
-  padding-top: 2px;
   flex-shrink: 0;
+  padding-top: 4px;
 }
 
 .sc-rank-eyebrow {
   font-family: 'Press Start 2P', monospace;
   font-size: 6px;
   color: var(--green-cta);
-  letter-spacing: 0.3px;
-  margin-bottom: 4px;
+  letter-spacing: 0.4px;
+  margin-bottom: 5px;
+  line-height: 1.6;
 }
 .sc-rank-name {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-dark);
   margin-bottom: 2px;
 }
 .sc-rank-xp {
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text-light);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .sc-rank-bar-track {
   width: 100%;
-  height: 6px;
+  height: 7px;
   background: var(--border);
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
 }
 .sc-rank-bar-fill {
   height: 100%;
   background: var(--green-cta);
-  border-radius: 3px;
+  border-radius: 4px;
 }
-.sc-rank-star   { font-size: 12px; line-height: 1; }
-.sc-rank-avatar { font-size: 28px; line-height: 1; }
+.sc-rank-star         { font-size: 13px; line-height: 1; margin-bottom: 2px; }
+.sc-rank-avatar       { font-size: 32px; line-height: 1; }
 .sc-rank-avatar-label {
   font-family: 'Inter', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-mid);
-  margin-top: 2px;
+  margin-top: 3px;
+  font-weight: 500;
 }
 
 /* ── Theme teaser ── */
@@ -1228,62 +1215,65 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0 4px;
+  gap: 14px;
+  padding: 10px 0 6px;
 }
 .sc-theme-text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0;
   flex: 1;
 }
 .sc-theme-eyebrow {
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-light);
+  margin-bottom: 2px;
 }
 .sc-theme-name {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-dark);
+  margin-bottom: 3px;
 }
 .sc-theme-desc {
   font-family: 'Inter', sans-serif;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--text-mid);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .sc-theme-lock {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #2d5a27 0%, #4a8a3a 50%, #1e3d18 100%);
-  border-radius: 12px;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(145deg, #2a5c22 0%, #3d8030 45%, #1a3d12 100%);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
 }
-.sc-theme-lock-icon { font-size: 22px; }
+.sc-theme-lock-icon { font-size: 26px; }
 
 /* ── Buttons ── */
 .sc-buttons {
   display: flex;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 18px;
   flex-shrink: 0;
 }
 .sc-btn {
   flex: 1;
   border-radius: 13px;
-  padding: 15px 8px;
+  padding: 16px 8px;
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
   letter-spacing: 0.3px;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 .sc-btn:active { transform: scale(0.97); }
 
@@ -1298,6 +1288,6 @@
 .sc-btn-secondary {
   background: transparent;
   color: var(--text-dark);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid rgba(180,168,148,0.8);
 }
 .sc-btn-secondary:hover { background: var(--card-bg); }
