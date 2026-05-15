@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import heroBg from './assets/themes/daytime-waterfall/background.png';
+import previewImg from './assets/themes/daytime-waterfall/active-background.png';
 
 const DURATIONS = [
   { value: 15,       label: '15\nmin'  },
@@ -104,26 +104,11 @@ export default function SessionSetup({ onBack, onStart }) {
           </div>
         </div>
 
-        {/* Dojo preview strip — taller to fill space */}
+        {/* Scenic preview — fills remaining space, edge-to-edge */}
         <div className="ss-preview">
-          <img src={heroBg} alt="" className="ss-preview-img" />
-          <div className="ss-preview-fade" />
+          <img src={previewImg} alt="" className="ss-preview-img" />
         </div>
 
-        {/* Today's Ritual summary card */}
-        <div className="ss-ritual-card">
-          <span className="ss-ritual-label">TODAY'S RITUAL</span>
-          <span className="ss-ritual-summary">
-            {duration === 'custom' ? 'Custom' : `${duration} min`}
-            {' · '}
-            {category}
-            {' · '}
-            {difficulty}
-          </span>
-          <span className="ss-ritual-quote">"Enter the waterfall when you're ready."</span>
-        </div>
-
-        <div className="scroll-bottom-pad" />
       </div>
 
       {/* ── Fixed CTA ── */}
