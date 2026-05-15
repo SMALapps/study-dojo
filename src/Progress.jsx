@@ -19,17 +19,17 @@ const WEEK_DATA = [
 const MAX_MINS = 90;
 
 const BELTS = [
-  { name: 'White',  bg: '#f0ede6', border: '#c0bdb0', active: true  },
-  { name: 'Yellow', bg: '#e8c832', border: '#b89810', active: false },
-  { name: 'Orange', bg: '#e07820', border: '#b05010', active: false },
-  { name: 'Green',  bg: '#3a7a42', border: '#2a5a30', active: false },
-  { name: 'Blue',   bg: '#2850a8', border: '#1c3880', active: false },
-  { name: 'Brown',  bg: '#7a4020', border: '#5a2c10', active: false },
-  { name: 'Black',  bg: '#181818', border: '#000',    active: false },
+  { name: 'White',  bg: '#f0ede6', border: '#aea89e', knot: '#ccc8c0', active: true  },
+  { name: 'Yellow', bg: '#e8c832', border: '#b09010', knot: '#c4a010', active: false },
+  { name: 'Orange', bg: '#e07820', border: '#b05010', knot: '#c06010', active: false },
+  { name: 'Green',  bg: '#3a7a42', border: '#235a2a', knot: '#2a5a30', active: false },
+  { name: 'Blue',   bg: '#2850a8', border: '#1a3480', knot: '#1c3880', active: false },
+  { name: 'Brown',  bg: '#804020', border: '#5a2c10', knot: '#5a2c10', active: false },
+  { name: 'Black',  bg: '#1c1c1c', border: '#000',    knot: '#383838', active: false },
 ];
 
 export default function Progress({ onTabChange }) {
-  const activeIdx = 2; // progress is index 2
+  const activeIdx = 2;
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
   return (
@@ -47,7 +47,6 @@ export default function Progress({ onTabChange }) {
         </div>
       </div>
 
-      {/* Scrollable content */}
       <div className="pr-scroll">
 
         {/* 2×2 stat grid */}
@@ -59,7 +58,7 @@ export default function Progress({ onTabChange }) {
           </div>
           <div className="pr-stat-card">
             <span className="pr-stat-label">CURRENT STREAK</span>
-            <span className="pr-stat-value streak-val">6</span>
+            <span className="pr-stat-value pr-streak">6</span>
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
@@ -68,9 +67,9 @@ export default function Progress({ onTabChange }) {
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
-            <span className="pr-stat-label">SESSIONS COMPLETED</span>
+            <span className="pr-stat-label">SESSIONS{'\n'}COMPLETED</span>
             <span className="pr-stat-value">42</span>
-            <span className="pr-stat-unit">completed</span>
+            <span className="pr-stat-unit">sessions</span>
           </div>
         </div>
 
@@ -104,6 +103,7 @@ export default function Progress({ onTabChange }) {
           <span className="pr-section-title">RANK PROGRESS</span>
           <div className="pr-rank-row">
             <div className="pr-rank-side">
+              <span className="pr-rank-eyebrow">CURRENT RANK</span>
               <span className="pr-rank-name">Disciple</span>
               <span className="pr-rank-xp">340 / 600 XP</span>
               <div className="pr-rank-bar-track">
@@ -121,22 +121,24 @@ export default function Progress({ onTabChange }) {
         </div>
 
         {/* Belt Journey */}
-        <div className="pr-section-card">
+        <div className="pr-section-card pr-belts-card">
           <span className="pr-section-title">BELT JOURNEY</span>
           <div className="pr-belts">
             {BELTS.map((belt) => (
               <div key={belt.name} className={`pr-belt-item${belt.active ? ' pr-belt-active' : ''}`}>
+                {belt.active && <div className="pr-belt-marker">▼</div>}
                 <div
-                  className="pr-belt-pip"
+                  className="pr-belt-strip"
                   style={{ background: belt.bg, borderColor: belt.border }}
-                />
+                >
+                  <div className="pr-belt-knot" style={{ background: belt.knot }} />
+                </div>
                 <span className="pr-belt-label">{belt.name}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="scroll-bottom-pad" />
       </div>
 
       {/* Bottom tab bar */}
