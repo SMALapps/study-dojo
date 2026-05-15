@@ -1,61 +1,75 @@
 import forestImg from './assets/themes/daytime-waterfall/forest-sunbeams.png';
 
+const FEATURES = [
+  { icon: '🏔️', label: 'Forest Sunbeams premium theme' },
+  { icon: '🌅', label: 'Additional unlockable environments' },
+  { icon: '📊', label: 'Advanced focus stats & insights' },
+  { icon: '🎋', label: 'Custom session rituals' },
+  { icon: '🥷', label: 'Extra ninja outfits & gear' },
+  { icon: '🎵', label: 'Premium soundscapes' },
+];
+
 export default function PremiumUpsell({ onClose, onStartPremium }) {
   return (
     <div className="screen pu-screen">
 
-      {/* Hero — forest image with header overlay */}
+      {/* Hero — forest image */}
       <div className="pu-hero">
         <img src={forestImg} alt="Forest Sunbeams" className="pu-hero-img" />
         <div className="pu-hero-overlay" />
-
-        {/* Header overlaid on image */}
-        <div className="pu-header">
-          <div className="pu-header-text">
-            <span className="pu-header-title">FOREST SUNBEAMS</span>
-            <span className="pu-header-sub">Premium Focus Environment</span>
-          </div>
-          <button className="pu-close" onClick={onClose} aria-label="Close">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M1 1l9 9M10 1L1 10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
-        </div>
       </div>
 
-      {/* Cream content card */}
+      {/* Dark card sliding up from bottom */}
       <div className="pu-card">
 
-        <p className="pu-desc">
-          Train inside a quiet forest grove where sunlight cuts through the canopy and the waterfall fades into the trees.
-        </p>
+        {/* Close button */}
+        <button className="pu-close" onClick={onClose} aria-label="Close">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+            <path d="M1 1l9 9M10 1L1 10" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </button>
 
-        <div className="pu-divider" />
-        <span className="pu-unlock-header">UNLOCK OPTIONS</span>
-
-        {/* Option 1 — Premium (highlighted) */}
-        <div className="pu-option pu-option-premium">
-          <span className="pu-option-icon">👑</span>
-          <span className="pu-option-label">Unlock with Premium</span>
+        {/* Crown + title */}
+        <div className="pu-title-block">
+          <span className="pu-crown">👑</span>
+          <span className="pu-title-top">FOCUS DOJO</span>
+          <span className="pu-title-main">PREMIUM</span>
+          <p className="pu-subtitle">
+            Unlock deeper focus environments, advanced stats, and more ways to personalize your dojo.
+          </p>
         </div>
 
-        {/* Option 2 — Streak */}
-        <div className="pu-option pu-option-streak">
-          <span className="pu-option-icon">🔥</span>
-          <div className="pu-streak-content">
-            <span className="pu-option-label">Or unlock with a 7-day focus streak</span>
-            <div className="pu-streak-bar-track">
-              <div className="pu-streak-bar-fill" style={{ width: '85.7%' }} />
-            </div>
-            <span className="pu-streak-count">6 / 7 days</span>
+        {/* Feature list */}
+        <ul className="pu-features">
+          {FEATURES.map((f, i) => (
+            <li key={i} className="pu-feature-item">
+              <span className="pu-feature-icon">{f.icon}</span>
+              <span className="pu-feature-label">{f.label}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Pricing cards */}
+        <div className="pu-pricing-row">
+          <div className="pu-price-card">
+            <span className="pu-price-period">Monthly</span>
+            <span className="pu-price-amount">$3.99</span>
+            <span className="pu-price-unit">/ mo</span>
+          </div>
+          <div className="pu-price-card pu-price-card-featured">
+            <span className="pu-price-badge">Save 38%</span>
+            <span className="pu-price-period">Yearly</span>
+            <span className="pu-price-amount">$29.99</span>
+            <span className="pu-price-unit">/ yr</span>
           </div>
         </div>
 
+        {/* Buttons */}
         <button className="pu-btn-primary" onClick={onStartPremium}>
           START PREMIUM
         </button>
         <button className="pu-btn-secondary" onClick={onClose}>
-          KEEP TRAINING
+          MAYBE LATER
         </button>
 
       </div>
