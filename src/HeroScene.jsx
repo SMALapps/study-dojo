@@ -56,20 +56,13 @@ export default function HeroScene({ animFrame: _animFrame }) {
       <img src={heroWaterfall} alt="" style={{ ...layerStyle, zIndex: 2 }} />
       {/* z=3 foreground overlay (transparent placeholder) */}
       <img src={heroFg}        alt="" style={{ ...layerStyle, zIndex: 3 }} />
-      {/* z=4 ninja — centered on meditation rock */}
+      {/* z=4 ninja — anchored by VISUAL body, not PNG canvas bounds.
+           PNG has ~67px transparent above visible body and ~70px below.
+           top:43px places visual body bottom at hero y=178 (5px into rock at y=173). */}
       <img
         src={ninjaImg}
         alt="Meditating ninja"
-        style={{
-          position: 'absolute',
-          bottom: '28px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          height: '80%',
-          width: 'auto',
-          imageRendering: 'pixelated',
-          zIndex: 4,
-        }}
+        className="home-ninja"
       />
       {/* z=10 status chip */}
       <CalmFlowChip />
