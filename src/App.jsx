@@ -86,6 +86,7 @@ export default function App() {
           {...(sessionConfig || {})}
           onBreak={() => setScreen('brokenFocus')}
           onComplete={() => setScreen('sessionComplete')}
+          onHome={() => setScreen('home')}
         />
       </div>
     );
