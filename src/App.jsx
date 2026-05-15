@@ -6,6 +6,7 @@ import ActiveSession from './ActiveSession';
 import SessionComplete from './SessionComplete';
 import BrokenFocus from './BrokenFocus';
 import Progress from './Progress';
+import Themes from './Themes';
 import './App.css';
 
 function StatusBar() {
@@ -177,13 +178,27 @@ export default function App() {
     );
   }
 
-  // ── Themes placeholder ────────────────────────────────────────────────────
+  // ── Themes screen ─────────────────────────────────────────────────────────
   if (screen === 'themes') {
     return (
       <div className="phone-shell">
         <div className="dynamic-island" />
         <StatusBar />
-        <PlaceholderScreen title="THEMES" onTabChange={handleTabChange} />
+        <Themes
+          onTabChange={handleTabChange}
+          onPremiumUpsell={() => setScreen('premiumUpsell')}
+        />
+      </div>
+    );
+  }
+
+  // ── Premium Upsell placeholder ────────────────────────────────────────────
+  if (screen === 'premiumUpsell') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <PlaceholderScreen title="PREMIUM" onTabChange={handleTabChange} />
       </div>
     );
   }
