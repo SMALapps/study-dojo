@@ -1008,11 +1008,11 @@
 .as-modal-stay:hover { background: #3d6b34; }
 
 .as-modal-break {
-  background: transparent;
-  color: #b03020;
-  border: 1.5px solid rgba(176,48,32,0.45);
+  background: #b03020;
+  color: #fff;
+  border: none;
 }
-.as-modal-break:hover { background: #fde8e6; }
+.as-modal-break:hover { background: #942818; }
 
 /* Broken Focus placeholder screen */
 .bf-screen {
