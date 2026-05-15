@@ -734,10 +734,11 @@
   z-index: 1;
 }
 
-/* Ninja: top:46% → 358px, height:16% → 124px, bottom=482px = debug anchor (rock surface) */
+/* Ninja: top:376px, height:16%→124px. Visible feet at 376+106=482px = debug anchor.
+   Sprite has 17.7px transparent bottom padding so box bottom (500px) ≠ visible feet (482px). */
 .as-ninja {
   position: absolute;
-  top: 46%;
+  top: 376px;
   left: 50%;
   transform: translateX(-50%);
   height: 16%;
