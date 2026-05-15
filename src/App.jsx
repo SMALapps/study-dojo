@@ -5,6 +5,7 @@ import SessionSetup from './SessionSetup';
 import ActiveSession from './ActiveSession';
 import SessionComplete from './SessionComplete';
 import BrokenFocus from './BrokenFocus';
+import Progress from './Progress';
 import './App.css';
 
 function StatusBar() {
@@ -52,6 +53,40 @@ const TABS = [
   { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
 ];
 
+function PlaceholderScreen({ title, onTabChange }) {
+  const activeId = title.toLowerCase();
+  const activeIdx = TABS.findIndex(t => t.id === activeId);
+  const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
+  return (
+    <div className="screen">
+      <div className="top-nav">
+        <button className="hamburger-btn" aria-label="Menu"><span /><span /><span /></button>
+        <span className="app-title">{title}</span>
+        <div className="xp-badge"><span className="flame">🔥</span><span className="xp-num">120 XP</span></div>
+      </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 10, color: 'var(--text-light)', textAlign: 'center', padding: '0 24px' }}>
+          {title}{'\n'}COMING SOON
+        </span>
+      </div>
+      <div className="tab-bar">
+        {TABS.map((tab) => (
+          <div
+            key={tab.id}
+            className={`tab-item${tab.id === activeId ? ' active' : ''}`}
+            onClick={() => onTabChange(tab.id)}
+          >
+            <span className="tab-icon">{tab.icon}</span>
+            <span className="tab-label">{tab.label}</span>
+          </div>
+        ))}
+        <div className="tab-underline" style={{ left: tabUnderlineLeft }} />
+        <div className="home-indicator" />
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeTab,     setActiveTab]     = useState('dojo');
   const [animFrame,     setAnimFrame]     = useState(0);
@@ -62,6 +97,14 @@ export default function App() {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
     return () => clearInterval(id);
   }, []);
+
+  const handleTabChange = (tabId) => {
+    if (tabId === 'dojo')     { setActiveTab('dojo'); setScreen('home'); }
+    else if (tabId === 'train')    setScreen('sessionSetup');
+    else if (tabId === 'progress') setScreen('progress');
+    else if (tabId === 'themes')   setScreen('themes');
+    else if (tabId === 'settings') setScreen('settings');
+  };
 
   // ── Session Setup screen ──────────────────────────────────────────────────
   if (screen === 'sessionSetup') {
@@ -123,6 +166,39 @@ export default function App() {
     );
   }
 
+  // ── Progress screen ───────────────────────────────────────────────────────
+  if (screen === 'progress') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <Progress onTabChange={handleTabChange} />
+      </div>
+    );
+  }
+
+  // ── Themes placeholder ────────────────────────────────────────────────────
+  if (screen === 'themes') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <PlaceholderScreen title="THEMES" onTabChange={handleTabChange} />
+      </div>
+    );
+  }
+
+  // ── Settings placeholder ──────────────────────────────────────────────────
+  if (screen === 'settings') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <PlaceholderScreen title="SETTINGS" onTabChange={handleTabChange} />
+      </div>
+    );
+  }
+
   // ── Home / Dojo screen ────────────────────────────────────────────────────
   const activeIdx = TABS.findIndex(t => t.id === activeTab);
   const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
@@ -179,7 +255,7 @@ export default function App() {
               <span className="action-icon">⛩️</span>
               <span className="action-label">TRAINING{'\n'}MODES</span>
             </div>
-            <div className="action-card">
+            <div className="action-card" onClick={() => handleTabChange('progress')}>
               <span className="action-icon">📊</span>
               <span className="action-label">PROGRESS</span>
             </div>
@@ -208,7 +284,7 @@ export default function App() {
             <div
               key={tab.id}
               className={`tab-item${activeTab === tab.id ? ' active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
             >
               <span className="tab-icon">{tab.icon}</span>
               <span className="tab-label">{tab.label}</span>
