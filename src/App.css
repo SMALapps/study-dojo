@@ -931,51 +931,53 @@
 .as-break-btn:active { transform: scale(0.98); }
 
 /* Break Focus confirmation modal */
+/* ── Break Focus modal ────────────────────────────────────────────────── */
 .as-modal-overlay {
   position: absolute;
   inset: 0;
-  /* Dark enough to signal interruption; light enough to keep waterfall + ninja visible */
-  background: rgba(4, 12, 24, 0.72);
-  backdrop-filter: blur(3px);
+  /* Dark enough to signal interruption; keeps waterfall + ninja readable */
+  background: rgba(4, 10, 20, 0.58);
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px 56px;
   z-index: 200;
-  padding: 0 20px 52px;
 }
 
 .as-modal-card {
   background: var(--cream);
-  border-radius: 24px;
-  padding: 28px 22px 22px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  padding: 26px 22px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
   width: 100%;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.06);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    0 2px 8px rgba(0,0,0,0.12);
 }
 
-/* Decorative icon above title */
 .as-modal-icon {
-  font-size: 28px;
-  margin-bottom: 12px;
+  font-size: 34px;
   line-height: 1;
+  margin-bottom: 14px;
 }
 
 .as-modal-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: 9.5px;
   color: var(--text-dark);
   text-align: center;
-  line-height: 1.8;
-  margin-bottom: 10px;
+  line-height: 1.9;
+  margin-bottom: 12px;
 }
 
 .as-modal-divider {
-  width: 40px;
-  height: 2px;
-  background: rgba(0,0,0,0.1);
+  width: 36px;
+  height: 1.5px;
+  background: var(--border);
   border-radius: 2px;
   margin-bottom: 12px;
 }
@@ -983,41 +985,40 @@
 .as-modal-body {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
+  font-weight: 400;
   color: var(--text-mid);
   text-align: center;
-  line-height: 1.55;
+  line-height: 1.6;
   margin-bottom: 22px;
 }
 
 .as-modal-btn {
   width: 100%;
   border: none;
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 13px;
+  padding: 15px 16px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: 8.5px;
+  letter-spacing: 0.4px;
   cursor: pointer;
-  letter-spacing: 0.3px;
   transition: background 0.15s, transform 0.1s;
 }
 
 .as-modal-btn + .as-modal-btn { margin-top: 10px; }
-
 .as-modal-btn:active { transform: scale(0.97); }
 
 .as-modal-stay {
   background: var(--green-cta);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(74,124,63,0.35);
 }
-
-.as-modal-stay:hover { background: #558945; }
+.as-modal-stay:hover { background: #3d6b34; }
 
 .as-modal-break {
-  background: transparent;
-  color: #c0392b;
-  border: 1.5px solid rgba(192,57,43,0.4);
+  background: var(--card-bg);
+  color: #b03020;
+  border: 1.5px solid rgba(176,48,32,0.25);
 }
-
 .as-modal-break:hover { background: #fde8e6; }
 
 /* Broken Focus placeholder screen */
