@@ -1081,10 +1081,9 @@
   position: relative;
   background: var(--cream);
   border-radius: 26px 26px 0 0;
-  margin-top: -24px;
-  padding: 22px 20px 48px;
+  margin-top: -42px;
+  padding: 14px 20px 24px;
   z-index: 3;
-  min-height: 340px;
 }
 
 .bf-card-title {
@@ -1093,13 +1092,13 @@
   color: #b03020;
   text-align: center;
   letter-spacing: 0.04em;
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 
 .bf-card-divider {
   height: 1px;
   background: rgba(0,0,0,0.10);
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 
 .bf-card-body {
@@ -1109,15 +1108,15 @@
   text-align: center;
   line-height: 1.55;
   white-space: pre-line;
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 
 /* Stats rows */
 .bf-stats {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .bf-stat-row {
@@ -1151,12 +1150,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .bf-btn {
   width: 100%;
-  padding: 14px 0;
+  padding: 12px 0;
   border-radius: 10px;
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
