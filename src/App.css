@@ -1890,16 +1890,19 @@
   color: var(--text-light);
 }
 
+
 /* ── Premium Upsell Screen ───────────────────────────────────────────────── */
 .pu-screen {
-  background: #0f1d14;
+  background: #0a1a0e;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Hero image block */
+/* ── Hero ── */
 .pu-hero {
   position: relative;
-  height: 185px;
+  height: 280px;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -1908,7 +1911,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 58%;
+  object-position: center 50%;
   display: block;
 }
 
@@ -1917,163 +1920,156 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(15,29,20,0.10) 0%,
-    rgba(15,29,20,0.62) 100%
+    rgba(10,26,14,0.35) 0%,
+    rgba(10,26,14,0.55) 100%
   );
 }
 
-/* Close button */
-.pu-close {
+/* Header overlaid on hero */
+.pu-header {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 30px;
-  height: 30px;
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.20);
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 14px 14px 0;
+  z-index: 10;
+}
+
+.pu-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pu-header-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.60);
+}
+
+.pu-header-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.80);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.50);
+}
+
+.pu-close {
+  width: 28px;
+  height: 28px;
+  background: rgba(0,0,0,0.40);
+  border: 1px solid rgba(255,255,255,0.22);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
+  flex-shrink: 0;
 }
 
-/* Scrollable card section */
-.pu-scroll {
+/* ── Cream card ── */
+.pu-card {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  padding: 16px 20px 16px;
+  background: var(--cream);
+  border-radius: 24px 24px 0 0;
+  margin-top: -18px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.pu-scroll::-webkit-scrollbar { display: none; }
-
-/* Crown + title — centered column */
-.pu-title-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 10px;
+  overflow: hidden;
+  z-index: 2;
 }
 
-.pu-crown { font-size: 28px; line-height: 1; margin-bottom: 2px; }
-
-.pu-title-top {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
-  color: #d4aa30;
-  letter-spacing: 0.8px;
-  text-align: center;
-}
-
-.pu-title-main {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 18px;
-  color: #e8c832;
-  letter-spacing: 2px;
-  line-height: 1.2;
-  text-align: center;
-}
-
-/* Subtitle */
-.pu-subtitle {
+.pu-desc {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  color: rgba(255,255,255,0.75);
-  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-mid);
   line-height: 1.55;
-  margin: 0 0 12px;
+  text-align: center;
+  margin: 0 0 14px;
 }
 
-/* Feature list */
-.pu-features {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 14px;
-  padding: 14px 16px;
-}
-
-.pu-feature-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.pu-feature-icon { font-size: 14px; flex-shrink: 0; line-height: 1; }
-
-.pu-feature-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  color: rgba(255,255,255,0.88);
-}
-
-/* Pricing cards */
-.pu-pricing-row {
-  width: 100%;
-  display: flex;
-  gap: 10px;
+.pu-divider {
+  height: 1px;
+  background: var(--border);
   margin-bottom: 12px;
 }
 
-.pu-price-card {
+.pu-unlock-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ── Unlock options ── */
+.pu-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 8px;
+  border: 1.5px solid var(--border);
+}
+
+.pu-option-premium {
+  background: var(--tab-active);
+  border-color: var(--tab-active);
+}
+
+.pu-option-premium .pu-option-label {
+  color: #fff;
+  font-weight: 600;
+}
+
+.pu-option-streak {
+  background: transparent;
+  flex-align: flex-start;
+}
+
+.pu-option-icon { font-size: 16px; flex-shrink: 0; line-height: 1; }
+
+.pu-option-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-dark);
+}
+
+/* Streak sub-content */
+.pu-streak-content {
   flex: 1;
-  background: var(--cream);
-  border-radius: 14px;
-  padding: 12px 10px 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 5px;
-  border: 1.5px solid var(--border);
-  position: relative;
 }
 
-.pu-price-featured {
-  border-color: #e8c832;
-  box-shadow: 0 0 0 1px #e8c832;
-  padding-top: 18px;
+.pu-streak-bar-track {
+  height: 6px;
+  background: rgba(0,0,0,0.10);
+  border-radius: 3px;
+  overflow: hidden;
 }
 
-.pu-price-save {
-  position: absolute;
-  top: -11px;
-  left: 50%;
-  transform: translateX(-50%);
+.pu-streak-bar-fill {
+  height: 100%;
   background: var(--tab-active);
-  color: #fff;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 5px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-  letter-spacing: 0.3px;
+  border-radius: 3px;
 }
 
-.pu-price-period {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px;
+.pu-streak-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
   color: var(--text-light);
-  letter-spacing: 0.4px;
 }
 
-.pu-price-amount {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 17px;
-  color: var(--text-dark);
-  line-height: 1;
-}
-
-/* CTA buttons */
+/* ── Buttons ── */
 .pu-btn-primary {
   width: 100%;
   background: var(--tab-active);
@@ -2085,8 +2081,9 @@
   font-size: 10px;
   letter-spacing: 0.5px;
   cursor: pointer;
+  margin-top: auto;
   margin-bottom: 8px;
-  box-shadow: 0 4px 16px rgba(74,140,74,0.40);
+  box-shadow: 0 4px 14px rgba(74,140,74,0.35);
   transition: opacity 0.15s;
 }
 .pu-btn-primary:hover { opacity: 0.88; }
@@ -2094,13 +2091,13 @@
 .pu-btn-secondary {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.30);
-  color: rgba(255,255,255,0.68);
+  color: var(--text-mid);
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
   letter-spacing: 0.4px;
   cursor: pointer;
-  padding: 4px 2px;
-  transition: color 0.15s, border-color 0.15s;
+  padding: 4px 0;
+  text-align: center;
+  transition: color 0.15s;
 }
-.pu-btn-secondary:hover { color: rgba(255,255,255,0.90); border-color: rgba(255,255,255,0.60); }
+.pu-btn-secondary:hover { color: var(--text-dark); }

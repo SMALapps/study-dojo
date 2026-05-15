@@ -1,74 +1,61 @@
 import forestImg from './assets/themes/daytime-waterfall/forest-sunbeams.png';
 
-const FEATURES = [
-  { icon: '🏔️', label: 'Forest Sunbeams premium theme'         },
-  { icon: '🌿', label: 'Additional unlockable environments'     },
-  { icon: '📊', label: 'Advanced focus stats'                   },
-  { icon: '🎯', label: 'Custom session rituals'                 },
-  { icon: '🥷', label: 'Extra ninja outfits'                    },
-  { icon: '🎵', label: 'Premium soundscapes'                    },
-];
-
 export default function PremiumUpsell({ onClose, onStartPremium }) {
   return (
     <div className="screen pu-screen">
 
-      {/* Hero image — forest sunbeams preview */}
+      {/* Hero — forest image with header overlay */}
       <div className="pu-hero">
         <img src={forestImg} alt="Forest Sunbeams" className="pu-hero-img" />
         <div className="pu-hero-overlay" />
 
-        {/* Close button */}
-        <button className="pu-close" onClick={onClose} aria-label="Close">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M1 1l10 10M11 1L1 11" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </button>
+        {/* Header overlaid on image */}
+        <div className="pu-header">
+          <div className="pu-header-text">
+            <span className="pu-header-title">FOREST SUNBEAMS</span>
+            <span className="pu-header-sub">Premium Focus Environment</span>
+          </div>
+          <button className="pu-close" onClick={onClose} aria-label="Close">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M1 1l9 9M10 1L1 10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      {/* Scrollable content card */}
-      <div className="pu-scroll">
+      {/* Cream content card */}
+      <div className="pu-card">
 
-        {/* Crown + Title */}
-        <div className="pu-title-block">
-          <span className="pu-crown">👑</span>
-          <span className="pu-title-top">FOCUS DOJO</span>
-          <span className="pu-title-main">PREMIUM</span>
-        </div>
-
-        <p className="pu-subtitle">
-          Unlock deeper focus environments, advanced stats, and more ways to personalize your dojo.
+        <p className="pu-desc">
+          Train inside a quiet forest grove where sunlight cuts through the canopy and the waterfall fades into the trees.
         </p>
 
-        {/* Feature list */}
-        <div className="pu-features">
-          {FEATURES.map(({ icon, label }) => (
-            <div key={label} className="pu-feature-row">
-              <span className="pu-feature-icon">{icon}</span>
-              <span className="pu-feature-label">{label}</span>
+        <div className="pu-divider" />
+        <span className="pu-unlock-header">UNLOCK OPTIONS</span>
+
+        {/* Option 1 — Premium (highlighted) */}
+        <div className="pu-option pu-option-premium">
+          <span className="pu-option-icon">👑</span>
+          <span className="pu-option-label">Unlock with Premium</span>
+        </div>
+
+        {/* Option 2 — Streak */}
+        <div className="pu-option pu-option-streak">
+          <span className="pu-option-icon">🔥</span>
+          <div className="pu-streak-content">
+            <span className="pu-option-label">Or unlock with a 7-day focus streak</span>
+            <div className="pu-streak-bar-track">
+              <div className="pu-streak-bar-fill" style={{ width: '85.7%' }} />
             </div>
-          ))}
-        </div>
-
-        {/* Pricing row */}
-        <div className="pu-pricing-row">
-          <div className="pu-price-card">
-            <span className="pu-price-period">MONTHLY</span>
-            <span className="pu-price-amount">$3.99</span>
-          </div>
-          <div className="pu-price-card pu-price-featured">
-            <span className="pu-price-save">Save 38%</span>
-            <span className="pu-price-period">YEARLY</span>
-            <span className="pu-price-amount">$29.99</span>
+            <span className="pu-streak-count">6 / 7 days</span>
           </div>
         </div>
 
-        {/* CTA buttons */}
         <button className="pu-btn-primary" onClick={onStartPremium}>
           START PREMIUM
         </button>
         <button className="pu-btn-secondary" onClick={onClose}>
-          MAYBE LATER
+          KEEP TRAINING
         </button>
 
       </div>
