@@ -935,70 +935,63 @@
 .as-modal-overlay {
   position: absolute;
   inset: 0;
-  /* Dark enough to signal interruption; keeps waterfall + ninja readable */
-  background: rgba(4, 10, 20, 0.58);
+  background: rgba(4, 10, 20, 0.52);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 24px 56px;
+  justify-content: center;
+  padding: 0 20px;
+  padding-top: 36%;
   z-index: 200;
 }
 
 .as-modal-card {
   background: var(--cream);
-  border-radius: 22px;
+  border-radius: 24px;
   border: 1px solid var(--border);
-  padding: 26px 22px 20px;
+  padding: 32px 26px 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.45),
-    0 2px 8px rgba(0,0,0,0.12);
-}
-
-.as-modal-icon {
-  font-size: 34px;
-  line-height: 1;
-  margin-bottom: 14px;
+    0 24px 64px rgba(0,0,0,0.50),
+    0 2px 8px rgba(0,0,0,0.10);
 }
 
 .as-modal-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9.5px;
+  font-size: 11px;
   color: var(--text-dark);
   text-align: center;
-  line-height: 1.9;
-  margin-bottom: 12px;
+  line-height: 2;
+  margin-bottom: 14px;
 }
 
 .as-modal-divider {
-  width: 36px;
+  width: 44px;
   height: 1.5px;
   background: var(--border);
   border-radius: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .as-modal-body {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--text-mid);
   text-align: center;
-  line-height: 1.6;
-  margin-bottom: 22px;
+  line-height: 1.65;
+  margin-bottom: 26px;
 }
 
 .as-modal-btn {
   width: 100%;
   border: none;
-  border-radius: 13px;
-  padding: 15px 16px;
+  border-radius: 14px;
+  padding: 16px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8.5px;
+  font-size: 9px;
   letter-spacing: 0.4px;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
@@ -1010,14 +1003,14 @@
 .as-modal-stay {
   background: var(--green-cta);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(74,124,63,0.35);
+  box-shadow: 0 4px 14px rgba(74,124,63,0.30);
 }
 .as-modal-stay:hover { background: #3d6b34; }
 
 .as-modal-break {
-  background: var(--card-bg);
+  background: transparent;
   color: #b03020;
-  border: 1.5px solid rgba(176,48,32,0.25);
+  border: 1.5px solid rgba(176,48,32,0.45);
 }
 .as-modal-break:hover { background: #fde8e6; }
 

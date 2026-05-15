@@ -13,7 +13,6 @@ function BreakModal({ onStay, onBreak }) {
   return (
     <div className="as-modal-overlay">
       <div className="as-modal-card">
-        <span className="as-modal-icon">🌊</span>
         <span className="as-modal-title">Leave the waterfall?</span>
         <div className="as-modal-divider" />
         <span className="as-modal-body">
