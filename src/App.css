@@ -1016,33 +1016,168 @@
 }
 .as-modal-break:hover { background: #8e2018; }
 
-/* Broken Focus placeholder screen */
+/* ── Broken Focus Screen ────────────────────────────────────────────────── */
 .bf-screen {
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: block;
+}
+
+.bf-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.bf-scroll::-webkit-scrollbar { display: none; }
+
+/* Hero block — waterfall + dark overlay + ninja */
+.bf-hero {
+  position: relative;
+  height: 510px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bf-hero-bg {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 788px;
+  object-fit: fill;
+}
+
+.bf-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.42);
+  z-index: 1;
+}
+
+.bf-hero-ninja {
+  position: absolute;
+  top: 338px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 257px;
+  width: auto;
+  z-index: 2;
+  image-rendering: pixelated;
+}
+
+/* Fixed header overlay */
+.bf-header { z-index: 20; }
+
+.bf-pill { background: rgba(140, 30, 25, 0.90); }
+
+.bf-xp-badge { /* inherits as-xp-badge styles */ }
+
+/* Cream card — normal document flow below hero */
+.bf-card {
+  position: relative;
   background: var(--cream);
-  padding: 40px 28px;
+  border-radius: 26px 26px 0 0;
+  margin-top: -24px;
+  padding: 22px 20px 48px;
+  z-index: 3;
+  min-height: 340px;
 }
 
-.bf-icon  { font-size: 48px; }
-
-.bf-title {
+.bf-card-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
-  color: var(--text-dark);
+  font-size: 12px;
+  color: #b03020;
   text-align: center;
-  line-height: 1.7;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
 }
 
-.bf-body {
+.bf-card-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.10);
+  margin: 0 0 14px;
+}
+
+.bf-card-body {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-mid);
   text-align: center;
+  line-height: 1.55;
+  white-space: pre-line;
+  margin: 0 0 14px;
 }
 
-.bf-cta { margin-top: 12px; width: 100%; }
+/* Stats rows */
+.bf-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.bf-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bf-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bf-stat-icon { font-size: 14px; }
+
+.bf-stat-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.bf-stat-xp { color: #c67c00; }
+
+/* Buttons */
+.bf-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.bf-btn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.bf-btn:hover { opacity: 0.88; }
+
+.bf-btn-primary {
+  background: #2a7a3a;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(42,122,58,0.30);
+}
+
+.bf-btn-secondary {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1.5px solid rgba(0,0,0,0.22);
+}
 
 /* ── DEV SHORTCUTS — remove before production ─────────────────────────
    Temporary testing panel only. Not part of the final design.

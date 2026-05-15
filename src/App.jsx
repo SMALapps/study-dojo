@@ -4,6 +4,7 @@ import RankCard from './RankCard';
 import SessionSetup from './SessionSetup';
 import ActiveSession from './ActiveSession';
 import SessionComplete from './SessionComplete';
+import BrokenFocus from './BrokenFocus';
 import './App.css';
 
 function StatusBar() {
@@ -107,21 +108,17 @@ export default function App() {
     );
   }
 
-  // ── Broken Focus placeholder ──────────────────────────────────────────────
+  // ── Broken Focus ──────────────────────────────────────────────────────────
   if (screen === 'brokenFocus') {
     return (
       <div className="phone-shell">
         <div className="dynamic-island" />
         <StatusBar />
-        <div className="screen bf-screen">
-          <span className="bf-icon">💔</span>
-          <span className="bf-title">Focus Broken</span>
-          <span className="bf-body">Your session has ended early.</span>
-          <button className="cta-button bf-cta" onClick={() => setScreen('home')}>
-            <span className="cta-text">RETURN TO DOJO</span>
-            <div className="cta-arrow">›</div>
-          </button>
-        </div>
+        <BrokenFocus
+          {...(sessionConfig || {})}
+          onTryAgain={() => setScreen('sessionSetup')}
+          onReturnHome={() => setScreen('home')}
+        />
       </div>
     );
   }
