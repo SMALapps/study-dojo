@@ -1889,3 +1889,219 @@
   justify-content: center;
   color: var(--text-light);
 }
+
+/* ── Premium Upsell Screen ───────────────────────────────────────────────── */
+.pu-screen {
+  background: #0f1d14;
+  overflow: hidden;
+}
+
+/* Hero image block */
+.pu-hero {
+  position: relative;
+  height: 210px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pu-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  display: block;
+}
+
+.pu-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15,29,20,0.15) 0%,
+    rgba(15,29,20,0.70) 100%
+  );
+}
+
+/* Close button */
+.pu-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Scrollable card section */
+.pu-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pu-scroll::-webkit-scrollbar { display: none; }
+
+/* Crown + title */
+.pu-title-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pu-crown { font-size: 26px; line-height: 1; }
+
+.pu-title-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pu-title-top {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #d4aa30;
+  letter-spacing: 0.5px;
+}
+
+.pu-title-main {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: #e8c832;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+/* Subtitle */
+.pu-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+  text-align: center;
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+
+/* Feature list */
+.pu-features {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.pu-feature-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pu-feature-icon { font-size: 14px; flex-shrink: 0; }
+
+.pu-feature-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Pricing cards */
+.pu-pricing-row {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pu-price-card {
+  flex: 1;
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1.5px solid var(--border);
+  position: relative;
+}
+
+.pu-price-featured {
+  border-color: #e8c832;
+  box-shadow: 0 0 0 1px #e8c832;
+}
+
+.pu-price-save {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tab-active);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.pu-price-period {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-light);
+  letter-spacing: 0.4px;
+}
+
+.pu-price-amount {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--text-dark);
+  line-height: 1;
+}
+
+/* CTA buttons */
+.pu-btn-primary {
+  width: 100%;
+  background: var(--tab-active);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 16px rgba(74,140,74,0.35);
+  transition: opacity 0.15s;
+}
+.pu-btn-primary:hover { opacity: 0.88; }
+
+.pu-btn-secondary {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.50);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+.pu-btn-secondary:hover { color: rgba(255,255,255,0.80); }
