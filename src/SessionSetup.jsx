@@ -50,8 +50,8 @@ export default function SessionSetup({ onBack, onStart }) {
         <div className="ss-header-spacer" />
       </div>
 
-      {/* ── Scrollable body ── */}
-      <div className="scroll-content">
+      {/* ── Selection sections (shrink-to-fit, no scroll) ── */}
+      <div className="ss-body">
 
         {/* Duration */}
         <div className="ss-section">
@@ -104,19 +104,17 @@ export default function SessionSetup({ onBack, onStart }) {
           </div>
         </div>
 
-        {/* Scenic preview — fills remaining space, edge-to-edge */}
-        <div className="ss-preview">
-          <img src={previewImg} alt="" className="ss-preview-img" />
-        </div>
-
       </div>
 
-      {/* ── Fixed CTA ── */}
-      <div className="ss-cta-wrap">
-        <button className="cta-button ss-cta-btn" onClick={() => onStart({ duration, category, difficulty })}>
-          <span className="cta-text">ENTER THE WATERFALL</span>
-          <div className="cta-arrow">›</div>
-        </button>
+      {/* ── Scenic preview — flex:1 fills all remaining height, button overlaid ── */}
+      <div className="ss-preview">
+        <img src={previewImg} alt="" className="ss-preview-img" />
+        <div className="ss-cta-overlay">
+          <button className="cta-button ss-cta-btn" onClick={() => onStart({ duration, category, difficulty })}>
+            <span className="cta-text">ENTER THE WATERFALL</span>
+            <div className="cta-arrow">›</div>
+          </button>
+        </div>
       </div>
 
     </div>

@@ -490,6 +490,13 @@
 
 .ss-header-spacer { width: 36px; }
 
+/* Selection sections wrapper — shrinks to content, no scroll */
+.ss-body {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .ss-section {
   margin: 16px 14px 0;
   display: flex;
@@ -621,11 +628,12 @@
 
 .ss-diff-card.active .ss-diff-desc { color: rgba(255,255,255,0.78); }
 
-/* Preview strip */
+/* Preview — fills all remaining screen height, button overlaid */
 .ss-preview {
+  flex: 1;
+  min-height: 0;
   margin: 14px 0 0;
-  height: 328px;
-  border-radius: 0;
+  border-radius: 14px 14px 0 0;
   overflow: hidden;
   position: relative;
 }
@@ -637,6 +645,15 @@
   object-position: center center;
   image-rendering: pixelated;
   display: block;
+}
+
+/* CTA button overlaid at bottom of image */
+.ss-cta-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 14px 22px;
 }
 
 /* Today's Ritual summary card */
@@ -671,14 +688,6 @@
   color: var(--text-light);
   font-style: italic;
   line-height: 1.4;
-}
-
-/* CTA wrapper */
-.ss-cta-wrap {
-  padding: 10px 14px 12px;
-  background: var(--cream);
-  border-top: 1.5px solid var(--border);
-  flex-shrink: 0;
 }
 
 .ss-cta-btn {
