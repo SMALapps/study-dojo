@@ -9,6 +9,7 @@ import Progress from './Progress';
 import Themes from './Themes';
 import PremiumUpsell from './PremiumUpsell';
 import Settings from './Settings';
+import Onboarding from './Onboarding';
 import './App.css';
 
 function StatusBar() {
@@ -93,7 +94,7 @@ function PlaceholderScreen({ title, onTabChange }) {
 export default function App() {
   const [activeTab,     setActiveTab]     = useState('dojo');
   const [animFrame,     setAnimFrame]     = useState(0);
-  const [screen,        setScreen]        = useState('home');
+  const [screen,        setScreen]        = useState('onboarding');
   const [sessionConfig, setSessionConfig] = useState(null);
 
   useEffect(() => {
@@ -108,6 +109,17 @@ export default function App() {
     else if (tabId === 'themes')   setScreen('themes');
     else if (tabId === 'settings') setScreen('settings');
   };
+
+  // ── Onboarding ────────────────────────────────────────────────────────────
+  if (screen === 'onboarding') {
+    return (
+      <div className="phone-shell">
+        <div className="dynamic-island" />
+        <StatusBar />
+        <Onboarding onBegin={() => setScreen('home')} />
+      </div>
+    );
+  }
 
   // ── Session Setup screen ──────────────────────────────────────────────────
   if (screen === 'sessionSetup') {
