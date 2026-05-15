@@ -738,13 +738,13 @@
    Sprite: ninja 3.0 (1024x1536), height:30% = 233px rendered, vis char ~77px. */
 .as-ninja {
   position: absolute;
-  top: 354px;
+  top: 320px;
   left: 50%;
   /* translateZ(0) forces a stable GPU compositing layer so the timer's
      per-second re-renders don't cause the image to briefly lose its
      pixel rendering state and flash a white fringe */
   transform: translateX(-50%) translateZ(0);
-  height: 30%;
+  height: 33%;
   width: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;

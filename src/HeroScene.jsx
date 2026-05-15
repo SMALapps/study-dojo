@@ -65,7 +65,7 @@ export default function HeroScene({ animFrame: _animFrame }) {
           bottom: '1.3%',
           left: '50%',
           transform: 'translateX(-50%)',
-          height: '76%',
+          height: '85%',
           width: 'auto',
           imageRendering: 'pixelated',
           zIndex: 4,
