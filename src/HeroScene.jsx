@@ -62,10 +62,10 @@ export default function HeroScene({ animFrame: _animFrame }) {
         alt="Meditating ninja"
         style={{
           position: 'absolute',
-          bottom: '6.5%',
+          bottom: '1.3%',
           left: '50%',
           transform: 'translateX(-50%)',
-          height: '61%',
+          height: '76%',
           width: 'auto',
           imageRendering: 'pixelated',
           zIndex: 4,

@@ -734,17 +734,17 @@
   z-index: 1;
 }
 
-/* Ninja: top:388px — visible feet (118.8px into 180px box) land at 507px on rock.
-   Sprite: ninja 3.0 (1024x1536), height:23% = 180px rendered, vis char ~60px. */
+/* Ninja: top:354px — visible feet (153px into 233px box) land at 507px on rock.
+   Sprite: ninja 3.0 (1024x1536), height:30% = 233px rendered, vis char ~77px. */
 .as-ninja {
   position: absolute;
-  top: 388px;
+  top: 354px;
   left: 50%;
   /* translateZ(0) forces a stable GPU compositing layer so the timer's
      per-second re-renders don't cause the image to briefly lose its
      pixel rendering state and flash a white fringe */
   transform: translateX(-50%) translateZ(0);
-  height: 23%;
+  height: 30%;
   width: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
