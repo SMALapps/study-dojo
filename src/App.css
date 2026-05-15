@@ -739,10 +739,15 @@
   position: absolute;
   top: 401px;
   left: 50%;
-  transform: translateX(-50%);
+  /* translateZ(0) forces a stable GPU compositing layer so the timer's
+     per-second re-renders don't cause the image to briefly lose its
+     pixel rendering state and flash a white fringe */
+  transform: translateX(-50%) translateZ(0);
   height: 16%;
   width: auto;
   image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  will-change: transform;
   z-index: 2;
 }
 
