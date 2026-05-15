@@ -96,6 +96,7 @@ export default function App() {
   const [animFrame,     setAnimFrame]     = useState(0);
   const [screen,        setScreen]        = useState('onboarding');
   const [sessionConfig, setSessionConfig] = useState(null);
+  const [timeFocused,   setTimeFocused]   = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
@@ -143,7 +144,7 @@ export default function App() {
         <StatusBar />
         <ActiveSession
           {...(sessionConfig || {})}
-          onBreak={() => setScreen('brokenFocus')}
+          onBreak={(elapsed) => { setTimeFocused(elapsed); setScreen('brokenFocus'); }}
           onComplete={() => setScreen('sessionComplete')}
           onHome={() => setScreen('home')}
         />
@@ -174,6 +175,7 @@ export default function App() {
         <StatusBar />
         <BrokenFocus
           {...(sessionConfig || {})}
+          timeFocused={timeFocused}
           onTryAgain={() => setScreen('sessionSetup')}
           onReturnHome={() => setScreen('home')}
         />

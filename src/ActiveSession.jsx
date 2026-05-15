@@ -39,9 +39,10 @@ export default function ActiveSession({
 
   useEffect(() => {
     if (secsLeft <= 0) { onComplete?.(); return; }
+    if (showModal) return;
     const id = setInterval(() => setSecsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(id);
-  }, [secsLeft]);
+  }, [secsLeft, showModal]);
 
   const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
   const secs = String(secsLeft % 60).padStart(2, '0');
@@ -106,7 +107,7 @@ export default function ActiveSession({
       {showModal && (
         <BreakModal
           onStay={() => setShowModal(false)}
-          onBreak={onBreak}
+          onBreak={() => onBreak(Math.max(1, Math.round((totalSecs - secsLeft) / 60)))}
         />
       )}
 
