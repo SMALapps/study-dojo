@@ -1088,10 +1088,11 @@
 }
 
 /* Hero block: holds waterfall bg + ninja, scrolls away with the page.
-   510px keeps the ninja (visible bottom ~507px) fully within the hero. */
+   540px gives more reward-moment visibility; ninja visible bottom ~507px
+   stays fully within the hero. */
 .sc-hero {
   position: relative;
-  height: 514px;
+  height: 540px;
   flex-shrink: 0;
   overflow: hidden;
 }
