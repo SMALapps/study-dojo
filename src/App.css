@@ -1097,11 +1097,15 @@
 }
 
 
+/* Render at full 778px scene height (same as Active Session) so the
+   waterfall composition, rock position, and colours are identical.
+   The hero clips it at 514px — we see exactly the top portion of the scene
+   with no compressed/dark-bottom artefact. */
 .sc-hero-bg {
   position: absolute;
   top: -10px; left: 0; right: 0;
   width: 100%;
-  height: calc(100% + 10px);
+  height: 788px; /* 778px scene + 10px for the translateY offset */
   object-fit: fill;
   image-rendering: pixelated;
   z-index: 0;
