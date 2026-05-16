@@ -49,7 +49,6 @@ function BeltIcon({ beltName }) {
         objectFit: 'contain',
         flexShrink: 0,
         imageRendering: 'pixelated',
-        filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.18))',
       }}
     />
   );
