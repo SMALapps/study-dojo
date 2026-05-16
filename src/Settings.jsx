@@ -1,12 +1,6 @@
 import { useState } from 'react';
+import TabBar from './TabBar';
 
-const TABS = [
-  { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
-  { id: 'train',    label: 'TRAIN',    icon: '⚔️'  },
-  { id: 'progress', label: 'PROGRESS', icon: '📊'  },
-  { id: 'themes',   label: 'THEMES',   icon: '🏔️' },
-  { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
-];
 
 function Toggle({ on, onChange }) {
   return (
@@ -29,8 +23,6 @@ function ChevronRight() {
 }
 
 export default function Settings({ xp = 0, onTabChange, onHamburger }) {
-  const activeIdx = 4;
-  const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
   const [autoBreaks,     setAutoBreaks]     = useState(true);
   const [trainingRem,    setTrainingRem]    = useState(true);
@@ -148,21 +140,7 @@ export default function Settings({ xp = 0, onTabChange, onHamburger }) {
         <div className="sg-bottom-pad" />
       </div>
 
-      {/* Bottom tab bar */}
-      <div className="tab-bar">
-        {TABS.map((tab) => (
-          <div
-            key={tab.id}
-            className={`tab-item${tab.id === 'settings' ? ' active' : ''}`}
-            onClick={() => onTabChange(tab.id)}
-          >
-            <span className="tab-icon">{tab.icon}</span>
-            <span className="tab-label">{tab.label}</span>
-          </div>
-        ))}
-        <div className="tab-underline" style={{ left: tabUnderlineLeft }} />
-        <div className="home-indicator" />
-      </div>
+      <TabBar activeId="settings" onTabChange={onTabChange} />
     </div>
   );
 }

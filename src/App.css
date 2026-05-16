@@ -255,7 +255,7 @@
 .action-card:hover { background: #ede8da; }
 .action-card:active { transform: scale(0.96); }
 
-.action-icon { font-size: 26px; line-height: 1; }
+.action-icon { display: flex; align-items: center; justify-content: center; height: 38px; }
 
 .action-label {
   font-family: 'Press Start 2P', monospace;
@@ -294,7 +294,7 @@
   margin-top: 5px;
 }
 
-.bonsai-icon { font-size: 38px; flex-shrink: 0; }
+.bonsai-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; }
 
 .scroll-bottom-pad { height: 4px; }
 
@@ -319,7 +319,7 @@
   padding: 2px 0;
 }
 
-.tab-icon { font-size: 20px; line-height: 1; }
+.tab-icon { display: flex; align-items: center; justify-content: center; height: 24px; }
 
 .tab-label {
   font-family: 'Press Start 2P', monospace;

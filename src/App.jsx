@@ -11,7 +11,79 @@ import PremiumUpsell from './PremiumUpsell';
 import Settings from './Settings';
 import Onboarding from './Onboarding';
 import { calcSessionXp, calcBrokenXp, todayWeekIndex } from './gameLogic';
+import TabBar from './TabBar';
 import './App.css';
+
+// ── Home screen action-card icons ─────────────────────────────────────────────
+function ToriiGateIcon() {
+  const red = '#c43820';
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      {/* Top crossbeam with upswept ends (trapezoid) */}
+      <polygon points="0,11 36,11 34,16 2,16" fill={red}/>
+      {/* Cap extensions on each end */}
+      <rect x="0"  y="8"  width="7"  height="4" rx="1" fill={red}/>
+      <rect x="29" y="8"  width="7"  height="4" rx="1" fill={red}/>
+      {/* Lower crossbeam */}
+      <rect x="3"  y="19" width="30" height="4" rx="1" fill={red}/>
+      {/* Left pillar */}
+      <rect x="5"  y="19" width="5"  height="15" rx="1" fill={red}/>
+      {/* Right pillar */}
+      <rect x="26" y="19" width="5"  height="15" rx="1" fill={red}/>
+    </svg>
+  );
+}
+
+function ProgressChartIcon() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <rect x="2"  y="22" width="8" height="12" rx="1" fill="#5aaa4e"/>
+      <rect x="14" y="14" width="8" height="20" rx="1" fill="#3a8030"/>
+      <rect x="26" y="8"  width="8" height="26" rx="1" fill="#2a5820"/>
+      <rect x="0"  y="34" width="36" height="2" rx="1" fill="#1a3818"/>
+    </svg>
+  );
+}
+
+function BlockLockIcon() {
+  return (
+    <svg width="32" height="36" viewBox="0 0 32 36" fill="none">
+      {/* Shackle */}
+      <path d="M8 18 V11 a8 8 0 0 1 16 0 V18"
+            stroke="#6a6a6a" strokeWidth="4.5" strokeLinecap="round" fill="none"/>
+      {/* Body */}
+      <rect x="2"  y="16" width="28" height="18" rx="4" fill="#888"/>
+      <rect x="4"  y="18" width="24" height="14" rx="3" fill="#7a7a7a"/>
+      {/* Keyhole */}
+      <circle cx="16" cy="24" r="3.5" fill="#505050"/>
+      <rect x="14.5" y="26" width="3"  height="5"  rx="1" fill="#505050"/>
+    </svg>
+  );
+}
+
+function BonsaiIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      {/* Pot / base */}
+      <rect x="13" y="34" width="14" height="5" rx="2" fill="#9a7050"/>
+      {/* Trunk */}
+      <rect x="18" y="27" width="4"  height="8"  rx="1" fill="#7a5030"/>
+      {/* Side branch left */}
+      <rect x="10" y="23" width="9"  height="3"  rx="1" fill="#7a5030"/>
+      {/* Side branch right */}
+      <rect x="21" y="21" width="8"  height="3"  rx="1" fill="#7a5030"/>
+      {/* Main canopy layers */}
+      <ellipse cx="20" cy="18" rx="14" ry="9"  fill="#2a6a1a"/>
+      <ellipse cx="12" cy="20" rx="7"  ry="5"  fill="#2a6a1a"/>
+      <ellipse cx="28" cy="19" rx="7"  ry="5"  fill="#2a6a1a"/>
+      <ellipse cx="13" cy="14" rx="7"  ry="5.5" fill="#3a7a28"/>
+      <ellipse cx="27" cy="13" rx="7"  ry="5.5" fill="#3a7a28"/>
+      <ellipse cx="20" cy="11" rx="7"  ry="5"  fill="#4a8a38"/>
+      {/* Top highlight */}
+      <ellipse cx="20" cy="8"  rx="4.5" ry="3.5" fill="#5a9a48"/>
+    </svg>
+  );
+}
 
 function StatusBar() {
   const [time, setTime] = useState('9:41');
@@ -83,14 +155,6 @@ function BlockedAppsModal({ onClose }) {
     </div>
   );
 }
-
-const TABS = [
-  { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
-  { id: 'train',    label: 'TRAIN',    icon: '⚔️'  },
-  { id: 'progress', label: 'PROGRESS', icon: '📊'  },
-  { id: 'themes',   label: 'THEMES',   icon: '🏔️' },
-  { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
-];
 
 function screenToTab(s) {
   if (s === 'home')                             return 'dojo';
@@ -312,8 +376,6 @@ export default function App() {
   }
 
   // ── Home / Dojo screen ────────────────────────────────────────────────────
-  const activeIdx        = TABS.findIndex(t => t.id === activeTab);
-  const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
   const focusHrs         = Math.floor(stats.focusTodayMinutes / 60);
   const focusMins        = stats.focusTodayMinutes % 60;
   const focusDisplay     = focusHrs > 0 ? `${focusHrs}h ${focusMins}m` : String(focusMins);
@@ -368,15 +430,15 @@ export default function App() {
 
           <div className="quick-actions">
             <div className="action-card" onClick={() => setScreen('sessionSetup')}>
-              <span className="action-icon">⛩️</span>
+              <span className="action-icon"><ToriiGateIcon /></span>
               <span className="action-label">TRAINING{'\n'}MODES</span>
             </div>
             <div className="action-card" onClick={() => handleTabChange('progress')}>
-              <span className="action-icon">📊</span>
+              <span className="action-icon"><ProgressChartIcon /></span>
               <span className="action-label">PROGRESS</span>
             </div>
             <div className="action-card" onClick={() => setShowBlocked(true)}>
-              <span className="action-icon">🔒</span>
+              <span className="action-icon"><BlockLockIcon /></span>
               <span className="action-label">BLOCKED{'\n'}APPS</span>
             </div>
           </div>
@@ -384,7 +446,7 @@ export default function App() {
           <RankCard xp={stats.xp} />
 
           <div className="quote-card">
-            <span className="bonsai-icon">🌳</span>
+            <span className="bonsai-icon"><BonsaiIcon /></span>
             <div className="quote-text-block">
               <p className="quote-body">Discipline today, freedom tomorrow.</p>
               <p className="quote-attribution">– The Dojo</p>
@@ -395,20 +457,7 @@ export default function App() {
           <div className="scroll-bottom-pad" />
         </div>
 
-        <div className="tab-bar">
-          {TABS.map((tab) => (
-            <div
-              key={tab.id}
-              className={`tab-item${activeTab === tab.id ? ' active' : ''}`}
-              onClick={() => handleTabChange(tab.id)}
-            >
-              <span className="tab-icon">{tab.icon}</span>
-              <span className="tab-label">{tab.label}</span>
-            </div>
-          ))}
-          <div className="tab-underline" style={{ left: tabUnderlineLeft }} />
-          <div className="home-indicator" />
-        </div>
+        <TabBar activeId={activeTab} onTabChange={handleTabChange} />
       </div>
 
       {showHamburger && <HamburgerModal onClose={() => setShowHamburger(false)} />}

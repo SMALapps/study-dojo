@@ -1,14 +1,8 @@
+import TabBar from './TabBar';
 import daytimeImg  from './assets/themes/daytime-waterfall/background.png';
 import forestImg   from './assets/themes/daytime-waterfall/forest-sunbeams.png';
 import nightImg    from './assets/themes/daytime-waterfall/night-waterfall.png';
 
-const TABS = [
-  { id: 'dojo',     label: 'DOJO',     icon: '🥷'  },
-  { id: 'train',    label: 'TRAIN',    icon: '⚔️'  },
-  { id: 'progress', label: 'PROGRESS', icon: '📊'  },
-  { id: 'themes',   label: 'THEMES',   icon: '🏔️' },
-  { id: 'settings', label: 'SETTINGS', icon: '⚙️'  },
-];
 
 const THEMES = [
   {
@@ -62,8 +56,6 @@ function CheckIcon() {
 }
 
 export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburger }) {
-  const activeIdx = 3;
-  const tabUnderlineLeft = `calc(${activeIdx} * 20% + 10% - 14px)`;
 
   const handleCardTap = (theme) => {
     if (theme.id === 'daytime') return;
@@ -124,21 +116,7 @@ export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburg
         ))}
       </div>
 
-      {/* Bottom tab bar */}
-      <div className="tab-bar">
-        {TABS.map((tab) => (
-          <div
-            key={tab.id}
-            className={`tab-item${tab.id === 'themes' ? ' active' : ''}`}
-            onClick={() => onTabChange(tab.id)}
-          >
-            <span className="tab-icon">{tab.icon}</span>
-            <span className="tab-label">{tab.label}</span>
-          </div>
-        ))}
-        <div className="tab-underline" style={{ left: tabUnderlineLeft }} />
-        <div className="home-indicator" />
-      </div>
+      <TabBar activeId="themes" onTabChange={onTabChange} />
     </div>
   );
 }
