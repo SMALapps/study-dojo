@@ -18,7 +18,7 @@ function NinjaPortrait() {
         backgroundImage: `url(${ninjaImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: '300%',
-        backgroundPosition: '50% 22%',
+        backgroundPosition: '50% 15%',
       }}
     />
   );
