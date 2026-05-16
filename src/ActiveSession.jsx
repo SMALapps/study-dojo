@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { playGong } from './gongAudio';
 import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
@@ -42,12 +43,10 @@ export default function ActiveSession({
     if (secsLeft <= 0) {
       if (!hasPlayedGongRef.current) {
         hasPlayedGongRef.current = true;
-        const gong = new Audio('/gong.mp3');
-        gong.volume = 0.5;
-        gong.play().catch(() => {});
+        playGong();
       }
-      // Short delay so the gong is audible before the screen transitions
-      const id = setTimeout(() => onComplete?.(), 600);
+      // Delay gives the gong time to begin before the screen transitions
+      const id = setTimeout(() => onComplete?.(), 1500);
       return () => clearTimeout(id);
     }
     if (showModal) return;

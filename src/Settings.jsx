@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TabBar from './TabBar';
+import { playGong } from './gongAudio';
 
 function Toggle({ on, onChange }) {
   return (
@@ -251,6 +252,11 @@ export default function Settings({ xp = 0, settings, onSettingsChange, onTabChan
         {/* ── Prototype ── */}
         <span className="sg-section-label">Prototype</span>
         <div className="sg-card">
+          <div className="sg-row sg-row-tappable" onClick={() => playGong()}>
+            <span className="sg-row-label">Test Gong</span>
+            <span className="sg-row-chevron"><ChevronRight /></span>
+          </div>
+          <div className="sg-divider" />
           {confirmReset ? (
             <div className="sg-row">
               <span className="sg-row-label" style={{ color: '#c04030', fontSize: 11 }}>Confirm reset? This clears all progress.</span>

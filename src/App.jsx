@@ -11,6 +11,7 @@ import PremiumUpsell from './PremiumUpsell';
 import Settings from './Settings';
 import Onboarding from './Onboarding';
 import { calcSessionXp, calcBrokenXp, todayWeekIndex } from './gameLogic';
+import { unlockGongAudio } from './gongAudio';
 import TabBar from './TabBar';
 import './App.css';
 
@@ -340,7 +341,7 @@ export default function App() {
           defaultDuration={settings.defaultDuration}
           defaultDifficulty={settings.defaultDifficulty}
           onBack={() => setScreen('home')}
-          onStart={(cfg) => { hapticFeedback(settings.haptics); setSessionConfig(cfg); setScreen('activeSession'); }}
+          onStart={(cfg) => { hapticFeedback(settings.haptics); unlockGongAudio(); setSessionConfig(cfg); setScreen('activeSession'); }}
         />
       </div>
     );
