@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import TabBar from './TabBar';
 import daytimeImg  from './assets/themes/daytime-waterfall/background.png';
 import forestImg   from './assets/themes/daytime-waterfall/forest-sunbeams.png';
@@ -55,16 +56,31 @@ function CheckIcon() {
   );
 }
 
+function ComingSoonModal({ onClose }) {
+  return (
+    <div className="hm-overlay" onClick={onClose}>
+      <div className="hm-card" onClick={e => e.stopPropagation()}>
+        <span className="hm-title">Coming Soon</span>
+        <div className="hm-divider" />
+        <p className="hm-body">Night Waterfall is under development and will be available in a future update.</p>
+        <button className="hm-close" onClick={onClose}>OK</button>
+      </div>
+    </div>
+  );
+}
+
 export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburger }) {
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const handleCardTap = (theme) => {
     if (theme.id === 'daytime') return;
     if (theme.id === 'forest')  onPremiumUpsell?.();
-    // night: coming soon — no action
+    if (theme.id === 'night')   setShowComingSoon(true);
   };
 
   return (
     <div className="screen th-screen">
+      {showComingSoon && <ComingSoonModal onClose={() => setShowComingSoon(false)} />}
 
       {/* Header */}
       <div className="top-nav">

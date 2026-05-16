@@ -22,8 +22,9 @@ function ChevronRight() {
   );
 }
 
-export default function Settings({ xp = 0, onTabChange, onHamburger }) {
+export default function Settings({ xp = 0, onTabChange, onHamburger, onReset }) {
 
+  const [confirmReset, setConfirmReset] = useState(false);
   const [autoBreaks,     setAutoBreaks]     = useState(true);
   const [trainingRem,    setTrainingRem]    = useState(true);
   const [streakRem,      setStreakRem]      = useState(true);
@@ -135,6 +136,25 @@ export default function Settings({ xp = 0, onTabChange, onHamburger }) {
             <span className="sg-row-label">Help &amp; Support</span>
             <span className="sg-row-chevron"><ChevronRight /></span>
           </div>
+        </div>
+
+        {/* ── Prototype ── */}
+        <span className="sg-section-label">Prototype</span>
+        <div className="sg-card">
+          {confirmReset ? (
+            <div className="sg-row">
+              <span className="sg-row-label" style={{ color: '#c04030', fontSize: 11 }}>Confirm reset? This clears all progress.</span>
+              <button
+                style={{ background: '#c04030', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 12px', fontFamily: "'Press Start 2P', monospace", fontSize: 6, cursor: 'pointer' }}
+                onClick={() => { setConfirmReset(false); onReset?.(); }}
+              >YES</button>
+            </div>
+          ) : (
+            <div className="sg-row sg-row-tappable" onClick={() => setConfirmReset(true)}>
+              <span className="sg-row-label" style={{ color: '#c04030' }}>Reset All Progress</span>
+              <span className="sg-row-chevron"><ChevronRight /></span>
+            </div>
+          )}
         </div>
 
         <div className="sg-bottom-pad" />

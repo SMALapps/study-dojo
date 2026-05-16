@@ -175,12 +175,25 @@ const INITIAL_STATS = {
   weeklyFocusData:   [0, 0, 0, 0, 0, 0, 0], // Mon–Sun
 };
 
+const STORAGE_KEY = 'focusDojo_stats';
+
+function loadStats() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? { ...INITIAL_STATS, ...JSON.parse(raw) } : INITIAL_STATS;
+  } catch {
+    return INITIAL_STATS;
+  }
+}
+
 export default function App() {
   const [animFrame,     setAnimFrame]     = useState(0);
-  const [screen,        setScreen]        = useState('onboarding');
+  const [screen,        setScreen]        = useState(
+    () => localStorage.getItem('focusDojo_onboarded') === '1' ? 'home' : 'onboarding'
+  );
   const [sessionConfig, setSessionConfig] = useState(null);
   const [timeFocused,   setTimeFocused]   = useState(0);
-  const [stats,         setStats]         = useState(INITIAL_STATS);
+  const [stats,         setStats]         = useState(loadStats);
   const [lastEarnedXp,  setLastEarnedXp]  = useState(0);
   const [showHamburger, setShowHamburger] = useState(false);
   const [showBlocked,   setShowBlocked]   = useState(false);
@@ -189,6 +202,11 @@ export default function App() {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
     return () => clearInterval(id);
   }, []);
+
+  // Persist stats to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+  }, [stats]);
 
   const activeTab = screenToTab(screen);
 
@@ -232,8 +250,18 @@ export default function App() {
     const brokenXp = calcBrokenXp(elapsed, diff);
     setTimeFocused(elapsed);
     setLastEarnedXp(brokenXp);
-    // Broken sessions: no streak increment, no sessionsCompleted update
+    // Award partial XP; no streak increment, no sessionsCompleted update
+    setStats(s => ({ ...s, xp: s.xp + brokenXp }));
     setScreen('brokenFocus');
+  };
+
+  const handleReset = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setStats(INITIAL_STATS);
+    setLastEarnedXp(0);
+    setTimeFocused(0);
+    setSessionConfig(null);
+    setScreen('home');
   };
 
   // ── Onboarding ────────────────────────────────────────────────────────────
@@ -242,7 +270,10 @@ export default function App() {
       <div className="phone-shell">
         <div className="dynamic-island" />
         <StatusBar />
-        <Onboarding onBegin={() => setScreen('home')} />
+        <Onboarding onBegin={() => {
+          localStorage.setItem('focusDojo_onboarded', '1');
+          setScreen('home');
+        }} />
       </div>
     );
   }
@@ -369,6 +400,7 @@ export default function App() {
           xp={stats.xp}
           onTabChange={handleTabChange}
           onHamburger={() => setShowHamburger(true)}
+          onReset={handleReset}
         />
         {showHamburger && <HamburgerModal onClose={() => setShowHamburger(false)} />}
       </div>
