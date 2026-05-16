@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { playGong } from './gongAudio';
+import { calcLiveXp } from './gameLogic';
 import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
@@ -55,9 +56,11 @@ export default function ActiveSession({
     return () => clearInterval(id);
   }, [secsLeft, showModal, shouldTimerRun]);
 
-  const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
-  const secs = String(secsLeft % 60).padStart(2, '0');
-  const progress = Math.round(((totalSecs - secsLeft) / totalSecs) * 100);
+  const elapsedSecs = totalSecs - secsLeft;
+  const mins     = String(Math.floor(secsLeft / 60)).padStart(2, '0');
+  const secs     = String(secsLeft % 60).padStart(2, '0');
+  const progress = Math.round((elapsedSecs / totalSecs) * 100);
+  const liveXp   = calcLiveXp(elapsedSecs, difficulty);
 
   return (
     <div className="screen as-screen">
@@ -75,7 +78,7 @@ export default function ActiveSession({
       <div className="as-header">
         <button className="as-back-btn" onClick={() => setShowModal(true)} aria-label="Back">‹</button>
         <div className="as-title-pill">FOCUS SESSION</div>
-        <div className="as-xp-badge">🔥 <span>120 XP</span></div>
+        <div className="as-xp-badge">🔥 <span>+{liveXp} XP</span></div>
       </div>
 
       {/* Content block: info group + button, sits in lower portion of screen */}
@@ -118,7 +121,7 @@ export default function ActiveSession({
       {showModal && (
         <BreakModal
           onStay={() => setShowModal(false)}
-          onBreak={() => onBreak(Math.max(1, Math.round((totalSecs - secsLeft) / 60)))}
+          onBreak={() => onBreak(elapsedSecs)}
         />
       )}
 

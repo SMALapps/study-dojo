@@ -300,13 +300,13 @@ export default function App() {
     }
   };
 
-  const handleBreak = (elapsed) => {
+  const handleBreak = (elapsedSecs) => {
     const diff     = (sessionConfig || {}).difficulty || 'Disciplined';
-    const brokenXp = calcBrokenXp(elapsed, diff);
-    setTimeFocused(elapsed);
+    const brokenXp = calcBrokenXp(elapsedSecs, diff);
+    setTimeFocused(Math.floor(elapsedSecs / 60));
     setLastEarnedXp(brokenXp);
     hapticFeedback(settings.haptics);
-    // Award partial XP; no streak increment, no sessionsCompleted update
+    // Award partial XP (0 if < 60 s); no streak or sessionsCompleted update
     setStats(s => ({ ...s, xp: s.xp + brokenXp }));
     setScreen('brokenFocus');
   };

@@ -10,12 +10,21 @@ export const RANKS = [
 
 const DIFFICULTY_MULT = { Gentle: 0.8, Disciplined: 1.0, Shinobi: 1.25 };
 
+// Full completed-session XP.
 export function calcSessionXp(duration, difficulty) {
   return Math.round(duration * 4 * (DIFFICULTY_MULT[difficulty] ?? 1.0));
 }
 
-export function calcBrokenXp(elapsed, difficulty) {
-  return Math.round(elapsed * 2 * (DIFFICULTY_MULT[difficulty] ?? 1.0));
+// Live XP shown during a session and awarded on early break.
+// No XP before 60 s; after that accrues proportionally.
+export function calcLiveXp(elapsedSecs, difficulty) {
+  if (elapsedSecs < 60) return 0;
+  return Math.floor((elapsedSecs / 60) * 4 * (DIFFICULTY_MULT[difficulty] ?? 1.0));
+}
+
+// Broken-session award — same rule as live XP.
+export function calcBrokenXp(elapsedSecs, difficulty) {
+  return calcLiveXp(elapsedSecs, difficulty);
 }
 
 export function getRankInfo(xp) {
