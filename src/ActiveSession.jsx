@@ -27,9 +27,10 @@ function BreakModal({ onStay, onBreak }) {
 }
 
 export default function ActiveSession({
-  duration   = 25,
-  category   = 'Study',
-  difficulty = 'Disciplined',
+  duration        = 25,
+  category        = 'Study',
+  difficulty      = 'Disciplined',
+  shouldTimerRun  = true,
   onBreak,
   onComplete,
   onHome,
@@ -49,10 +50,10 @@ export default function ActiveSession({
       const id = setTimeout(() => onComplete?.(), 1500);
       return () => clearTimeout(id);
     }
-    if (showModal) return;
+    if (!shouldTimerRun || showModal) return;
     const id = setInterval(() => setSecsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(id);
-  }, [secsLeft, showModal]);
+  }, [secsLeft, showModal, shouldTimerRun]);
 
   const mins = String(Math.floor(secsLeft / 60)).padStart(2, '0');
   const secs = String(secsLeft % 60).padStart(2, '0');

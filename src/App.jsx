@@ -12,6 +12,7 @@ import Settings from './Settings';
 import Onboarding from './Onboarding';
 import { calcSessionXp, calcBrokenXp, todayWeekIndex } from './gameLogic';
 import { unlockGongAudio } from './gongAudio';
+import DojoDoorTransition from './DojoDoorTransition';
 import TabBar from './TabBar';
 import './App.css';
 
@@ -227,8 +228,10 @@ export default function App() {
   const [lastEarnedXp,  setLastEarnedXp]  = useState(0);
   const [showHamburger, setShowHamburger] = useState(false);
   const [showBlocked,   setShowBlocked]   = useState(false);
-  const [settings, setSettings] = useState(loadSettings);
-  const [toast,    setToast]    = useState(null);
+  const [settings,            setSettings]            = useState(loadSettings);
+  const [toast,               setToast]               = useState(null);
+  const [dojoPhase,           setDojoPhase]           = useState(null);
+  const [activeSessionCanRun, setActiveSessionCanRun] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
@@ -317,6 +320,32 @@ export default function App() {
     setScreen('home');
   };
 
+  const startDojoTransition = (cfg) => {
+    hapticFeedback(settings.haptics);
+    unlockGongAudio();
+    setActiveSessionCanRun(false);
+    setDojoPhase('closing');
+
+    const closeMs = settings.reducedMotion ? 250 : 700;
+    const holdMs  = 350;
+    const openMs  = settings.reducedMotion ? 250 : 700;
+
+    setTimeout(() => {
+      // Doors fully closed: swap screen, timer still frozen
+      setSessionConfig(cfg);
+      setScreen('activeSession');
+      setDojoPhase('closed');
+
+      setTimeout(() => {
+        // Begin opening doors + release the timer
+        setDojoPhase('opening');
+        setActiveSessionCanRun(true);
+
+        setTimeout(() => setDojoPhase(null), openMs + 100);
+      }, holdMs);
+    }, closeMs + 100);
+  };
+
   // ── Onboarding ────────────────────────────────────────────────────────────
   if (screen === 'onboarding') {
     return (
@@ -341,8 +370,9 @@ export default function App() {
           defaultDuration={settings.defaultDuration}
           defaultDifficulty={settings.defaultDifficulty}
           onBack={() => setScreen('home')}
-          onStart={(cfg) => { hapticFeedback(settings.haptics); unlockGongAudio(); setSessionConfig(cfg); setScreen('activeSession'); }}
+          onStart={startDojoTransition}
         />
+        <DojoDoorTransition phase={dojoPhase} reducedMotion={settings.reducedMotion} />
       </div>
     );
   }
@@ -355,10 +385,12 @@ export default function App() {
         <StatusBar />
         <ActiveSession
           {...(sessionConfig || {})}
+          shouldTimerRun={activeSessionCanRun}
           onBreak={handleBreak}
           onComplete={handleSessionComplete}
           onHome={() => setScreen('home')}
         />
+        <DojoDoorTransition phase={dojoPhase} reducedMotion={settings.reducedMotion} />
       </div>
     );
   }
