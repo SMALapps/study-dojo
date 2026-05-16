@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
@@ -33,12 +33,23 @@ export default function ActiveSession({
   onComplete,
   onHome,
 }) {
-  const totalSecs = Number(duration) * 60;
+  const totalSecs             = Number(duration) * 60;
   const [secsLeft,  setSecsLeft]  = useState(totalSecs);
   const [showModal, setShowModal] = useState(false);
+  const hasPlayedGongRef          = useRef(false);
 
   useEffect(() => {
-    if (secsLeft <= 0) { onComplete?.(); return; }
+    if (secsLeft <= 0) {
+      if (!hasPlayedGongRef.current) {
+        hasPlayedGongRef.current = true;
+        const gong = new Audio('/gong.mp3');
+        gong.volume = 0.5;
+        gong.play().catch(() => {});
+      }
+      // Short delay so the gong is audible before the screen transitions
+      const id = setTimeout(() => onComplete?.(), 600);
+      return () => clearTimeout(id);
+    }
     if (showModal) return;
     const id = setInterval(() => setSecsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(id);
