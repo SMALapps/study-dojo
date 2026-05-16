@@ -2569,36 +2569,3 @@
   letter-spacing: 0.05em;
 }
 .hm-close:active { transform: scale(0.97); }
-
-/* ── Mobile responsive: remove fake iPhone shell ────────────────────────────
-   On real mobile devices the phone-shell border/shadow/rounded-corners are
-   removed and the app fills the actual viewport. Safe-area insets handle the
-   notch (top) and home bar (bottom) on iOS Safari with viewport-fit=cover. */
-@media (max-width: 600px) {
-  .phone-shell {
-    width: 100vw;
-    height: 100dvh;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-  }
-
-  /* Hide decorative fake-device elements */
-  .dynamic-island {
-    display: none;
-  }
-
-  /* Extend status bar to sit below the real notch */
-  .status-bar {
-    height: max(54px, calc(14px + env(safe-area-inset-top)));
-    padding-top: env(safe-area-inset-top);
-  }
-
-  /* Replace the fake home-indicator pill with real safe-area padding */
-  .home-indicator {
-    display: none;
-  }
-  .tab-bar {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
