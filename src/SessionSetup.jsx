@@ -60,11 +60,11 @@ function CustomModal({ initial, onSet, onCancel }) {
   );
 }
 
-export default function SessionSetup({ onBack, onStart }) {
-  const [duration,   setDuration]   = useState(25);
+export default function SessionSetup({ defaultDuration = 25, defaultDifficulty = 'Disciplined', onBack, onStart }) {
+  const [duration,   setDuration]   = useState(defaultDuration);
   const [showCustom, setShowCustom] = useState(false);
   const [category,   setCategory]   = useState('Study');
-  const [difficulty, setDifficulty] = useState('Disciplined');
+  const [difficulty, setDifficulty] = useState(defaultDifficulty);
 
   const isCustom      = !PRESET_DURATIONS.map(d => d.value).includes(duration);
   const customLabel   = isCustom ? `Custom\n${duration} min` : 'Custom';

@@ -186,6 +186,35 @@ function loadStats() {
   }
 }
 
+const SETTINGS_KEY = 'focusDojo_settings';
+const DEFAULT_SETTINGS = {
+  defaultDuration:   25,
+  defaultDifficulty: 'Disciplined',
+  soundscape:        'Waterfall',
+  autoBreaks:        true,
+  trainingRem:       true,
+  streakRem:         true,
+  sessionAlerts:     true,
+  darkMode:          false,
+  haptics:           true,
+  ambience:          true,
+  reducedMotion:     false,
+};
+
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    return raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : DEFAULT_SETTINGS;
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
+
+function hapticFeedback(enabled) {
+  if (!enabled) return;
+  if (navigator.vibrate) navigator.vibrate(10);
+}
+
 export default function App() {
   const [animFrame,     setAnimFrame]     = useState(0);
   const [screen,        setScreen]        = useState(
@@ -197,6 +226,8 @@ export default function App() {
   const [lastEarnedXp,  setLastEarnedXp]  = useState(0);
   const [showHamburger, setShowHamburger] = useState(false);
   const [showBlocked,   setShowBlocked]   = useState(false);
+  const [settings, setSettings] = useState(loadSettings);
+  const [toast,    setToast]    = useState(null);
 
   useEffect(() => {
     const id = setInterval(() => setAnimFrame(f => f + 1), 180);
@@ -207,6 +238,20 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
   }, [stats]);
+
+  useEffect(() => {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  }, [settings]);
+
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(null), 3000);
+    return () => clearTimeout(id);
+  }, [toast]);
+
+  useEffect(() => {
+    document.body.classList.toggle('reduced-motion', settings.reducedMotion);
+  }, [settings.reducedMotion]);
 
   const activeTab = screenToTab(screen);
 
@@ -225,6 +270,7 @@ export default function App() {
     const earnedXp = calcSessionXp(dur, diff);
     const dayIdx   = todayWeekIndex();
     setLastEarnedXp(earnedXp);
+    hapticFeedback(settings.haptics);
     setStats(s => {
       // NOTE: incrementing streak once per completed session is a prototype simplification.
       // Real daily streak logic requires storing the last-session date with persistence.
@@ -242,7 +288,12 @@ export default function App() {
         weeklyFocusData:   weekly,
       };
     });
-    setScreen('sessionComplete');
+    if (settings.sessionAlerts) {
+      setScreen('sessionComplete');
+    } else {
+      setScreen('home');
+      setToast('Session complete. XP added.');
+    }
   };
 
   const handleBreak = (elapsed) => {
@@ -250,6 +301,7 @@ export default function App() {
     const brokenXp = calcBrokenXp(elapsed, diff);
     setTimeFocused(elapsed);
     setLastEarnedXp(brokenXp);
+    hapticFeedback(settings.haptics);
     // Award partial XP; no streak increment, no sessionsCompleted update
     setStats(s => ({ ...s, xp: s.xp + brokenXp }));
     setScreen('brokenFocus');
@@ -285,8 +337,10 @@ export default function App() {
         <div className="dynamic-island" />
         <StatusBar />
         <SessionSetup
+          defaultDuration={settings.defaultDuration}
+          defaultDifficulty={settings.defaultDifficulty}
           onBack={() => setScreen('home')}
-          onStart={(cfg) => { setSessionConfig(cfg); setScreen('activeSession'); }}
+          onStart={(cfg) => { hapticFeedback(settings.haptics); setSessionConfig(cfg); setScreen('activeSession'); }}
         />
       </div>
     );
@@ -398,6 +452,8 @@ export default function App() {
         <StatusBar />
         <Settings
           xp={stats.xp}
+          settings={settings}
+          onSettingsChange={setSettings}
           onTabChange={handleTabChange}
           onHamburger={() => setShowHamburger(true)}
           onReset={handleReset}
@@ -455,7 +511,7 @@ export default function App() {
             </div>
           </div>
 
-          <button className="cta-button" onClick={() => setScreen('sessionSetup')}>
+          <button className="cta-button" onClick={() => { hapticFeedback(settings.haptics); setScreen('sessionSetup'); }}>
             <span className="cta-text">START FOCUS SESSION</span>
             <div className="cta-arrow">›</div>
           </button>
@@ -494,6 +550,7 @@ export default function App() {
 
       {showHamburger && <HamburgerModal onClose={() => setShowHamburger(false)} />}
       {showBlocked   && <BlockedAppsModal onClose={() => setShowBlocked(false)} />}
+      {toast && <div className="app-toast">{toast}</div>}
     </div>
   );
 }

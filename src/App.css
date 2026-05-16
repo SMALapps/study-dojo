@@ -2569,3 +2569,60 @@
   letter-spacing: 0.05em;
 }
 .hm-close:active { transform: scale(0.97); }
+
+/* ── Toast notification ── */
+.app-toast {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 20, 0.88);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  line-height: 1.5;
+  padding: 10px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+  z-index: 9999;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+}
+
+/* ── Picker modal options ── */
+.pk-option {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #2a2a20;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.pk-option:last-of-type { border-bottom: none; }
+.pk-option:active { background: rgba(0,0,0,0.04); }
+.pk-option-active { color: #3a6030; font-weight: 600; }
+.pk-option-label { flex: 1; }
+.pk-check { color: #3a6030; font-size: 15px; font-weight: 700; margin-left: 8px; }
+.pk-soon-tag {
+  font-size: 9px;
+  background: #e8e0d0;
+  color: #7a7060;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+/* ── Reduced motion ── */
+.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
