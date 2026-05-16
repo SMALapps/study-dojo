@@ -44,11 +44,12 @@ function BeltIcon({ beltName }) {
       src={src}
       alt={beltName}
       style={{
-        width: 52,
-        height: 52,
+        width: 60,
+        height: 60,
         objectFit: 'contain',
         flexShrink: 0,
-        imageRendering: 'auto',
+        imageRendering: 'pixelated',
+        filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.18))',
       }}
     />
   );
