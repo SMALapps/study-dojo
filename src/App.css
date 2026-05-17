@@ -296,7 +296,7 @@
 
 .bonsai-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; }
 
-.scroll-bottom-pad { height: 4px; }
+.scroll-bottom-pad { height: 20px; }
 
 .tab-bar {
   height: 80px;
