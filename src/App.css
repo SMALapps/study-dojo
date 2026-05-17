@@ -2241,21 +2241,35 @@
 
 /* Section label above each card */
 .sg-section-label {
-  display: block;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--text-dark);
-  margin: 10px 0 5px 2px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--tab-active);
+  letter-spacing: 0.5px;
+  margin: 18px 0 6px 2px;
 }
-.sg-section-label:first-of-type { margin-top: 4px; }
+.sg-section-label::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--green-cta);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.sg-section-label:first-of-type { margin-top: 6px; }
+.sg-proto-label { color: var(--text-light); }
+.sg-proto-label::before { background: var(--text-light); }
 
 /* Card container */
 .sg-card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 14px;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* Row */
@@ -2263,8 +2277,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 16px;
-  min-height: 44px;
+  padding: 13px 16px;
+  min-height: 46px;
 }
 
 .sg-row-tappable { cursor: pointer; }
@@ -2272,14 +2286,16 @@
 
 .sg-row-label {
   font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-dark);
 }
 
 .sg-row-value {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
-  color: var(--text-light);
+  font-weight: 500;
+  color: var(--tab-active);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -2289,6 +2305,27 @@
   color: var(--text-light);
   display: flex;
   align-items: center;
+}
+
+.sg-reset-label { color: #c04030; }
+
+.sg-confirm-label {
+  font-size: 11px;
+  color: #c04030;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.sg-confirm-btn {
+  background: #c04030;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .sg-divider {
