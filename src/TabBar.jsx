@@ -6,73 +6,91 @@ const TABS = [
   { id: 'settings', label: 'SETTINGS' },
 ];
 
-function NinjaTabIcon({ active }) {
-  const c = active ? '#2a5020' : '#6a6a5a';
+// Shared palette — mirrors CSS vars
+const A = '#3a6030'; // active  (--tab-active)
+const I = '#7a7a68'; // inactive (muted olive-gray)
+
+// ── Dojo: torii gate ──────────────────────────────────────────────────────────
+function DojoIcon({ active }) {
+  const c = active ? A : I;
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      {/* Hood peak */}
-      <rect x="9"  y="0" width="6"  height="3" rx="0.5" fill={c}/>
-      <rect x="6"  y="2" width="12" height="3" rx="0.5" fill={c}/>
-      {/* Head block */}
-      <rect x="4"  y="4" width="16" height="11" rx="1"  fill={c}/>
-      {/* White headband */}
-      <rect x="3"  y="7" width="18" height="3"  rx="0.5" fill={active ? '#ffffff' : '#c8c8bc'}/>
-      {/* Gold eyes */}
-      <rect x="6"  y="11" width="4" height="2"  rx="0.5" fill="#c09820"/>
-      <rect x="14" y="11" width="4" height="2"  rx="0.5" fill="#c09820"/>
-      {/* Body */}
-      <rect x="3"  y="15" width="18" height="8" rx="1"  fill={c}/>
-      {/* Belt stripe */}
-      <rect x="3"  y="17" width="18" height="2.5" rx="0.5" fill={active ? 'rgba(255,255,255,0.75)' : 'rgba(200,200,188,0.55)'}/>
+      {/* Upswept end caps on top beam */}
+      <rect x="0"  y="2" width="5" height="3" rx="0.5" fill={c}/>
+      <rect x="19" y="2" width="5" height="3" rx="0.5" fill={c}/>
+      {/* Top crossbeam */}
+      <rect x="0"  y="4" width="24" height="3" rx="0.5" fill={c}/>
+      {/* Lower crossbeam */}
+      <rect x="4"  y="9" width="16" height="2.5" rx="0.5" fill={c}/>
+      {/* Left pillar */}
+      <rect x="5"  y="11" width="3" height="12" rx="0.5" fill={c}/>
+      {/* Right pillar */}
+      <rect x="16" y="11" width="3" height="12" rx="0.5" fill={c}/>
     </svg>
   );
 }
 
-function SwordsTabIcon({ active }) {
-  const c = active ? '#2a5020' : '#6a6a5a';
-  const g = active ? '#3a7030' : '#8a8a78';
+// ── Train: upright katana silhouette ──────────────────────────────────────────
+function TrainIcon({ active }) {
+  const c = active ? A : I;
+  const h = active ? '#5a8050' : '#9a9a88'; // slightly lighter for handle accents
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24">
-      <line x1="2"  y1="2"  x2="22" y2="22" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <line x1="22" y1="2"  x2="2"  y2="22" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      {/* Crossguards */}
-      <rect x="9.5" y="10" width="5" height="3" rx="1" fill={g}/>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      {/* Blade — tapers via a narrow polygon */}
+      <polygon points="11,1 13,1 12.5,14 11.5,14" fill={c}/>
+      {/* Tsuba (guard) */}
+      <rect x="7.5" y="13.5" width="9" height="2.5" rx="1" fill={c}/>
+      {/* Handle */}
+      <rect x="11"  y="16"   width="2" height="7"   rx="0.5" fill={c}/>
+      {/* Handle wrap — two subtle bands */}
+      <rect x="10.5" y="18"  width="3" height="1"   rx="0.3" fill={h}/>
+      <rect x="10.5" y="20.5" width="3" height="1"  rx="0.3" fill={h}/>
     </svg>
   );
 }
 
-function ChartTabIcon({ active }) {
-  const c1 = active ? '#5aaa50' : '#9a9a88';
-  const c2 = active ? '#3a8030' : '#7a7a68';
-  const c3 = active ? '#2a5820' : '#5a5a4a';
+// ── Progress: three ascending bars with baseline ───────────────────────────────
+function ProgressIcon({ active }) {
+  const c1 = active ? '#6ab85e' : '#aaa898'; // short bar  — lightest
+  const c2 = active ? '#4a8a3e' : '#8a8878'; // mid bar
+  const c3 = active ? A        : '#6a6a58'; // tall bar   — darkest
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="1"   y="16" width="5" height="7"  rx="0.5" fill={c1}/>
-      <rect x="9.5" y="10" width="5" height="13" rx="0.5" fill={c2}/>
+      <rect x="1"   y="17" width="5" height="6"  rx="0.5" fill={c1}/>
+      <rect x="9.5" y="11" width="5" height="12" rx="0.5" fill={c2}/>
       <rect x="18"  y="5"  width="5" height="18" rx="0.5" fill={c3}/>
-      <rect x="0"   y="23" width="24" height="1.5" rx="0.5" fill={c3}/>
+      {/* Baseline */}
+      <rect x="0" y="23" width="24" height="1.5" rx="0.5" fill={c3}/>
     </svg>
   );
 }
 
-function MountainTabIcon({ active }) {
-  const c = active ? '#2a5020' : '#6a6a5a';
+// ── Themes: mountain landscape with sun ───────────────────────────────────────
+function ThemesIcon({ active }) {
+  const c    = active ? A        : I;
+  const snow = active ? 'rgba(255,255,255,0.92)' : 'rgba(210,208,198,0.7)';
+  const sun  = active ? '#c09820' : '#9a9888';
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <polygon points="12,2 24,22 0,22" fill={c}/>
-      <polygon points="12,2 16.5,10 7.5,10" fill={active ? 'rgba(255,255,255,0.78)' : 'rgba(220,220,208,0.5)'}/>
+      {/* Sun */}
+      <circle cx="19" cy="5" r="3" fill={sun}/>
+      {/* Mountain body */}
+      <polygon points="1,23 12,3 23,23" fill={c}/>
+      {/* Snow cap */}
+      <polygon points="12,3 15.5,11 8.5,11" fill={snow}/>
     </svg>
   );
 }
 
-function GearTabIcon({ active }) {
-  const c   = active ? '#2a5020' : '#6a6a5a';
-  const bg  = '#f5f0e8'; // --cream
-  const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+// ── Settings: 8-tooth pixel gear ──────────────────────────────────────────────
+function SettingsIcon({ active }) {
+  const c  = active ? A       : I;
+  const bg = '#faf7f0'; // --card-bg, matches tab bar background
+  const teeth = [0, 45, 90, 135, 180, 225, 270, 315];
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      {angles.map(a => (
-        <rect key={a} x="11" y="0.5" width="2" height="5" rx="0.5"
+      {teeth.map(a => (
+        <rect key={a} x="11" y="0.5" width="2" height="5.5" rx="0.5"
               fill={c} transform={`rotate(${a} 12 12)`}/>
       ))}
       <circle cx="12" cy="12" r="6.5" fill={c}/>
@@ -82,11 +100,11 @@ function GearTabIcon({ active }) {
 }
 
 const ICONS = {
-  dojo:     NinjaTabIcon,
-  train:    SwordsTabIcon,
-  progress: ChartTabIcon,
-  themes:   MountainTabIcon,
-  settings: GearTabIcon,
+  dojo:     DojoIcon,
+  train:    TrainIcon,
+  progress: ProgressIcon,
+  themes:   ThemesIcon,
+  settings: SettingsIcon,
 };
 
 export default function TabBar({ activeId, onTabChange }) {
