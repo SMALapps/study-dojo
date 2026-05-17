@@ -30,21 +30,26 @@ function DojoIcon({ active }) {
   );
 }
 
-// ── Train: upright katana silhouette ──────────────────────────────────────────
+// ── Train: crossed bokken in ready stance ─────────────────────────────────────
+// Rotated ±22° (44° total spread) so tips fan upward and handles angle down —
+// reads as sparring/training, not a close/cancel X.
 function TrainIcon({ active }) {
   const c = active ? A : I;
-  const h = active ? '#5a8050' : '#9a9a88'; // slightly lighter for handle accents
+  const g = active ? '#5a8050' : '#9a9a88'; // tsuba guard — slightly lighter
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      {/* Blade — tapers via a narrow polygon */}
-      <polygon points="11,1 13,1 12.5,14 11.5,14" fill={c}/>
-      {/* Tsuba (guard) */}
-      <rect x="7.5" y="13.5" width="9" height="2.5" rx="1" fill={c}/>
-      {/* Handle */}
-      <rect x="11"  y="16"   width="2" height="7"   rx="0.5" fill={c}/>
-      {/* Handle wrap — two subtle bands */}
-      <rect x="10.5" y="18"  width="3" height="1"   rx="0.3" fill={h}/>
-      <rect x="10.5" y="20.5" width="3" height="1"  rx="0.3" fill={h}/>
+      {/* Bokken 1: leaning left */}
+      <g transform="rotate(-22 12 12)">
+        <rect x="11" y="1"  width="2" height="13" rx="0.8" fill={c}/>
+        <rect x="8"  y="13" width="8" height="2"  rx="0.8" fill={g}/>
+        <rect x="11" y="15" width="2" height="7"  rx="0.8" fill={c}/>
+      </g>
+      {/* Bokken 2: leaning right */}
+      <g transform="rotate(22 12 12)">
+        <rect x="11" y="1"  width="2" height="13" rx="0.8" fill={c}/>
+        <rect x="8"  y="13" width="8" height="2"  rx="0.8" fill={g}/>
+        <rect x="11" y="15" width="2" height="7"  rx="0.8" fill={c}/>
+      </g>
     </svg>
   );
 }
