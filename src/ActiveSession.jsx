@@ -14,19 +14,21 @@ const CHIP_ICONS = {
 function BreakModal({ onStay, onBreak }) {
   return (
     <div className="as-modal-overlay">
-      <img
-        src="/assets/ninja/interrupted-ninja.png"
-        alt=""
-        className="as-modal-ninja"
-      />
-      <div className="as-modal-card">
-        <span className="as-modal-title">Leave the waterfall?</span>
-        <div className="as-modal-divider" />
-        <span className="as-modal-body">
-          Leaving now will end this training session.
-        </span>
-        <button className="as-modal-btn as-modal-stay"  onClick={onStay}>Stay Focused</button>
-        <button className="as-modal-btn as-modal-break" onClick={onBreak}>Break Session</button>
+      <div className="as-break-modal-wrap">
+        <img
+          src="/assets/ninja/interrupted-ninja.png"
+          alt=""
+          className="as-modal-ninja"
+        />
+        <div className="as-modal-card">
+          <span className="as-modal-title">Leave the waterfall?</span>
+          <div className="as-modal-divider" />
+          <span className="as-modal-body">
+            Leaving now will end this training session.
+          </span>
+          <button className="as-modal-btn as-modal-stay"  onClick={onStay}>Stay Focused</button>
+          <button className="as-modal-btn as-modal-break" onClick={onBreak}>Break Session</button>
+        </div>
       </div>
     </div>
   );

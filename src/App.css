@@ -1032,13 +1032,19 @@
   z-index: 200;
 }
 
+.as-break-modal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .as-modal-ninja {
-  align-self: center;
-  height: 290px;
+  height: 360px;
   width: auto;
   object-fit: contain;
   image-rendering: pixelated;
-  margin-bottom: -58px;
+  margin-bottom: -70px;
   position: relative;
   z-index: 201;
   pointer-events: none;
@@ -1049,7 +1055,7 @@
   border-radius: 22px 22px 0 0;
   border: 1px solid var(--border);
   border-bottom: none;
-  padding: 62px 26px 48px;
+  padding: 76px 26px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
