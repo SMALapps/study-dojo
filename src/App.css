@@ -1586,7 +1586,7 @@
   padding: 10px 14px 0;
 }
 .pr-scroll::-webkit-scrollbar { display: none; }
-.pr-bottom-pad { height: 32px; }
+.pr-bottom-pad { height: 64px; }
 
 /* ── 2×2 stat grid ── */
 .pr-stat-grid {
@@ -1813,7 +1813,7 @@
 }
 
 /* ── Belt journey ── */
-.pr-belts-card { margin-bottom: 4px; }
+.pr-belts-card { margin-bottom: 4px; padding-bottom: 18px; }
 
 .pr-belts {
   display: flex;
