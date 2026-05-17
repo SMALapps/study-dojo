@@ -1040,11 +1040,11 @@
 }
 
 .as-modal-ninja {
-  height: 360px;
+  height: clamp(220px, 27vh, 280px);
   width: auto;
   object-fit: contain;
   image-rendering: pixelated;
-  margin-bottom: -70px;
+  margin-bottom: -50px;
   position: relative;
   z-index: 201;
   pointer-events: none;
@@ -1055,7 +1055,7 @@
   border-radius: 22px 22px 0 0;
   border: 1px solid var(--border);
   border-bottom: none;
-  padding: 76px 26px 48px;
+  padding: 60px 26px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
