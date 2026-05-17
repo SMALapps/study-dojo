@@ -1,7 +1,7 @@
 import activeBg  from './assets/themes/daytime-waterfall/active-background.png';
 import fallbackBg from './assets/themes/daytime-waterfall/background.png';
 import ninjaImg   from './assets/ninja/white-belt/meditating.png';
-import { getRankInfo } from './gameLogic';
+import { getRankInfo, BELT_IMG } from './gameLogic';
 
 const CATEGORY_ICONS = {
   Study: '📖', Work: '💼', Reading: '📚', 'Deep Work': '🎯', Meditation: '🧘',
@@ -68,9 +68,17 @@ export default function SessionComplete({
               </div>
             </div>
             <div className="sc-rank-col sc-rank-center">
-              <span className="sc-rank-star">⭐</span>
-              <span className="sc-rank-avatar">🥷</span>
-              <span className="sc-rank-avatar-label">{next ? next.name : current.name}</span>
+              <img
+                src={BELT_IMG[next ? next.name : current.name] ?? BELT_IMG['Black Belt']}
+                alt={next ? next.name : 'Max Rank'}
+                style={{
+                  width: 64,
+                  height: 64,
+                  objectFit: 'contain',
+                  imageRendering: 'pixelated',
+                }}
+              />
+              <span className="sc-rank-avatar-label">{next ? next.name : 'MAX RANK'}</span>
             </div>
             <div className="sc-rank-col sc-rank-right">
               <span className="sc-rank-eyebrow">NEXT RANK</span>

@@ -1,5 +1,5 @@
 import ninjaImg from './assets/ninja/white-belt/meditating.png';
-import { getRankInfo } from './gameLogic';
+import { getRankInfo, BELT_IMG } from './gameLogic';
 
 // Crops the meditating ninja PNG to show just the head inside a circle.
 // The PNG is 1024×1536; visible body spans ~33–66% of canvas height.
@@ -24,18 +24,6 @@ function NinjaPortrait() {
   );
 }
 
-// Maps each belt name to its public-folder PNG path.
-// The right-side icon shows the NEXT belt goal, so White Belt → yellow-belt.png, etc.
-// At max rank (Black Belt) there is no next, so we fall back to black-belt.png.
-const BELT_IMG = {
-  'White Belt':  '/white-belt.png',
-  'Yellow Belt': '/yellow-belt.png',
-  'Orange Belt': '/orange-belt.png',
-  'Green Belt':  '/green-belt.png',
-  'Blue Belt':   '/blue-belt.png',
-  'Brown Belt':  '/brown-belt.png',
-  'Black Belt':  '/black-belt.png',
-};
 
 function BeltIcon({ beltName }) {
   const src = BELT_IMG[beltName] ?? BELT_IMG['White Belt'];

@@ -1,3 +1,13 @@
+export const BELT_IMG = {
+  'White Belt':  '/white-belt.png',
+  'Yellow Belt': '/yellow-belt.png',
+  'Orange Belt': '/orange-belt.png',
+  'Green Belt':  '/green-belt.png',
+  'Blue Belt':   '/blue-belt.png',
+  'Brown Belt':  '/brown-belt.png',
+  'Black Belt':  '/black-belt.png',
+};
+
 export const RANKS = [
   { name: 'White Belt',  tier: 'Beginner',    minXp: 0,    maxXp: 500  },
   { name: 'Yellow Belt', tier: 'Novice',       minXp: 500,  maxXp: 1000 },
