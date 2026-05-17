@@ -2224,7 +2224,7 @@
 
 /* ── Settings Screen ─────────────────────────────────────────────────────── */
 .sg-screen {
-  background: var(--cream);
+  background: linear-gradient(180deg, var(--cream) 0%, #ece6d8 100%);
   display: flex;
   flex-direction: column;
 }
@@ -2243,23 +2243,23 @@
 .sg-section-label {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 8px;
   color: var(--tab-active);
   letter-spacing: 0.5px;
-  margin: 18px 0 6px 2px;
+  margin: 22px 0 7px 2px;
 }
 .sg-section-label::before {
   content: '';
   display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: var(--green-cta);
   border-radius: 1px;
   flex-shrink: 0;
 }
-.sg-section-label:first-of-type { margin-top: 6px; }
+.sg-section-label:first-of-type { margin-top: 8px; }
 .sg-proto-label { color: var(--text-light); }
 .sg-proto-label::before { background: var(--text-light); }
 
@@ -2268,8 +2268,14 @@
   background: var(--card-bg);
   border-radius: 14px;
   border: 1.5px solid var(--border);
+  border-top: 3px solid var(--green-cta);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+}
+/* De-emphasize the Prototype card's top accent */
+.sg-proto-label + .sg-card {
+  border-top-color: var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 /* Row */
@@ -2302,7 +2308,7 @@
 }
 
 .sg-row-chevron {
-  color: var(--text-light);
+  color: var(--tab-active);
   display: flex;
   align-items: center;
 }
@@ -2339,7 +2345,7 @@
   width: 44px;
   height: 26px;
   border-radius: 13px;
-  background: #ccc8c2;
+  background: #c8c0ae;
   border: none;
   cursor: pointer;
   position: relative;
