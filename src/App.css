@@ -296,6 +296,66 @@
 
 .bonsai-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; }
 
+/* ── Next Goal card ──────────────────────────────────────────────────────── */
+.ng-card {
+  margin: 8px 14px 0;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-top: 3px solid var(--tab-active);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ng-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ng-eyebrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--tab-active);
+  letter-spacing: 0.4px;
+}
+
+.ng-belt-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text-dark);
+}
+
+.ng-sub {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-mid);
+}
+
+.ng-bar-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 5px;
+}
+
+.ng-bar-fill {
+  height: 100%;
+  background: var(--tab-active);
+  border-radius: 2px;
+}
+
+.ng-belt-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
 .scroll-bottom-pad { height: 20px; }
 
 .tab-bar {

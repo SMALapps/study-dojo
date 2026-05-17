@@ -10,11 +10,42 @@ import Themes from './Themes';
 import PremiumUpsell from './PremiumUpsell';
 import Settings from './Settings';
 import Onboarding from './Onboarding';
-import { calcSessionXp, calcBrokenXp, todayWeekIndex } from './gameLogic';
+import { calcSessionXp, calcBrokenXp, todayWeekIndex, getRankInfo, BELT_IMG } from './gameLogic';
 import { unlockGongAudio } from './gongAudio';
 import DojoDoorTransition from './DojoDoorTransition';
 import TabBar from './TabBar';
 import './App.css';
+
+function NextGoalCard({ xp }) {
+  const { next, rankXp, rankMax, progress } = getRankInfo(xp);
+
+  if (!next) {
+    return (
+      <div className="ng-card">
+        <div className="ng-left">
+          <span className="ng-eyebrow">ACHIEVEMENT</span>
+          <span className="ng-belt-name">Black Belt</span>
+          <span className="ng-sub">Master rank reached</span>
+        </div>
+        <img src={BELT_IMG['Black Belt']} alt="Black Belt" className="ng-belt-img" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="ng-card">
+      <div className="ng-left">
+        <span className="ng-eyebrow">NEXT GOAL</span>
+        <span className="ng-belt-name">{next.name}</span>
+        <span className="ng-sub">{next.minXp - xp} XP to go</span>
+        <div className="ng-bar-track">
+          <div className="ng-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+      <img src={BELT_IMG[next.name]} alt={next.name} className="ng-belt-img" />
+    </div>
+  );
+}
 
 function BonsaiIcon() {
   return (
@@ -492,6 +523,8 @@ export default function App() {
           </div>
 
           <RankCard xp={stats.xp} />
+
+          <NextGoalCard xp={stats.xp} />
 
           <div className="scroll-bottom-pad" />
         </div>
