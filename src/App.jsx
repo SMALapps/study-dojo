@@ -292,12 +292,7 @@ export default function App() {
         weeklyFocusData:   weekly,
       };
     });
-    if (settings.sessionAlerts) {
-      setScreen('sessionComplete');
-    } else {
-      setScreen('home');
-      setToast(`Session complete! +${earnedXp} XP earned.`);
-    }
+    setScreen('sessionComplete');
   };
 
   const handleBreak = (elapsedSecs) => {
