@@ -14,6 +14,11 @@ const CHIP_ICONS = {
 function BreakModal({ onStay, onBreak }) {
   return (
     <div className="as-modal-overlay">
+      <img
+        src="/assets/ninja/interrupted-ninja.png"
+        alt=""
+        className="as-modal-ninja"
+      />
       <div className="as-modal-card">
         <span className="as-modal-title">Leave the waterfall?</span>
         <div className="as-modal-divider" />
