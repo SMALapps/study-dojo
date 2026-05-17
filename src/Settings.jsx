@@ -200,6 +200,7 @@ export default function Settings({ xp = 0, settings, onSettingsChange, onTabChan
           </div>
           <div className="sg-divider" />
           <div className="sg-row">
+            {/* Reserved for future push/toast alerts — does not affect the in-app Session Complete screen */}
             <span className="sg-row-label">Session complete alerts</span>
             <Toggle on={settings.sessionAlerts} onChange={v => set('sessionAlerts', v)} />
           </div>

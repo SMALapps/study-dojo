@@ -196,6 +196,7 @@ const DEFAULT_SETTINGS = {
   autoBreaks:        true,
   trainingRem:       true,
   streakRem:         true,
+  // Controls optional push/toast alerts only — not the in-app SessionComplete screen.
   sessionAlerts:     true,
   darkMode:          false,
   haptics:           true,
@@ -267,6 +268,9 @@ export default function App() {
     else if (tabId === 'settings') setScreen('settings');
   };
 
+  // Natural completion always routes to SessionComplete — that screen is a core
+  // reward loop and must never be skipped. sessionAlerts is reserved for future
+  // push/toast notifications and must not gate this navigation.
   const handleSessionComplete = () => {
     const cfg      = sessionConfig || {};
     const dur      = Number(cfg.duration || 25);
