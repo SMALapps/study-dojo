@@ -16,53 +16,6 @@ import DojoDoorTransition from './DojoDoorTransition';
 import TabBar from './TabBar';
 import './App.css';
 
-// ── Home screen action-card icons ─────────────────────────────────────────────
-function ToriiGateIcon() {
-  const red = '#c43820';
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Top crossbeam with upswept ends (trapezoid) */}
-      <polygon points="0,11 36,11 34,16 2,16" fill={red}/>
-      {/* Cap extensions on each end */}
-      <rect x="0"  y="8"  width="7"  height="4" rx="1" fill={red}/>
-      <rect x="29" y="8"  width="7"  height="4" rx="1" fill={red}/>
-      {/* Lower crossbeam */}
-      <rect x="3"  y="19" width="30" height="4" rx="1" fill={red}/>
-      {/* Left pillar */}
-      <rect x="5"  y="19" width="5"  height="15" rx="1" fill={red}/>
-      {/* Right pillar */}
-      <rect x="26" y="19" width="5"  height="15" rx="1" fill={red}/>
-    </svg>
-  );
-}
-
-function ProgressChartIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect x="2"  y="22" width="8" height="12" rx="1" fill="#5aaa4e"/>
-      <rect x="14" y="14" width="8" height="20" rx="1" fill="#3a8030"/>
-      <rect x="26" y="8"  width="8" height="26" rx="1" fill="#2a5820"/>
-      <rect x="0"  y="34" width="36" height="2" rx="1" fill="#1a3818"/>
-    </svg>
-  );
-}
-
-function BlockLockIcon() {
-  return (
-    <svg width="32" height="36" viewBox="0 0 32 36" fill="none">
-      {/* Shackle */}
-      <path d="M8 18 V11 a8 8 0 0 1 16 0 V18"
-            stroke="#6a6a6a" strokeWidth="4.5" strokeLinecap="round" fill="none"/>
-      {/* Body */}
-      <rect x="2"  y="16" width="28" height="18" rx="4" fill="#888"/>
-      <rect x="4"  y="18" width="24" height="14" rx="3" fill="#7a7a7a"/>
-      {/* Keyhole */}
-      <circle cx="16" cy="24" r="3.5" fill="#505050"/>
-      <rect x="14.5" y="26" width="3"  height="5"  rx="1" fill="#505050"/>
-    </svg>
-  );
-}
-
 function BonsaiIcon() {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -141,23 +94,6 @@ function HamburgerModal({ onClose }) {
   );
 }
 
-// ── Blocked Apps modal ────────────────────────────────────────────────────────
-function BlockedAppsModal({ onClose }) {
-  return (
-    <div className="hm-overlay" onClick={onClose}>
-      <div className="hm-card" onClick={e => e.stopPropagation()}>
-        <span className="hm-title">BLOCKED APPS</span>
-        <div className="hm-divider" />
-        <p className="hm-body">
-          Blocked Apps are coming soon. In the full app, this will help protect your focus during sessions.
-        </p>
-        <div className="hm-divider" />
-        <button className="hm-close" onClick={onClose}>Got It</button>
-      </div>
-    </div>
-  );
-}
-
 function screenToTab(s) {
   if (s === 'home')                             return 'dojo';
   if (s === 'sessionSetup')                     return 'train';
@@ -228,7 +164,6 @@ export default function App() {
   const [stats,         setStats]         = useState(loadStats);
   const [lastEarnedXp,  setLastEarnedXp]  = useState(0);
   const [showHamburger, setShowHamburger] = useState(false);
-  const [showBlocked,   setShowBlocked]   = useState(false);
   const [settings,            setSettings]            = useState(loadSettings);
   const [toast,               setToast]               = useState(null);
   const [dojoPhase,           setDojoPhase]           = useState(null);
@@ -548,31 +483,15 @@ export default function App() {
             <div className="cta-arrow">›</div>
           </button>
 
-          <div className="quick-actions">
-            <div className="action-card" onClick={() => setScreen('sessionSetup')}>
-              <span className="action-icon"><ToriiGateIcon /></span>
-              <span className="action-label">TRAINING{'\n'}MODES</span>
-            </div>
-            <div className="action-card" onClick={() => handleTabChange('progress')}>
-              <span className="action-icon"><ProgressChartIcon /></span>
-              <span className="action-label">PROGRESS</span>
-            </div>
-            <div className="action-card" onClick={() => setShowBlocked(true)}>
-              <span className="action-icon"><BlockLockIcon /></span>
-              <span className="action-label">BLOCKED{'\n'}APPS</span>
-            </div>
-          </div>
-
-          <RankCard xp={stats.xp} />
-
           <div className="quote-card">
             <span className="bonsai-icon"><BonsaiIcon /></span>
             <div className="quote-text-block">
               <p className="quote-body">Discipline today, freedom tomorrow.</p>
               <p className="quote-attribution">– The Dojo</p>
             </div>
-            <span className="quote-arrow">›</span>
           </div>
+
+          <RankCard xp={stats.xp} />
 
           <div className="scroll-bottom-pad" />
         </div>
@@ -581,7 +500,6 @@ export default function App() {
       </div>
 
       {showHamburger && <HamburgerModal onClose={() => setShowHamburger(false)} />}
-      {showBlocked   && <BlockedAppsModal onClose={() => setShowBlocked(false)} />}
       {toast && <div className="app-toast">{toast}</div>}
     </div>
   );
