@@ -1586,7 +1586,7 @@
   padding: 10px 14px 0;
 }
 .pr-scroll::-webkit-scrollbar { display: none; }
-.pr-bottom-pad { height: 64px; }
+.pr-bottom-pad { height: 16px; }
 
 /* ── 2×2 stat grid ── */
 .pr-stat-grid {
