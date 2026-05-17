@@ -1,4 +1,4 @@
-import { getRankInfo, RANKS } from './gameLogic';
+import { getRankInfo, RANKS, BELT_IMG } from './gameLogic';
 import TabBar from './TabBar';
 
 
@@ -113,7 +113,11 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
               </div>
             </div>
             <div className="pr-rank-center">
-              <span className="pr-rank-avatar">🥷</span>
+              <img
+                src={BELT_IMG[next ? next.name : current.name] ?? BELT_IMG['Black Belt']}
+                alt={next ? next.name : 'Max Rank'}
+                style={{ width: 52, height: 52, objectFit: 'contain', imageRendering: 'pixelated' }}
+              />
             </div>
             <div className="pr-rank-side pr-rank-next">
               <span className="pr-rank-eyebrow">NEXT RANK</span>

@@ -92,7 +92,7 @@ function StatusBar() {
   useEffect(() => {
     const tick = () => {
       const now = new Date();
-      setTime(`${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`);
+      setTime(`${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`);
     };
     tick();
     const id = setInterval(tick, 10000);
@@ -296,7 +296,7 @@ export default function App() {
       setScreen('sessionComplete');
     } else {
       setScreen('home');
-      setToast('Session complete. XP added.');
+      setToast(`Session complete! +${earnedXp} XP earned.`);
     }
   };
 
