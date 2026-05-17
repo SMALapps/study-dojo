@@ -30,26 +30,23 @@ function DojoIcon({ active }) {
   );
 }
 
-// ── Train: crossed bokken in ready stance ─────────────────────────────────────
-// Rotated ±22° (44° total spread) so tips fan upward and handles angle down —
-// reads as sparring/training, not a close/cancel X.
+// ── Train: stopwatch ──────────────────────────────────────────────────────────
+// A stopwatch reads instantly as "timed session" and can't be mistaken for
+// a close/cancel mark the way diagonal shapes can at small sizes.
 function TrainIcon({ active }) {
   const c = active ? A : I;
-  const g = active ? '#5a8050' : '#9a9a88'; // tsuba guard — slightly lighter
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      {/* Bokken 1: leaning left */}
-      <g transform="rotate(-22 12 12)">
-        <rect x="11" y="1"  width="2" height="13" rx="0.8" fill={c}/>
-        <rect x="8"  y="13" width="8" height="2"  rx="0.8" fill={g}/>
-        <rect x="11" y="15" width="2" height="7"  rx="0.8" fill={c}/>
-      </g>
-      {/* Bokken 2: leaning right */}
-      <g transform="rotate(22 12 12)">
-        <rect x="11" y="1"  width="2" height="13" rx="0.8" fill={c}/>
-        <rect x="8"  y="13" width="8" height="2"  rx="0.8" fill={g}/>
-        <rect x="11" y="15" width="2" height="7"  rx="0.8" fill={c}/>
-      </g>
+      {/* Crown button */}
+      <rect x="9" y="1" width="6" height="2.5" rx="0.8" fill={c}/>
+      {/* Stem */}
+      <rect x="11" y="3" width="2" height="2.5" fill={c}/>
+      {/* Body ring */}
+      <circle cx="12" cy="14" r="7.5" stroke={c} strokeWidth="2.5" fill="none"/>
+      {/* Hand pointing to ~10 o'clock — active/running feel */}
+      <line x1="12" y1="14" x2="8.5" y2="9" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Center pivot */}
+      <circle cx="12" cy="14" r="1.2" fill={c}/>
     </svg>
   );
 }
