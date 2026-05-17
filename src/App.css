@@ -1571,7 +1571,13 @@
 .sc-btn-secondary:hover { background: var(--card-bg); }
 
 
+
 /* ── Progress Screen ─────────────────────────────────────────────────────── */
+
+.pr-screen {
+  background: linear-gradient(180deg, var(--cream) 0%, #ece6d8 100%);
+}
+
 .pr-scroll {
   flex: 1;
   overflow-y: auto;
@@ -1580,8 +1586,9 @@
   padding: 10px 14px 0;
 }
 .pr-scroll::-webkit-scrollbar { display: none; }
+.pr-bottom-pad { height: 16px; }
 
-/* 2×2 stat grid */
+/* ── 2×2 stat grid ── */
 .pr-stat-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1592,11 +1599,12 @@
 .pr-stat-card {
   background: var(--card-bg);
   border: 1.5px solid var(--border);
+  border-top: 3px solid var(--green-cta);
   border-radius: 14px;
-  padding: 16px 14px 14px;
+  padding: 14px 13px 13px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
 }
 
 .pr-stat-label {
@@ -1604,7 +1612,7 @@
   font-size: 5.5px;
   color: var(--text-light);
   letter-spacing: 0.3px;
-  line-height: 1.7;
+  line-height: 1.8;
   white-space: pre-line;
   margin-bottom: 8px;
 }
@@ -1622,33 +1630,34 @@
   font-family: 'Inter', sans-serif;
   font-size: 11px;
   color: var(--text-mid);
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
-/* Section cards */
+/* ── Section cards ── */
 .pr-section-card {
   background: var(--card-bg);
   border: 1.5px solid var(--border);
+  border-top: 3px solid var(--green-cta);
   border-radius: 14px;
-  padding: 14px 14px 12px;
+  padding: 14px 14px 14px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
 }
 
 .pr-section-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: var(--text-dark);
-  letter-spacing: 0.4px;
+  font-size: 8px;
+  color: var(--tab-active);
+  letter-spacing: 0.5px;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 /* ── Bar chart ── */
 .pr-chart {
   display: flex;
   gap: 8px;
-  height: 110px;
+  height: 104px;
 }
 
 .pr-chart-yaxis {
@@ -1671,7 +1680,7 @@
   display: flex;
   align-items: flex-end;
   gap: 5px;
-  height: 110px;
+  height: 104px;
 }
 
 .pr-bar-col {
@@ -1679,15 +1688,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  height: 110px;
+  gap: 4px;
+  height: 104px;
   justify-content: flex-end;
 }
 
 .pr-bar-track {
   flex: 1;
   width: 100%;
-  background: rgba(0,0,0,0.07);
+  background: rgba(0,0,0,0.06);
   border-radius: 4px 4px 2px 2px;
   display: flex;
   align-items: flex-end;
@@ -1695,18 +1704,33 @@
   min-height: 0;
 }
 
+/* Today's column: tinted track */
+.pr-bar-today .pr-bar-track {
+  background: rgba(74,124,63,0.12);
+}
+
 .pr-bar-fill {
   width: 100%;
-  background: var(--tab-active);
+  background: var(--green-cta);
   border-radius: 4px 4px 2px 2px;
   min-height: 4px;
+}
+
+/* Today's bar is darker/bolder */
+.pr-bar-today .pr-bar-fill {
+  background: var(--tab-active);
 }
 
 .pr-bar-label {
   font-family: 'Inter', sans-serif;
   font-size: 10px;
-  color: var(--text-mid);
+  color: var(--text-light);
   flex-shrink: 0;
+}
+
+.pr-bar-today .pr-bar-label {
+  color: var(--tab-active);
+  font-weight: 700;
 }
 
 /* ── Rank progress ── */
@@ -1716,59 +1740,76 @@
   gap: 10px;
 }
 
-.pr-rank-side {
-  flex: 1;
+/* Left / right belt columns */
+.pr-rank-belt-col {
+  flex-shrink: 0;
+  width: 54px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4px;
 }
 
-.pr-rank-next { align-items: flex-end; text-align: right; }
+.pr-rank-belt-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* Centre: progress bar + XP labels */
+.pr-rank-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
 
 .pr-rank-eyebrow {
   font-family: 'Press Start 2P', monospace;
   font-size: 5px;
   color: var(--text-light);
   letter-spacing: 0.3px;
-  margin-bottom: 1px;
 }
 
 .pr-rank-name {
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: 8px;
   color: var(--text-dark);
   line-height: 1.3;
+  text-align: center;
+}
+
+.pr-rank-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pr-rank-bar-fill {
+  height: 100%;
+  background: var(--green-cta);
+  border-radius: 4px;
+  transition: width 0.4s ease;
 }
 
 .pr-rank-xp {
   font-family: 'Inter', sans-serif;
   font-size: 11px;
+  font-weight: 600;
   color: var(--text-mid);
 }
 
-.pr-rank-bar-track {
-  height: 7px;
-  background: rgba(0,0,0,0.08);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 6px;
+.pr-rank-to-next {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--text-light);
+  text-align: center;
 }
-
-.pr-rank-bar-fill {
-  height: 100%;
-  background: var(--tab-active);
-  border-radius: 4px;
-}
-
-.pr-rank-center {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-}
-
-.pr-rank-avatar { font-size: 40px; line-height: 1; }
 
 /* ── Belt journey ── */
 .pr-belts-card { margin-bottom: 4px; }
@@ -1777,7 +1818,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 4px;
+  gap: 3px;
 }
 
 .pr-belt-item {
@@ -1785,14 +1826,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  opacity: 0.35;
+  gap: 4px;
   position: relative;
 }
 
-.pr-belt-item.pr-belt-active { opacity: 1; }
+/* PNG frame — invisible by default, highlighted when active */
+.pr-belt-frame {
+  width: 100%;
+  padding: 3px 1px;
+  border-radius: 7px;
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-/* Green dot marker above active belt */
+.pr-belt-png {
+  width: 100%;
+  height: 38px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* Earned belts (already passed) */
+.pr-belt-earned { opacity: 0.65; }
+
+/* Active (current) belt */
+.pr-belt-active { opacity: 1; }
+.pr-belt-active .pr-belt-frame {
+  border-color: var(--tab-active);
+  background: rgba(58,96,48,0.07);
+}
+
+/* Locked (future) belts */
+.pr-belt-locked {
+  opacity: 0.2;
+  filter: grayscale(0.3);
+}
+
+/* Dot marker above active belt */
 .pr-belt-marker {
   width: 6px;
   height: 6px;
@@ -1801,7 +1874,6 @@
   flex-shrink: 0;
 }
 
-/* Spacer keeps inactive belts bottom-aligned with active */
 .pr-belt-spacer {
   width: 6px;
   height: 6px;
@@ -1809,51 +1881,10 @@
   visibility: hidden;
 }
 
-/* Belt strip — horizontal karate belt shape with depth */
-.pr-belt-strip {
-  width: 100%;
-  height: 22px;
-  border-radius: 4px;
-  border: 1.5px solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Subtle sheen — makes it feel like fabric, not a flat swatch */
-.pr-belt-strip::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.22) 0%,
-    transparent 48%,
-    rgba(0,0,0,0.10) 100%
-  );
-  pointer-events: none;
-}
-
-/* Center knot — taller rectangle to suggest fold */
-.pr-belt-knot {
-  width: 10px;
-  height: 15px;
-  border-radius: 2px;
-  opacity: 0.60;
-  position: relative;
-  z-index: 1;
-}
-
-.pr-belt-active .pr-belt-strip {
-  box-shadow: 0 0 0 2px var(--tab-active);
-}
-
 .pr-belt-label {
   font-family: 'Inter', sans-serif;
   font-size: 7px;
-  color: var(--text-mid);
+  color: var(--text-light);
   text-align: center;
   white-space: nowrap;
 }
@@ -1861,6 +1892,10 @@
 .pr-belt-active .pr-belt-label {
   color: var(--tab-active);
   font-weight: 700;
+}
+
+.pr-belt-earned .pr-belt-label {
+  color: var(--text-mid);
 }
 
 /* ── Themes Screen ───────────────────────────────────────────────────────── */

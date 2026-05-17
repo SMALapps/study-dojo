@@ -1,18 +1,7 @@
-import { getRankInfo, RANKS, BELT_IMG } from './gameLogic';
+import { getRankInfo, RANKS, BELT_IMG, todayWeekIndex } from './gameLogic';
 import TabBar from './TabBar';
 
-
 const DAY_LABELS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-const BELT_STYLES = {
-  'White Belt':  { bg: '#f0ede6', border: '#aea89e', knot: '#ccc8c0' },
-  'Yellow Belt': { bg: '#e8c832', border: '#b09010', knot: '#c4a010' },
-  'Orange Belt': { bg: '#e07820', border: '#b05010', knot: '#c06010' },
-  'Green Belt':  { bg: '#3a7a42', border: '#235a2a', knot: '#2a5a30' },
-  'Blue Belt':   { bg: '#2850a8', border: '#1a3480', knot: '#1c3880' },
-  'Brown Belt':  { bg: '#804020', border: '#5a2c10', knot: '#5a2c10' },
-  'Black Belt':  { bg: '#1c1c1c', border: '#000',    knot: '#383838' },
-};
 
 export default function Progress({ stats = {}, onTabChange, onHamburger }) {
 
@@ -32,10 +21,13 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
     : String(totalMins);
   const totalUnit = totalHrs > 0 ? 'hrs' : 'min';
 
-  const weekMax  = Math.max(...weeklyFocusData, 30); // floor at 30 so empty chart still renders
-  const yLabels  = [weekMax, Math.round(weekMax * 0.66), Math.round(weekMax * 0.33)];
+  const weekMax   = Math.max(...weeklyFocusData, 30);
+  const yLabels   = [weekMax, Math.round(weekMax * 0.66), Math.round(weekMax * 0.33)];
+  const todayIdx  = todayWeekIndex();
 
   const { current, next, rankXp, rankMax, progress } = getRankInfo(xp);
+  const currentRankIdx = RANKS.findIndex(r => r.name === current.name);
+  const xpToNext = next && rankMax ? rankMax - rankXp : null;
 
   return (
     <div className="screen pr-screen">
@@ -53,31 +45,31 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
 
       <div className="pr-scroll">
 
-        {/* 2×2 stat grid */}
+        {/* ── 2×2 Stat grid ── */}
         <div className="pr-stat-grid">
           <div className="pr-stat-card">
-            <span className="pr-stat-label">TOTAL FOCUS</span>
+            <span className="pr-stat-label">TOTAL{'\n'}FOCUS</span>
             <span className="pr-stat-value">{totalDisplay}</span>
             <span className="pr-stat-unit">{totalUnit}</span>
           </div>
           <div className="pr-stat-card">
-            <span className="pr-stat-label">CURRENT STREAK</span>
+            <span className="pr-stat-label">CURRENT{'\n'}STREAK</span>
             <span className="pr-stat-value pr-streak">{currentStreak}</span>
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
-            <span className="pr-stat-label">LONGEST STREAK</span>
+            <span className="pr-stat-label">LONGEST{'\n'}STREAK</span>
             <span className="pr-stat-value">{longestStreak}</span>
             <span className="pr-stat-unit">days</span>
           </div>
           <div className="pr-stat-card">
-            <span className="pr-stat-label">SESSIONS{'\n'}COMPLETED</span>
+            <span className="pr-stat-label">SESSIONS{'\n'}DONE</span>
             <span className="pr-stat-value">{sessionsCompleted}</span>
             <span className="pr-stat-unit">sessions</span>
           </div>
         </div>
 
-        {/* Focus This Week */}
+        {/* ── Focus This Week ── */}
         <div className="pr-section-card">
           <span className="pr-section-title">FOCUS THIS WEEK</span>
           <div className="pr-chart">
@@ -86,7 +78,7 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
             </div>
             <div className="pr-chart-bars">
               {weeklyFocusData.map((mins, i) => (
-                <div key={i} className="pr-bar-col">
+                <div key={i} className={`pr-bar-col${i === todayIdx ? ' pr-bar-today' : ''}`}>
                   <div className="pr-bar-track">
                     <div
                       className="pr-bar-fill"
@@ -100,50 +92,75 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
           </div>
         </div>
 
-        {/* Rank Progress */}
+        {/* ── Rank Progress ── */}
         <div className="pr-section-card">
           <span className="pr-section-title">RANK PROGRESS</span>
           <div className="pr-rank-row">
-            <div className="pr-rank-side">
-              <span className="pr-rank-eyebrow">CURRENT RANK</span>
-              <span className="pr-rank-name">{current.name}</span>
-              <span className="pr-rank-xp">{rankXp} / {rankMax ?? rankXp} XP</span>
+
+            {/* Current belt */}
+            <div className="pr-rank-belt-col">
+              <img
+                src={BELT_IMG[current.name] ?? BELT_IMG['White Belt']}
+                alt={current.name}
+                className="pr-rank-belt-img"
+              />
+              <span className="pr-rank-eyebrow">CURRENT</span>
+              <span className="pr-rank-name">{current.name.replace(' Belt', '')}</span>
+            </div>
+
+            {/* Progress bar + XP info */}
+            <div className="pr-rank-mid">
               <div className="pr-rank-bar-track">
                 <div className="pr-rank-bar-fill" style={{ width: `${progress}%` }} />
               </div>
+              <span className="pr-rank-xp">{rankXp} / {rankMax ?? rankXp} XP</span>
+              {xpToNext !== null && (
+                <span className="pr-rank-to-next">{xpToNext} XP to go</span>
+              )}
             </div>
-            <div className="pr-rank-center">
+
+            {/* Next belt */}
+            <div className="pr-rank-belt-col pr-rank-belt-col-next">
               <img
                 src={BELT_IMG[next ? next.name : current.name] ?? BELT_IMG['Black Belt']}
                 alt={next ? next.name : 'Max Rank'}
-                style={{ width: 52, height: 52, objectFit: 'contain', imageRendering: 'pixelated' }}
+                className="pr-rank-belt-img"
               />
+              <span className="pr-rank-eyebrow">NEXT</span>
+              <span className="pr-rank-name">{next ? next.name.replace(' Belt', '') : 'MAX'}</span>
             </div>
-            <div className="pr-rank-side pr-rank-next">
-              <span className="pr-rank-eyebrow">NEXT RANK</span>
-              <span className="pr-rank-name">{next ? next.name : 'MAX RANK'}</span>
-            </div>
+
           </div>
         </div>
 
-        {/* Belt Journey */}
+        {/* ── Belt Journey ── */}
         <div className="pr-section-card pr-belts-card">
           <span className="pr-section-title">BELT JOURNEY</span>
           <div className="pr-belts">
-            {RANKS.map((rank) => {
-              const style  = BELT_STYLES[rank.name] || BELT_STYLES['White Belt'];
-              const active = rank.name === current.name;
+            {RANKS.map((rank, i) => {
+              const isActive = i === currentRankIdx;
+              const isEarned = i < currentRankIdx;
+              const isLocked = i > currentRankIdx;
               return (
-                <div key={rank.name} className={`pr-belt-item${active ? ' pr-belt-active' : ''}`}>
-                  {active
+                <div
+                  key={rank.name}
+                  className={[
+                    'pr-belt-item',
+                    isActive ? 'pr-belt-active' : '',
+                    isEarned ? 'pr-belt-earned' : '',
+                    isLocked ? 'pr-belt-locked' : '',
+                  ].join(' ').trim()}
+                >
+                  {isActive
                     ? <div className="pr-belt-marker" />
                     : <div className="pr-belt-spacer" />
                   }
-                  <div
-                    className="pr-belt-strip"
-                    style={{ background: style.bg, borderColor: style.border }}
-                  >
-                    <div className="pr-belt-knot" style={{ background: style.knot }} />
+                  <div className="pr-belt-frame">
+                    <img
+                      src={BELT_IMG[rank.name]}
+                      alt={rank.name}
+                      className="pr-belt-png"
+                    />
                   </div>
                   <span className="pr-belt-label">{rank.name.replace(' Belt', '')}</span>
                 </div>
@@ -152,6 +169,7 @@ export default function Progress({ stats = {}, onTabChange, onHamburger }) {
           </div>
         </div>
 
+        <div className="pr-bottom-pad" />
       </div>
 
       <TabBar activeId="progress" onTabChange={onTabChange} />
