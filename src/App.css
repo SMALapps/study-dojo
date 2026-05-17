@@ -1586,7 +1586,7 @@
   padding: 10px 14px 0;
 }
 .pr-scroll::-webkit-scrollbar { display: none; }
-.pr-bottom-pad { height: 16px; }
+.pr-bottom-pad { height: 32px; }
 
 /* ── 2×2 stat grid ── */
 .pr-stat-grid {
@@ -1747,7 +1747,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .pr-rank-belt-img {
@@ -1764,7 +1764,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  padding: 0 4px;
 }
 
 .pr-rank-eyebrow {
@@ -1856,13 +1857,14 @@
 .pr-belt-active { opacity: 1; }
 .pr-belt-active .pr-belt-frame {
   border-color: var(--tab-active);
-  background: rgba(58,96,48,0.07);
+  border-width: 2px;
+  background: rgba(58,96,48,0.09);
+  box-shadow: 0 0 0 1px rgba(58,96,48,0.18);
 }
 
-/* Locked (future) belts */
+/* Locked (future) belts — muted but still aspirational */
 .pr-belt-locked {
-  opacity: 0.2;
-  filter: grayscale(0.3);
+  opacity: 0.5;
 }
 
 /* Dot marker above active belt */
