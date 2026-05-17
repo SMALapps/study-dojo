@@ -250,7 +250,7 @@ export default function Settings({ xp = 0, settings, onSettingsChange, onTabChan
         </div>
 
         {/* ── Prototype ── */}
-        <span className="sg-section-label">Prototype</span>
+        <span className="sg-section-label sg-proto-label">Prototype</span>
         <div className="sg-card">
           <div className="sg-row sg-row-tappable" onClick={() => playGong()}>
             <span className="sg-row-label">Test Gong</span>
@@ -259,15 +259,12 @@ export default function Settings({ xp = 0, settings, onSettingsChange, onTabChan
           <div className="sg-divider" />
           {confirmReset ? (
             <div className="sg-row">
-              <span className="sg-row-label" style={{ color: '#c04030', fontSize: 11 }}>Confirm reset? This clears all progress.</span>
-              <button
-                style={{ background: '#c04030', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 12px', fontFamily: "'Press Start 2P', monospace", fontSize: 6, cursor: 'pointer' }}
-                onClick={() => { setConfirmReset(false); onReset?.(); }}
-              >YES</button>
+              <span className="sg-confirm-label">Confirm reset? This clears all progress.</span>
+              <button className="sg-confirm-btn" onClick={() => { setConfirmReset(false); onReset?.(); }}>YES</button>
             </div>
           ) : (
             <div className="sg-row sg-row-tappable" onClick={() => setConfirmReset(true)}>
-              <span className="sg-row-label" style={{ color: '#c04030' }}>Reset All Progress</span>
+              <span className="sg-row-label sg-reset-label">Reset All Progress</span>
               <span className="sg-row-chevron"><ChevronRight /></span>
             </div>
           )}
