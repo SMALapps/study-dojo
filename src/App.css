@@ -319,7 +319,18 @@
   padding: 2px 0;
 }
 
-.tab-icon { display: flex; align-items: center; justify-content: center; height: 24px; }
+.tab-icon { display: flex; align-items: center; justify-content: center; height: 28px; }
+
+.tab-png-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.6;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.tab-png-icon.tab-png-active { opacity: 1; }
 
 .tab-label {
   font-family: 'Press Start 2P', monospace;
