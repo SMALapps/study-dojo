@@ -314,18 +314,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   cursor: pointer;
   padding: 2px 0;
 }
 
-.tab-icon { display: flex; align-items: center; justify-content: center; height: 28px; }
+.tab-icon { display: flex; align-items: center; justify-content: center; height: 40px; }
 
 .tab-png-icon {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  opacity: 0.6;
+  opacity: 0.7;
   display: block;
   image-rendering: pixelated;
 }
@@ -345,7 +345,7 @@
 
 .tab-underline {
   position: absolute;
-  bottom: 28px;
+  bottom: 15px;
   height: 2.5px;
   width: 28px;
   background: var(--tab-active);
