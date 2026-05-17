@@ -1901,48 +1901,77 @@
 }
 
 /* ── Themes Screen ───────────────────────────────────────────────────────── */
+
+.th-screen {
+  background: linear-gradient(180deg, var(--cream) 0%, #ece6d8 100%);
+}
+
 .th-scroll {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
-  padding: 14px 14px 14px;
+  padding: 12px 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .th-scroll::-webkit-scrollbar { display: none; }
 
-/* Theme card — flex:1 so all three fill the scroll area evenly */
+.th-tagline {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-light);
+  letter-spacing: 0.6px;
+  text-align: center;
+  margin: 0 0 4px;
+}
+
+/* Theme card — vertical: thumbnail on top, body row below */
 .th-card {
-  flex: 1;
   background: var(--card-bg);
   border: 1.5px solid var(--border);
+  border-top: 3px solid var(--green-cta);
   border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: transform 0.12s;
 }
-.th-card:hover { opacity: 0.9; }
+.th-card:active { transform: scale(0.99); }
+
+/* Selected / active environment */
 .th-card-active {
   border-color: var(--tab-active);
-  box-shadow: 0 0 0 1px var(--tab-active), 0 2px 10px rgba(0,0,0,0.06);
+  border-top: 3px solid var(--tab-active);
+  box-shadow: 0 0 0 1.5px var(--tab-active), 0 3px 14px rgba(58,96,48,0.15);
 }
-.th-card-locked { cursor: default; }
 
-/* Thumbnail */
-.th-thumb-wrap {
-  width: 108px;
-  height: 108px;
-  border-radius: 12px;
-  overflow: hidden;
-  flex-shrink: 0;
-  background: #1a2a1a;
+/* Premium — gold accent on top border + sides */
+.th-card-premium {
+  border-color: rgba(184,114,10,0.35);
+  border-top-color: #b8720a;
 }
+
+/* Coming Soon — neutral, slightly muted */
+.th-card-soon {
+  border-top-color: var(--border);
+  opacity: 0.82;
+}
+
+/* Locked cards still tappable (upsell / coming-soon modal) */
+.th-card-locked { cursor: pointer; }
+
+/* ── Thumbnail ── */
+.th-thumb-wrap {
+  width: 100%;
+  height: 110px;
+  position: relative;
+  overflow: hidden;
+  background: #1a2a1a;
+  flex-shrink: 0;
+}
+
 .th-thumb-img {
   width: 100%;
   height: 100%;
@@ -1950,56 +1979,79 @@
   display: block;
 }
 
-/* Card text block — title / badge / desc stacked */
+/* Dark tint on locked thumbnails — keeps image visible but signals unavailability */
+.th-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.24);
+  pointer-events: none;
+}
+
+/* Badge pill overlaid bottom-left on thumbnail */
+.th-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.th-badge-active {
+  background: var(--tab-active);
+  color: #fff;
+}
+
+.th-badge-premium {
+  background: rgba(10,6,0,0.55);
+  color: #f0c060;
+  border: 1px solid rgba(240,180,60,0.5);
+}
+
+.th-badge-soon {
+  background: rgba(20,20,20,0.52);
+  color: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ── Card body row ── */
 .th-card-body {
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.th-card-text {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 4px;
 }
 
 .th-card-title {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-dark);
   line-height: 1.2;
 }
 
-/* Badges */
-.th-badge {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  align-self: flex-start;
-}
-.th-badge-active {
-  background: var(--tab-active);
-  color: #fff;
-}
-.th-badge-premium {
-  background: rgba(192,118,20,0.14);
-  color: #9a6010;
-  border: 1.5px solid rgba(192,118,20,0.38);
-}
-.th-badge-soon {
-  background: transparent;
-  color: var(--text-mid);
-  border: 1.5px solid var(--border);
-}
-
 .th-card-desc {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-mid);
-  line-height: 1.45;
+  line-height: 1.4;
   margin: 0;
 }
 
-/* Status icons */
+/* ── Status icons ── */
 .th-card-status {
   flex-shrink: 0;
   display: flex;
@@ -2009,8 +2061,8 @@
 }
 
 .th-check {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   background: var(--tab-active);
   border-radius: 50%;
   display: flex;
@@ -2019,14 +2071,13 @@
 }
 
 .th-lock {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9a9a8e;
+  color: var(--text-light);
 }
-
 
 /* ── Premium Upsell Screen ───────────────────────────────────────────────── */
 .pu-screen {

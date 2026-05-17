@@ -82,7 +82,6 @@ export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburg
     <div className="screen th-screen">
       {showComingSoon && <ComingSoonModal onClose={() => setShowComingSoon(false)} />}
 
-      {/* Header */}
       <div className="top-nav">
         <button className="hamburger-btn" aria-label="Menu" onClick={onHamburger}>
           <span /><span /><span />
@@ -94,15 +93,22 @@ export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburg
         </div>
       </div>
 
-      {/* Theme list */}
       <div className="th-scroll">
+        <p className="th-tagline">CHOOSE YOUR TRAINING GROUND</p>
+
         {THEMES.map((theme) => (
           <div
             key={theme.id}
-            className={`th-card${theme.id === 'daytime' ? ' th-card-active' : ''}${theme.locked ? ' th-card-locked' : ''}`}
+            className={[
+              'th-card',
+              theme.id === 'daytime'        ? 'th-card-active'  : '',
+              theme.badge === 'premium'     ? 'th-card-premium' : '',
+              theme.badge === 'soon'        ? 'th-card-soon'    : '',
+              theme.locked                  ? 'th-card-locked'  : '',
+            ].filter(Boolean).join(' ')}
             onClick={() => handleCardTap(theme)}
           >
-            {/* Thumbnail */}
+            {/* Cinematic full-width thumbnail */}
             <div className="th-thumb-wrap">
               <img
                 src={theme.img}
@@ -110,23 +116,20 @@ export default function Themes({ xp = 0, onTabChange, onPremiumUpsell, onHamburg
                 className="th-thumb-img"
                 style={{ objectPosition: theme.imgPos }}
               />
-            </div>
-
-            {/* Title → badge → description stacked */}
-            <div className="th-card-body">
-              <span className="th-card-title">{theme.title}</span>
+              {theme.locked && <div className="th-thumb-overlay" />}
               <span className={`th-badge th-badge-${theme.badge}`}>{theme.badgeLabel}</span>
-              <p className="th-card-desc">{theme.description}</p>
             </div>
 
-            {/* Status icon */}
-            <div className="th-card-status">
-              {theme.id === 'daytime' && (
-                <div className="th-check"><CheckIcon /></div>
-              )}
-              {theme.locked && (
-                <div className="th-lock"><LockIcon /></div>
-              )}
+            {/* Body: text left, status icon right */}
+            <div className="th-card-body">
+              <div className="th-card-text">
+                <span className="th-card-title">{theme.title}</span>
+                <p className="th-card-desc">{theme.description}</p>
+              </div>
+              <div className="th-card-status">
+                {theme.id === 'daytime' && <div className="th-check"><CheckIcon /></div>}
+                {theme.locked && <div className="th-lock"><LockIcon /></div>}
+              </div>
             </div>
           </div>
         ))}
