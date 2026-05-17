@@ -304,7 +304,7 @@
   border-top: 1.5px solid var(--border);
   display: flex;
   align-items: flex-start;
-  padding-top: 10px;
+  padding-top: 13px;
   flex-shrink: 0;
   position: relative;
 }
@@ -345,7 +345,7 @@
 
 .tab-underline {
   position: absolute;
-  bottom: 24px;
+  bottom: 20px;
   height: 2.5px;
   width: 28px;
   background: var(--tab-active);
